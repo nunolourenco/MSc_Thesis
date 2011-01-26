@@ -1,0 +1,36 @@
+%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2_ano/Thesis/Thesis/thesis.tex
+\chapter{Atomic Clusters}
+
+Understanding the properties of chemical clusters is relevant in many scientific fields, from protein structure prediction to the field of the nanotechnology \cite{wales98}. In simple terms a cluster is a set of between a few and millions of atoms or molecules, which may present distinct properties from those of a single particle. In order to describe the interactions that occur in the aggregate a multidimensional function is used. This function, known as the Potential Energy Surface (PES), contains all the relevant information about the chemical system, and models all the interactions between the aggregate particles \cite{doye06}.
+
+The goal of cluster geometry optimization is to determine the optimal structural organization for a set of particles that compose an aggregate. In other words, the main objective is to discover the position of all the atoms, or molecules, in a 3D space so that it corresponds to the lowest potential energy.
+
+Since the PES are usually computational heavy functions, model PES are adopted when studying large clusters. Examples of this type of PES are the potentials that only consider the distance between every pair of particles composing the cluster to determine the energy of the cluster. These potentials are known  as pairwise additive and, as expected, different conformations on the 3-Dimensional space lead to different energy values. An example, for a cluster with 6 atoms, is shown in Fig.~\ref{fig:clusters}.
+
+
+\botapic[0.8]{clusters}{Pairwise Potential: The distances considered to calculate the potential energy for two conformations of a cluster with 6 atoms.} 
+\pagebreak
+
+Usually PES functions define highly roughed landscapes, with multiple valleys (Fig.~\ref{fig:morse_sample}). It has been proved that global minimization of the PES function is a NP-hard problem \cite{doye98}.
+
+\botapic[0.5]{morse_sample}{Example of a PES function}
+
+
+
+	\section{Morse Clusters}
+	
+	As described above, model PES are regularly adopted to understand chemical properties of real materials and as benchmarks of new optimization algorithms. The most widely adopted pairwise models are the Lennard-Jones and Morse potentials. Since the Morse potential provides accurate approximations of real materials, and define a more challenging benchmark, we focus our attention in this one.
+
+	The energy function of a \emph{N}-cluster Morse cluster, where \emph{N} is the number of atoms composing the aggregate, is obtained by the sum of all pairwise contributions that occurs between the atoms. This can be formulated as:
+	
+	\begin{equation} 
+		\label{eq:morse_potential}
+		V_{Morse} = \epsilon \sum_{i=1}^{N}\sum_{j=i+1}^{N} \left ( \exp^{-2\beta(r_{ij}-r_{0})} - 2\exp^{-\beta(r_{ij}-r_{0})} \right)
+	\end{equation}
+
+
+	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. The $\beta$ is set to 14.0 which corresponds to the short-ranged interactions between particles. Optimization of the PES with short-range interactions is particularly hard, because the fitness landscape is very rugged, with many valleys, and the number of local minima increases exponentially as the number of atoms increases.
+	
+	
+	
+	

@@ -1,0 +1,79 @@
+%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2_ano/Thesis/Thesis_Latex/thesis.tex
+\chapter{Current Work and Preliminary Results}
+
+\label{chap:curr_work}
+
+%Falar que enquanto andava a preparar este documento, andei a fazer testes com soluções baseadas em PSO e GA para depois poder comparar com a versão que pretendo desenvolver durante o segundo semestre.
+	%Explicar detelhadamente:
+	%Como foram feitas experimentações
+		During the preparation of this work, we started making experiments with the approaches that will be used for comparison. In this chapter we detail the experiments that we carried on for the PSO algorithm.
+		
+	\section{PSO Results}
+	The PSO that we used in these experiments is specific for the cluster geometry problem. It has several features that were specifically designed to improve the search for low energy structures of atomic clusters. The main differences between the traditional PSO presented in section \ref{subsec:swarm_intelligence} are:
+	\begin{enumerate}
+		\item the adoption of specific rules to update the current positions of particles, where velocity is applied only to a fraction of the variables that encode a solution; 
+		\item the embracing of a steady-state strategy to update the population of particles. This strategy allows for a simultaneous exploration of the neighborhoods of the current locations and of the best ever seen solutions and is coupled with a mechanism to maintain diversity, therefore postponing convergence.
+	\end{enumerate}
+	A local search algorithm described in \cite{liu89}, is used within the PSO algorithm. For more details in the PSO algorithm, please refer to \cite{lourenco10}, \cite{lourenco11}.
+	
+	The complete set of parameters used in the experiments is defined in the following table:
+	
+	\begin{table}[htdp]
+		\label{tab:pso_parameters}
+		\begin{center}
+			\begin{tabular}{| l | c | r | }
+				\hline
+				Number of runs & 30 \\ \hline
+				Population size & 50 \\ \hline
+				Number of evaluations & 5000000 \\ \hline
+				Neighborhood size & 2 \\ \hline
+				Local Search Accuracy & $1*10^{-8}$ \\ \hline
+				Initial Population & Randomly Generated \\ \hline
+		
+			\end{tabular}
+		\end{center}
+		\caption{Parameterization of the PSO} 
+	\end{table}
+	
+	In table \ref{tab:pso_results} we present the result of the PSO algorithm. The first column identifies the number of atoms of each instance and the second column (\emph{optimum}) displays the potential energy of the best known solution, i.e. the putative optimum. One of the most widely adopted performance measure in cluster geometry optimization is the ability of algorithms to discover the putative optima for the instances under study. We present the results of this measure in the column labeled \emph{success rate} The column \emph{MBF} represents the mean best fitness (MBF). The column \emph{deviation} represent the percentage of deviation from the putative optima. In the last two columns we present the results of an hybrid EA, taken from \cite{xico09}.
+	
+	\begin{table}[!htdp]
+		\label{tab:pso_results}
+		\begin{center}
+			\begin{tabular}{| c | c | c | c | c | c | c |}
+				\hline
+				\multicolumn{5}{|c|}{PSO-CGO} & \multicolumn{2}{c|}{Hybrid EA}\\ \hline 
+				~ & Optimum & Success Rate & MBF & Deviation & Success Rate & MBF \\ \hline 
+				30 & -106.8357 & 4 & -106.7182 & 0.11 & 22 & -106.7947 \\ \hline 
+				31 & -111.7606 & 19 & -111.6309 & 0.12 & 30 & -111.7606 \\ \hline 
+				32 & -115.7675 & 20 & -115.6863 & 0.07 & 29 & -115.7666 \\ \hline 
+				33 & -120.7413 & 19 & -120.6902 & 0.04 & 28 & -120.6976 \\ \hline 
+				34 & -124.7482 & 15 & -124.6052 & 0.11 & 28 & -124.7154 \\ \hline 
+				35 & -129.7373 & 6 & -129.0789 & 0.51 & 27 & -129.6232 \\ \hline 
+				36 & -133.7446 & 14 & -133.4948 & 0.19 & 28 & -133.7151 \\ \hline 
+				37 & -138.7085 & 12 & -138.1474 & 0.4 & 25 & -138.6105 \\ \hline 
+				38 & -144.321 & 8 & -142.5455 & 1.23 & 8 & -143.1304 \\ \hline 
+				39 & -148.3274 & 7 & -147.3619 & 0.65 & 14 & -147.958 \\ \hline 
+				40 & -152.3337 & 7 & -151.5165 & 0.54 & 9 & -151.886 \\ \hline 
+				41 & -156.6334 & 2 & -155.8986 & 0.47 & 15 & -156.5479 \\ \hline 
+				42 & -160.641 & 4 & -160.0271 & 0.38 & 12 & -160.5181 \\ \hline 
+				43 & -165.6349 & 4 & -164.6498 & 0.59 & 14 & -165.2548 \\ \hline 
+				44 & -169.6424 & 3 & -168.9085 & 0.43 & 7 & -169.3036 \\ \hline 
+				45 & -174.5116 & 3 & -173.1605 & 0.77 & 5 & -174.1021 \\ \hline 
+				46 & -178.5193 & 1 & -177.5135 & 0.56 & 9 & -178.3897 \\ \hline 
+				47 & -183.5082 & 1 & -182.0811 & 0.78 & 2 & -183.1536 \\ \hline 
+				48 & -188.8889 & 2 & -186.782 & 1.12 & 14 & -188.1606 \\ \hline 
+				49 & -192.8984 & 4 & -191.496 & 0.73 & 18 & -192.6278 \\ \hline 
+				50 & -198.4556 & 1 & -195.816 & 1.33 & 5 & -197.6889 \\ \hline 
+			\end{tabular}
+		\end{center}
+		\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the PSO algorithm and the hybrid EA }
+	\end{table}
+	When comparing the two approaches, we can see that the PSO is not as effective as the hybrid EA, both in terms of MBF or success rate. However the EA is one of the state-of-art approaches, while the PSO is one of the first approaches to this kind of problems.
+	
+	
+	
+	
+	
+	
+	
