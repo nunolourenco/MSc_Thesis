@@ -1,4 +1,4 @@
-%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2_ano/Thesis/Thesis/thesis.tex
+%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2010_2011/Thesis/Thesis/thesis.tex
 \chapter{Optimization Algorithms}
 	\label{chap:opt_alg}
 		
@@ -72,17 +72,17 @@
 			
 		\section{Swarm Intelligence}
 		\label{subsec:swarm_intelligence}
-		The idea of swarm intelligence is to develop algorithms that model the behavior of a group of animals that engage in social interactions. Some examples are synchronous bird flocking, ants gathering food or fish shoals escaping from a predator \cite{si01}. In this sections we describe the Ant Colony Optimization (ACO) and Particle Swarm Optimization (PSO) frameworks.
+		The idea of swarm intelligence is to develop algorithms that model the behavior of a group of animals that engage in social interactions. Some examples are synchronous bird flocking, ants gathering food or fish shoals escaping from a predator \cite{si01}. In this sections we describe the Ant Colony Optimization (ACO) framework, which is inspired by the behavior of foraging ants searching for food.
 		
 		\subsubsection*{Traveling Salesman Problem}
 		 The Traveling Salesman Problem (TSP) will be used to help explain the ACO algorithms described. We choose this problem, due to its simplicity, and because it is a benchmark for all ACO algorithms.
 		
 		The TSP is the problem of a salesman, who starting from a initial city, wants to find the shortest tour that visits a set of cities. More formally, we have a graph $G=(C,E)$, where $C$ are the cities that the salesman has to visit, and $E$ are the arcs connecting the cities, the problem consists of finding the minimum length Hamiltonian circuit of the graph, where an Hamiltonian circuit is a closed path visiting each node $c \in C$ exactly once.
-		%ACO and PSO
+		%ACO
 		\subsubsection*{Ant Colony Optimization Algorithms}
 		\label{subsubsec:ant_algorithms}
 
-		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone, which they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{"trail pheromone"}, which is very important for the social life of some ant species. This specific type of pheromone allow ants to mark paths, for example, from the nest to food source. This is the inspiring source of the ACO framework. 
+		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone, which they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{``trail pheromone"}, which is very important for the social life of some ant species. This specific type of pheromone allow ants to mark paths, for example, from the nest to food source. This is the inspiring source of the ACO framework. 
 		These insights made possible the proposal of the ACO framework in 1992 \cite{dorigo92}. 	
 
 		Algorithm \ref{alg:general_aco} presents the general idea of the ACO algorithm.
@@ -102,30 +102,30 @@
 				
 				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, the ant evaluates the (partial) solution. This result will be then used by the \emph{UpdatePheromones()} procedure to decide how much pheromones an ant should deposit.
 				
-				The UpdatePheromones() is the process by which the pheromone trails are updated. The trails values can either increase, as ants deposits pheromone in the components or edges that they use, or decrease, due to pheromone evaporation. In practice, the deposit of pheromone trails increases the probability that those components/edges, which belonged to good solutions, will be selected again. Differently, pheromone evaporation implements a forgetting method: it avoids early convergence to a suboptimal region, therefore favoring exploration of new areas of the search space.
+				The \emph{UpdatePheromones()} is the process by which the pheromone trails are updated. The trails values can either increase, as ants deposits pheromone in the components or edges that they use, or decrease, due to pheromone evaporation. In practice, the deposit of pheromone trails increases the probability that those components/edges, which belonged to good solutions, will be selected again. Differently, pheromone evaporation implements a forgetting method: it avoids early convergence to a suboptimal region, therefore favoring exploration of new areas of the search space.
 				 
 				Finally \emph{DaemonActions()} procedure corresponds to actions that are not performed by ants. Examples of this daemon actions are the local search procedures, or the collection of global information to be used by ants.
 
 					\subsubsection*{Ant System} 
 					\label{sec:ant_system}
-					Ant System (AS) was first proposed in 1992 by Marco Dorigo \cite{dorigo92}, \cite{dorigo96}.
+					Ant System (AS) was first proposed in 1992 by Marco Dorigo \cite{dorigo92, dorigo96}.
 					Initially, the pheromone trails are initialized according to a simple rule: the initial value must be higher than the total amount of pheromone that an ant will deposit in one iteration. Heuristics to calculate this value are commonly used.
 
-					Each ant in AS, constructs a complete solution to the problem in question. For instance, in the TSP, an ant must construct a tour. At each construction step, an ant uses a probabilistic rule to decide which new component it should add to the current solution. In particular, the probability with which ant $k$, currently at city $i$, chooses to go to city $j$ is given as follows:
+					Each ant in AS, constructs a complete solution to the problem in question. For instance, in the TSP, an ant must construct a tour. At each construction step, an ant uses a probabilistic rule to decide which new component it should add to the current solution. Following \cite{dorigo96}, the probability with which ant $k$, currently at city $i$, chooses to go to city $j$ is given as follows:
 					\begin{equation}
 						\label{eq:prob_rule_for_choice}
-						p_{ij}^k = \frac{[\tau_{ij}]^\alpha[\eta_{ij}]^\beta} {\sum_{l \in N_{i}^k} [\tau_{il}]^\alpha[\eta_{il}]^\beta}, \quad j \in N_{i}^k,
+						p_{ij}^k = \frac{[\tau_{ij}]^\alpha[\eta_{ij}]^\gamma} {\sum_{l \in N_{i}^k} [\tau_{il}]^\alpha[\eta_{il}]^\gamma}, \quad j \in N_{i}^k,
 					\end{equation}
 
-		\noindent where $\tau_{ij}$ is the pheromone trail in edge $(i,j)$, $\eta$ is an heuristic value that is problem related (e.g. for the TSP: $\eta = \frac{1}{d_{ij}}$, where $d_{ij}$ is the distance between city $i$ and city $j$), $N_i^k$ is the feasible neighborhood when the ant $k$ is in the node $i$ (e.g. in TSP is the set of cities that ant $k$ has not visited yet), $\alpha, \beta$ are parameters of the algorithm. The $\alpha$ parameter determines the relative influence of the pheromone trail, and $\beta$ determines the relative influence of the heuristic information.
+		\noindent where $\tau_{ij}$ is the pheromone trail in edge $(i,j)$, $\eta$ is an heuristic value that is problem related (e.g. for the TSP: $\eta = \frac{1}{d_{ij}}$, where $d_{ij}$ is the distance between city $i$ and city $j$), $N_i^k$ is the feasible neighborhood when the ant $k$ is in the node $i$ (e.g. in TSP is the set of cities that ant $k$ has not visited yet), $\alpha, \gamma$ are parameters of the algorithm. The $\alpha$ parameter determines the relative influence of the pheromone trail, and $\gamma$ determines the relative influence of the heuristic information.
 
-					After all ants have constructed their solutions, the pheromone trails must be updated. First, and if we consider pheromone evaporation, we must update the trail, taking into account the percentage of pheromone to evaporate:
+					After all ants have constructed their solutions, the pheromone trails must be updated. First, and if we consider pheromone evaporation \cite{dorigo96}, we must update the trail, taking into account the percentage of pheromone to evaporate:
 					\begin{equation}
 						\tau_{ij} = (1 - \rho)\tau_{ij}, \quad \forall(i,j)\in E,
 					\end{equation}
 		\noindent where $0 \leq \rho \leq 1$ is a parameter.
 
-					Then we perform the  pheromone trails update:
+					Then we perform the  pheromone trails update \cite{dorigo96}:
 					\begin{equation}
 						\label{eq:as_pheromone_update}
 						\tau_{ij} = \tau_{ij} + \sum_{k=1}^{m}\Delta\tau_{ij}^k, \quad \forall(i,j)\in E,
@@ -134,11 +134,11 @@
 
 		\noindent where $\Delta\tau^k$ is usually calculated using $\frac{1} {L^k}$, where $L^k$ is the fitness of the solution of the $k^{th}$-ant.
 
-					This algorithm had a poor performance when applied to larger instances of optimization problems \cite{acobook}, like the TSP. Therefore, there have been attempts to improve the algorithm. Elitist Ant System(EAS) \cite{dorigo92} \cite{dorigo96}, Rank-Based Ant System($AS_{rank}$) \cite{bullnheimer97} and Max-Min Ant System (MMAS) \cite{stutzle00} are the most relevant contributions.
+					This algorithm had a poor performance when applied to larger instances of optimization problems \cite{acobook}, like the TSP. Therefore, there have been attempts to improve the algorithm. Elitist Ant System(EAS) \cite{dorigo92} \cite{dorigo96}, Rank-Based Ant System($AS_{rank}$) \cite{bullnheimer97}, Max-Min Ant System (MMAS) \cite{stutzle00}, and Ant Colony System \cite{dorigo97} are the most relevant contributions.
 
 					\subsubsection*{Elitist Ant System}
 
-					The main idea behind EAS \cite{dorigo92}\cite{dorigo96} is that the edges belonging to the best solution found since the beginning of the algorithm should receive more pheromones. If we look into Eq. \eqref{eq:as_pheromone_update}, and add an additional parameter that reinforces pheromones if an edge belongs to the best tour so far, the final equation will look like
+					The main idea behind EAS \cite{dorigo92, dorigo96} is that the edges belonging to the best solution found since the beginning of the algorithm should receive more pheromones. If we look into Eq. \eqref{eq:as_pheromone_update}, and add an additional parameter that reinforces pheromones if an edge belongs to the best tour so far \cite{dorigo92, dorigo96}, the final equation will be:
 					\begin{equation}
 						\label{eq:eas_pheromone_update}
 						\tau_{ij} = \tau_{ij} + \sum_{k=1}^{m}\Delta\tau_{ij}^k + e\Delta\tau^{bs},
@@ -150,16 +150,18 @@
 
 					In $AS_{rank}$ each ant deposits pheromones according to its rank, when compared to other ants of the colony. Besides, as in the EAS algorithm, the best-so-far-ant deposits the largest quantity of pheromone.
 
-					Before the updating of pheromones, ants are sorted, by ascending order, of the fitness of the current solution. In each iteration, only the $(w-1)$ best ranked ants, and the best ant so far, can deposit pheromone, where $w$ is a parameter. Thus, the $AS_{rank}$ pheromone update rule is as follow:
+					Before the updating of pheromones, ants are sorted, by ascending order, of the fitness of the current solution. In each iteration, only the $(w-1)$ best ranked ants, and the best ant so far, can deposit pheromone, where $w$ is a parameter. Thus, the $AS_{rank}$ pheromone update rule is as follow \cite{bullnheimer97}:
 					\begin{equation}
 						\label{eq:asrank_pheromone_update}
 						\tau_{ij} = \tau_{ij} + \sum_{r=1}^{w-1}(w-r)\Delta\tau_{ij}^r + w\Delta\tau_{ij}^{bs},
 					\end{equation}.
 
+
+
 					\subsubsection*{$\mathcal{MAX}-\mathcal{MIN}$ Ant System}
 					$\mathcal{MAX}-\mathcal{MIN}$ Ant System ($\mathcal{MM}$AS) introduces four main modifications to the traditional AS:
 					\begin{enumerate}
-						\item only the \emph{best-so-far} or the \emph{iteration-best} ants are allowed to deposit pheromones:
+						\item only the \emph{best-so-far} or the \emph{iteration-best} ants are allowed to deposit pheromones \cite{stutzle00}:
 							\begin{equation}
 								\label{eq:max_min_rank_pheromone_update}
 								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best},
@@ -176,25 +178,25 @@
 		
 					\subsubsection*{Ant Colony System}
 					\label{sec:acs}
-					This algorithm, despite of being inspired by the AS, differs from it in three main aspects:
+					This algorithm \cite{dorigo97}, despite of being inspired by the AS, differs from it in three main aspects:
 					\begin{enumerate}
 						\item it exploits the accumulated search experience, through the use of a more aggressive action choice rule: Eq. \ref{eq:acs_choice_rule}. 
 						\item Pheromone update and pheromone deposit takes place only on the edges belonging to the \emph{best-so-far} solution;
 						\item Each time an ant uses an edge $(i,j)$, it removes some pheromone from it, to increase the exploration of alternative solutions.
 					\end{enumerate}
 
-					In Ant Colony System(ACS), when an ant is building a solution, it chooses to move from component $i$ to component $j$ according to the following \emph{pseudorandom proportional} rule:
+					In Ant Colony System(ACS), when an ant is building a solution, it chooses to move from component $i$ to component $j$ according to the following \emph{pseudorandom proportional} rule \cite{dorigo97}:
 
 					\begin{equation} 
 						\label{eq:acs_choice_rule}
 						j =
 						  \begin{cases}
-						   \operatorname{arg\,\max}_{l \in N_{i}^k} (\tau_{il}[\eta_{il}^{\beta}]), & \text{if } q \leq q_{0}  \\
+						   \operatorname{arg\,\max}_{l \in N_{i}^k} (\tau_{il}[\eta_{il}^{\gamma}]), & \text{if } q \leq q_{0}  \\
 						  	P, & \text{otherwise,}
 						  \end{cases}
 					\end{equation}
 
-					\noindent where $q$ in a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\beta$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search: around the \emph{best-so-far}, or explore other locations.
+					\noindent where $q$ in a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\gamma$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search: around the \emph{best-so-far}, or explore other locations.
 
 					\subsubsection*{Multi-colony ant algorithm}
 					The main idea behind this algorithm is to have a set of identical colonies solving the same problem. In \cite{melo10} they used a variant of ACS with multiple colonies working in different locations of the search space, where the best colonies share information with the worst. This information sharing is made by passing along, to the worst colony, the \emph{best-so-far} solution. Every time a migration occurs, the worst colony uses the new solution as if it was found by it.
@@ -205,7 +207,7 @@
 
 
 					\subsubsection*{Hyper-Cube Framework for Ant Colony Optimization}
-					The hyper-cube framework was introduced in \cite{blum01} to automatically rescale the values of pheromone trails, so they can stay in range $[0,1]$. This choice was inspired by other algorithms that used binary representation of the solutions. In this type of representation, the decision variables typically correspond to solution components as they are used by the ants, that is, if a component is in the ant solution, it takes the value 1, else it takes the value 0. Thus, a solution corresponds to one corner of a \emph{n-dimensional} cube, where n is the number of decision variables.
+					The hyper-cube framework was introduced in \cite{blum04} to automatically rescale the values of pheromone trails, so they can stay in range $[0,1]$. This choice was inspired by other algorithms that used binary representation of the solutions. In this type of representation, the decision variables typically correspond to solution components as they are used by the ants, that is, if a component is in the ant solution, it takes the value 1, else it takes the value 0. Thus, a solution corresponds to one corner of a \emph{n-dimensional} cube, where n is the number of decision variables.
 					The relationship with ACO lies in the normalization of the pheromones to the interval [0,1]. In this case, the pheromone vector is a point in the solution space; in case $\tau$ is a binary vector, which corresponds to a solution of the problem.
 					
 					\subsubsection*{Ant Colony Optimization for continuous domains}
@@ -226,57 +228,23 @@
 
 					 Later a new version of this algorithm was proposed, where they used a solution archive. This solution archive is a table with a number $k$ of solutions that will be used to create the PDFs for the kernel. The number of solutions $k$ to store in the table is parameter. For more details on this algorithm, please refer to Socha et al. \cite{socha08}.
 					
-					\subsubsection*{Particle Swarm Optimization Algorithms}
-					PSO algorithms keep a set of simple entities, called particles, which travel across the search space in order to find good promising solutions. At each instant, the fitness of a particle is the quality of its current location. Particles iteratively move around the search space, guided by their previous search history and the best locations of its closest neighbors. A PSO particle encoding is composed by three \emph{D}-dimensional vector $y = (y_1,y_2,..., y_D), y_i \in \Re$, where D is the dimension of the search space. The first vector $x$ encodes the set of coordinates the defines the current position of the particle. The second vector $p$ keeps the coordinates of the best position ever visited by the particle. The third vector $v$ stores the velocity of the particle, and helps to establish the direction and strength of the movement.
-					To improve the search effectiveness, the swarm entities interact with each other, sharing the best positions ever visited. Thus, every time a particle is calculating the new position, it takes into account the best position found by any of its neighbors. This information is encoded in vector $p_g$.
-					In the original PSO, proposed in \cite{kennedy95}, the velocity and the current position of a particle $i$ are update as follows:
-					\begin{equation}
-						\label{eq:pso_update_rules}
-						\left\{ 
-						  \begin{array}{l l}
-						    v_i = v_i + U(0, \phi_1) \otimes (p_i - x_i) +  U(0, \phi_2) \otimes (p_g - x_i)\\
-						    x_i = x_i + v_i
-						  \end{array} \right.
-					\end{equation}
-					
-						\noindent where $U(0, \phi_1)$ (respectively $U(0, \phi_2)$) is a vector of random distributed numbers in $[0, \phi_1]$ (respectively $[0, \phi_2]$)  and $\otimes$ is the component-wise multiplication.
-					
-					
-					
-					The general PSO algorithm is depicted in Algorithm \ref{alg:original_pso}. Starting from a random initialization, the optimization goes through a iterative process, until it all particles converge to an optimum, or a until a maximum of iterations is reached. 
-					
-					\begin{algorithm}[h]
-						\caption{Original PSO}
-						\label{alg:original_pso}
-						\begin{algorithmic}
-						\STATE initialize population of particles with random positions and velocities
-						\WHILE{termination condition not met}
-							\STATE evaluate particles
-							\STATE check if the current position $x_i$ is better the previous best position $p_i$ 
-							\STATE identify the best particle in the neighborhood, and assign it to $p_g$
-							\STATE change the current position $x_i$%, according to \ref{eq:pso_update_rules}
-						\ENDWHILE
-						\STATE return best particle in the population
-						\end{algorithmic}
-					\end{algorithm}
-
-
-					Note that in this version of the algorithm the velocity is kept in $[-V_{max}, +V_{max}]$. Impelled by the desire to better control the search of the particles, and to remove the importance of the velocity limit, some modifications where proposed the way which velocity was calculated: the introduction of a \emph{inertia weight} \cite{shi98} and the \emph{constriction coefficient} \cite{clerc02}.
-					
-		
+	\pagebreak
 			
 	\section{Cluster Geometry Optimization}
 		%Falta falar do CSA
 		\label{subsec:cgo}
 		Here we present some algorithms that were proposed in the literature to tackle the problem of Cluster Geometry Optimization, using Morse potential as a benchmark function.
 
-		One of the first attempts of global optimization of the Morse potential was made by Wales et al. \cite{wales98}. In their work they used a Monte Carlo method combined with a local search algorithm. This method is known as Basin-Hopping (BH). For more details on the Basin-Hopping algorithm, please refer to \cite{wales98}, \cite{li87}.
+		One of the first attempts of global optimization of the Morse potential was made by Wales et al. \cite{doye97, wales97}. In their work they used a Monte Carlo minimization method \cite{li87} combined with a local search algorithm. This method is known as Basin-Hopping (BH). In the work conducted by Wales et al., they deform the surface of the PES, in a way that some of the valleys are removed. This transformation does not affect the energies of the minima. They were able to found almost all the known global optima for short-ranged ($\beta = 14.0$) Morse clusters up to 80 atoms.
 		
-		In Roberts et al. \cite{roberts00} they proposed the first evolutionary algorithm to the optimization of Morse clusters. They used real representation of the Cartesian coordinates of the atoms. Moreover they used genetic operators introduced by Deaven et al. \cite{deaven95} specific for clusters.
+		In Roberts et al. \cite{roberts00} they proposed the first EA to the optimization of Morse clusters. They used a certain number of components that had been previously proposed: real-valued representation of the Cartesian coordinates of the atoms, a local search method to improve the solutions, and a Cut and Splice \cite{deaven95} crossover. This crossover is a specific operator handling atomic clusters. First, it defines a plane that passes through the center of mass of the clusters to be combined. Then the clusters are cut about this plane and the complementary halves are joined (spliced) together in order to form a new offspring.
+		The mutation operator in this work corresponds to assign a random coordinates to a certain number of atoms. 
+		The algorithm was applied to instances between 19 and 50 of the Morse Potential with $\beta = 6.0$ and $\beta = 14.0$. The results showed that it was able to discover nearly all the known global optima \cite{roberts00}.   
 		
-		In Grosso et al. \cite{grosso07} they used a method called Population Basin-Hopping (PBH). Instead of having only one solution, they used a population of solutions during the optimization.
+		In Grosso et al. \cite{grosso07} they proposed a stochastic method, in which different conformations of the clusters are maintained in a population of solutions, hence ensuring a sufficient level of diversity. The diversity is enforced through the definition of diversity measures, related to the problem of cluster geometry optimization. Moreover, in their work, Grosso et el. applied an two-phase local search algorithm, in order to improve the efficiency of the method. Their final algorithm is also known as Population Basin Hopping (PBH) \cite{grosso07}.
 		
-		Dynamic lattice searching (DLS) is another effective approach for cluster geometry optimization \cite{cheng07}. It starts with a randomly generated local minimum and iteratively applies a greedy strategy to seek for better solutions in the neighborhood. The method is restarted several times to ensure a proper exploration of the search space.  
+		Dynamic lattice searching (DLS) is another effective approach for cluster geometry optimization \cite{cheng07}. It starts with a randomly generated local minimum and iteratively applies a greedy strategy to search for better solutions in the neighborhood. This search is aid by a Dynamic Lattice (DL). The DL is constructed adaptively, based on a starting local minimum, and then locating all the possible locations for new atom. Afterwards, they perform a greedy search for conformations with low potential energy values: it iteratively moves the atom located at the position with the highest energy (in the lattice) to the vacant position with the lowest energy (in the lattice) \cite{cheng07, shao04}. The method is restarted several times to ensure proper exploration of the search space \cite{cheng07}.
 			
-		More recently Pereira et al. \cite{xico09} proposed a steady-state genetic algorithm, with diversity control, that showed very good results when optimizing instances up to 80 atoms.
+		More recently Pereira et al.\cite{xico09} proposed a steady-state EA, with diversity control to the problem of cluster geometry optimization. In a steady-state EA after generating a new offspring it is necessary to decide if it will enter the population, and if he do, which individual he will replace. In general, the replacement strategies are related with the fitness and the age of an individual. In the fitness based strategies we use the quality of the individuals to decide who will be replaced. In the age based strategies the oldest elements are replaced. These two strategies are not mutually exclusive, since they can be combined together. Moreover, these strategies can still be combined with other mechanisms, in order to keep an suitable level of diversity in the populations.
+		In Pereira et al.\cite{xico09} they propose a couple of mechanisms to keep the diversity in the population. Furthermore, they show that the diversity is important to improve the effectiveness of the EA. The proposed EA was able to find all the known optima for short-ranged Morse clusters up to 80 atoms.
 		

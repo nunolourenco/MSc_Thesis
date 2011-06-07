@@ -1,7 +1,7 @@
-%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2_ano/Thesis/Thesis/thesis.tex
+%!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2010_2011/Thesis/Thesis/thesis.tex
 \chapter{Atomic Clusters}
 
-Understanding the properties of chemical clusters is relevant in many scientific fields, from protein structure prediction to the field of the nanotechnology \cite{wales98}. In simple terms a cluster is a set of between a few and millions of atoms or molecules, which may present distinct properties from those of a single particle. In order to describe the interactions that occur in the aggregate a multidimensional function is used. This function, known as the Potential Energy Surface (PES), contains all the relevant information about the chemical system, and models all the interactions between the aggregate particles \cite{doye06}.
+Understanding the properties of chemical clusters is relevant in many scientific fields, from protein structure prediction to the field of the nanotechnology \cite{wales97}. In simple terms a cluster is a set of between a few and millions of atoms or molecules, which may present distinct properties from those of a single particle. In order to describe the interactions that occur in the aggregate a multidimensional function is used. This function, known as the Potential Energy Surface (PES), contains all the relevant information about the chemical system, and models all the interactions between the aggregate particles \cite{doye06}.
 
 The goal of cluster geometry optimization is to determine the optimal structural organization for a set of particles that compose an aggregate. In other words, the main objective is to discover the position of all the atoms, or molecules, in a 3D space so that it corresponds to the lowest potential energy.
 
@@ -11,9 +11,8 @@ Since the PES are usually computational heavy functions, model PES are adopted w
 \botapic[0.8]{clusters}{Pairwise Potential: The distances considered to calculate the potential energy for two conformations of a cluster with 6 atoms.} 
 \pagebreak
 
-Usually PES functions define highly roughed landscapes, with multiple valleys (Fig.~\ref{fig:morse_sample}). It has been proved that global minimization of the PES function is a NP-hard problem \cite{doye98}.
+Usually PES functions define highly roughed landscapes, with multiple valleys \cite{stillinger99}. It has been proved that global minimization of the PES function is a NP-hard problem, since the number of local minima increases exponentially as the cluster grows in size \cite{doye98, wille85}.
 
-\botapic[0.5]{morse_sample}{Example of a PES function}
 
 
 
@@ -21,7 +20,7 @@ Usually PES functions define highly roughed landscapes, with multiple valleys (F
 	
 	As described above, model PES are regularly adopted to understand chemical properties of real materials and as benchmarks of new optimization algorithms. The most widely adopted pairwise models are the Lennard-Jones and Morse potentials. Since the Morse potential provides accurate approximations of real materials, and define a more challenging benchmark, we focus our attention in this one.
 
-	The energy function of a \emph{N}-cluster Morse cluster, where \emph{N} is the number of atoms composing the aggregate, is obtained by the sum of all pairwise contributions that occurs between the atoms. This can be formulated as:
+	The energy function of a \emph{N}-cluster Morse cluster, where \emph{N} is the number of atoms composing the aggregate, is obtained by the sum of all pairwise contributions that occurs between the atoms. Following \cite{doye97, morse29} we can formulate this as:
 	
 	\begin{equation} 
 		\label{eq:morse_potential}
@@ -29,7 +28,13 @@ Usually PES functions define highly roughed landscapes, with multiple valleys (F
 	\end{equation}
 
 
-	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. The $\beta$ is set to 14.0 which corresponds to the short-ranged interactions between particles. Optimization of the PES with short-range interactions is particularly hard, because the fitness landscape is very rugged, with many valleys, and the number of local minima increases exponentially as the number of atoms increases.
+	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. Thus, the potential has a single parameter $\beta$, that establishes the shape of the energy contribution of every pair of atoms \cite{doye04}. Figure \ref{fig:beta_influence} illustrates how the pair-wise contribution is modeled as a function of distance between atoms (\emph{xx} axis). Two different values of $\beta$ are depicted: $\beta = 6.0$, which corresponds to the long-ranged potential, and $\beta = 14.0$, which corresponds to a short-ranged version. As we can see, in both cases, the optimal potential energy is achieved when the atoms are placed at a distance of 1. This value corresponds to the equilibrium bond value. Another aspect that Fig.\ref{fig:beta_influence} shows, is that if we move from a long-ranged potential ($\beta = 6.0$) to a short-ranged version ($\beta = 14.0$), we get a narrower potential curvature, promoting the appearance of very roughed search landscapes, with the number of local minima increasing exponentially as the number of atoms increases \cite{doye04}.
+	
+	
+\botapic[0.50]{beta_influence}{Morse Potential for different values of $\beta$ }
+	
+	
+	
 	
 	
 	
