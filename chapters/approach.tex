@@ -2,11 +2,11 @@
 \chapter{Approach}
 \label{chap:approach}
 
-In this chapter we present the approach that we used to tackle the problem of Cluster Geometry Optimization. Firstly, we present the ACO variant that we choose, and some insights in why we choose it, followed by a high level overview of our entire algorithm. Thereafter we will split it in its main components and we will explain them in more detail.
+In this chapter we present the approach that we used to tackle the problem of Cluster Geometry Optimization. First, we present the ACO variant that we choose, and some insights in why we choose it, followed by a high level overview of our entire algorithm. Thereafter we will split it in its main components and we will explain them in more detail.
 
 
 	\section{Ant Colony Optimization Algorithm}
-	The first decision that we had to make was about the variant of the ACO that we should use to tackle our problem. As ACO were first proposed to work in discrete environments, they were firstly applied to discrete problems, and they obtained some encouraging results. Not very long after the first results of ACO started to appear, people started to research for methodologies to apply ACO to continuous problems \cite{bilchev95}. Since then a lot of efforts converged in the same direction: trying to modify ACO in such away that it could be applied to continuous problems \cite{bilchev95, kong06, tsutsui04}. However, there has been no such effort in trying to adapt the problems to the ACO. In other words, the effort that has been applied in the conversion of the ACO framework to work in continuous problems is bigger than the effort that has been applied in attempts to convert the problems to work with ACO. Hence in this dissertation we were interested in:
+	The first decision that we had to make was about the variant of the ACO that we should use to tackle our problem. As ACO were first proposed to work in discrete environments, they were first applied to discrete problems, and they obtained some encouraging results. Not very long after the first results of ACO started to appear, people started to research for methodologies to apply ACO to continuous problems \cite{bilchev95}. Since then a lot of efforts converged in the same direction: trying to modify ACO in such away that it could be applied to continuous problems \cite{bilchev95, kong06, tsutsui04}. However, there has a minor effort in trying to adapt the problems to the ACO. In other words, the effort that has been applied in the conversion of the ACO framework to work in continuous problems is bigger than the effort that has been applied in attempts to convert the problems to work with ACO. Hence in this dissertation we were interested in:
 	\begin{enumerate}
 		\item Convert a problem that is defined in a continuous domain to a discrete domain;
 		\item See the performance of an ACO algorithm in a problem that was not originally discrete;
@@ -16,12 +16,12 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 
 	Firstly we were inclined to use the $\mathcal{MAX}-\mathcal{MIN}$ Ant System \cite{stutzle00}, since it was one of the most successful approaches of the ACO.  However, this variant has some drawbacks:
 	\begin{enumerate}
-		\item Definition initial values to the pheromone limits;
+		\item Definition of the initial values to the pheromone limits;
 		\item Readjust the limits every time a new best solution is found; 
 		\item The decision in what ant to use to update the pheromones;
 	\end{enumerate}
 	
-	To overcome these drawbacks, Blum et al. \cite{blum04}, proposed an ACO variant called Hyper-Cube Framework (HCF). In the HCF the pheromones values are always kept in the interval [0,1]. Hence, we do not have to define an initial value to the pheromone values neither readjust them every time we find a new best solution. Furthermore, the rule to update pheromones in \cite{blum04} seemed to be more robust, since they used more than one ant in the updates. They only adjust the relative influence that each ant has to the pheromone values. These adjustments are made weights depend on the state of the algorithm.
+	To overcome these drawbacks, Blum et al. \cite{blum04}, proposed an ACO variant called Hyper-Cube Framework (HCF). In the HCF the pheromones values are always kept in the interval [0,1]. Hence, we do not have to define an initial limit to the pheromones neither readjust them every time we find a new best solution. Furthermore, the rule to update pheromones in \cite{blum04} seemed to be robust, since they used more than one ant in the updates. They only adjust the relative influence that each ant has to the pheromone values. These adjustments are made by weights, which depend on the state of the algorithm.
 
 	Taking into account all elements aforementioned, our final choice fell to the HCF variant, with some modifications, in order to adapt it to our problem. The main modifications are:
 	\begin{enumerate}
@@ -78,14 +78,14 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 		\end{algorithmic}
 	\end{algorithm}
 
-	In the first instruction we begin by defining an empty search space. Then we define the maximum coordinate of our problem. It is important to say that our cube is only defined in the positive side of the xx, yy, zz axis. After this we calculate the center of each cell in terms of (x,y,z) components and add it to the new search space. 
+	In the first instruction we begin by defining an empty search space. Then we define the maximum coordinate of our problem. It is important to say that our cube is only defined in the positive side of the xx, yy, zz axis (Fig. \ref{fig:cube1}). After this we calculate the center of each cell in terms of (x,y,z) components and add it to the new search space. 
 	The return value is the discretized search space.
 	
 	\subsection{Initialize Pheromones}
 	Before we start the optimization process, we need to initialize the pheromone matrix. Following \cite{blum04}, we choose the value of $0.5$ as the initial pheromone values.
 
 	\subsection{Construction of Solutions}
-	The construction of ant solutions is achieved by the method Construct Solutions. An ant solution corresponds to a complete cluster of atoms. The algorithm starts by defining a start position for the ant. This means that we have to place the ant in a cell of our search space. Then the ant calculates which are the neighbors of it, and chooses, in a probabilistic way, a new cell to move. After it knows which cell is the next, it places the atom in the center of the current cell, add it to solution, and move to next one. This process is repeated several times until each ant has a cluster with all the atoms in place. The general algorithm that defines this construction process is detailed in Alg. \ref{alg:construct_solutions}.
+	The construction of ant solutions is achieved by the method Construct Solutions. An ant solution corresponds to a complete cluster of atoms. The algorithm starts by defining a start position for the ant, thus we have to place the ant in a cell of our search space. Then the ant calculates which are the neighbors of it, and chooses, in a probabilistic way, a new cell to move. After it knows which cell is the next, it places the atom in the center of the current cell, add it to solution, and move to next one. This process is repeated several times until each ant has a cluster with all the atoms in place. The general algorithm that defines this construction process is detailed in Alg. \ref{alg:construct_solutions}.
 	
 	\begin{algorithm}
 		\caption{Construct Solutions}
@@ -108,7 +108,7 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 	Lets now focus our attention in some of the procedures used:\\ the $find\_feasible\_neighborhood()$ and $find\_next\_cell()$. 
 	
 		\subsubsection*{Find Feasible Neighborhood}
-		This procedure determines the cells that are available in the neighbor of the current position of an ant. To find this neighbors, we tried some different techniques:
+		This procedure determines the cells that are available in the neighbor of the current position of an ant. To find this neighbors, we used some different techniques:
 		\begin{enumerate}
 			\item Moore Neighborhood
 			\item Convex Hull
@@ -120,12 +120,12 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 			In this technique we use a Moore neighborhood to determine which cells we be used to determine the next cell. 
 			This neighborhood is defined, in $\mathbb{R}^3$, by cube that is centered in a given cell (x0, y0, z0). The Moore neighborhood of range r can be defined by the set M of all points (x, y, z) that verify the following condition:
 			\begin{equation}
-				M= {(x,y):|x-x0| \leq r \wedge |y-y0| \leq r}
+				M= \{(x,y):|x-x0| \leq r \wedge |y-y0| \leq r \wedge |z-z0| \leq r\}
 			\end{equation}
 			where $r \geq 0$. However, in our approach the values of r are only in the range r > 0.
 			The final M set will then be used to determine which cell will be the next.
 			\paragraph*{Convex Hull}
-			With this technique we want to use more information about the problem, in the choice of the neighbors. Since the Morse potential takes in account the distance of all pair of atoms that composes the aggregate, we thought that we should use the information of the partially constructed solutions to help choose the neighborhood. One of the first ideas that came into mind was the following: build a convex hull, with the atoms that are in the partial solution, and then determine all the cells that are at distance one from the segments defined by the points of the convex hull. The process is detailed in Alg.4.
+			With this technique we wanted to use more information about the problem, in the choice of the neighbors. Since the Morse potential takes in account the distance of all pair of atoms that composes the aggregate, we thought that we should use the information of the partially constructed solutions to help choose the neighborhood. One of the first ideas that came into mind was the following: build a convex hull, with the atoms that are in the partial solution, and then determine all the cells that are at distance one from the segments defined by the points of the convex hull. The process is detailed in Alg.4.
 			\begin{algorithm}
 				\caption{Convex Hull}
 				\label{alg:convex_hull}
@@ -150,10 +150,10 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 			The $remove\_repeated\_cell()$ procedure removes the repeated cells that are in the M set, since one cell can be in more the one atom neighborhood.
 			The M set will then be used to determine which cell should be added to the solution.
 
-			This technique uses the information of all the atoms that had already been placed, but it demands a lot of computational resources. Every time we place a new atom we have to calculate the Convex Hull of the current partial solution. This, together with the calculus of the distance of all cells to the segments, made us look for other alternative.
+			This technique uses the information of all the atoms that had already been placed, but it demands a lot of computational resources. Every time we place a new atom we have to calculate the Convex Hull of the current partial solution. This, together with the additional time on the calculus of the distance of all cells to the segments, made us look for other alternative.
 			
 			\paragraph*{All Atom Neighbors}
-			This technique was another attempt to use information about the partially constructed cluster.  In this technique, we iterate by all atoms that are already in place, and we look for the neighbors of them. The neighborhood that we use is the Moore neighborhood with the same r for all the atoms. The general idea is depicted in Fig. \ref{fig:all_neighbors}. We use a 2D representation for simplicity. The following algorithm gives more details about this technique:
+			This technique was another attempt to use information about the partial constructed cluster.  In this technique, we iterate by all atoms that are already in place, and we look for the neighbors of them. The neighborhood that we use is the Moore neighborhood with the same r for all the atoms. The general idea is depicted in Fig. \ref{fig:all_neighbors}. We use a 2D representation for simplicity. The following algorithm gives more details about this technique:
 		
 			\begin{algorithm}
 				\caption{All Atom Neighbors}
@@ -176,13 +176,13 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 		\botapic[0.50]{all_neighbors}{The grey cells represent the final M set, with $r = 1$}	
 		
 		\subsubsection*{Find Next Cell}	
-		This procedure is where we decide which cell should be considered to be part of the solution. This means that, an ant, located in a cell $i$ should choose a new cell $j$ to move to. This choice is based on the pheromone value of cell $j$ $\tau_{j}^{\alpha}$ and the heuristic information $\eta_{j}^\gamma$. It is important to say that we do not use any heuristic information explicitly. Our heuristic information is applied when choosing cells to the set M of candidate cells. In the case of our problem, we are interested in cells that are at a distance $d$, where $0.5 < d < 1.3$. So while choosing the candidate cells, we discard all the solutions that do not verify this condition. Hence, the choice function depends only of the pheromone value of cell $j$:
+		This procedure is where we decide which cell should be considered to be part of the solution. This means that, an ant, located in a cell $i$ should choose a new cell $j$ to move to. This choice is based on the pheromone value of cell $j$, $\tau_{j}^{\alpha}$ and the heuristic information $\eta_{j}^\gamma$. It is important to say that we do not use any heuristic information explicitly. Our heuristic information is applied when we are choosing cells to the set M of candidates. In the case of our problem, we are interested in cells that are at a distance $d$, where $0.5 < d < 1.3$. So while choosing the candidate cells, we discard all the solutions that do not verify this condition. Hence, the choice function depends only of the pheromone value of cell $j$:
 		\begin{equation}
 			\label{eq:prob_rule}
-			p_j = \frac{\tau_j} {\sum_{l \in M} \tau_l}
+			p_j = \frac{[\tau_j]^\alpha} {\sum_{l \in M} [\tau_l]^\alpha}
 		\end{equation}
 		To explain the cell selection process, lets assume that the values of the rule function are stored in $V$. To choose which cell should be used next we use a roulette wheel selection: each value of the $V$ determines a slice on a circular roulette wheel. Next, the wheel is spun and the cell to which the marker points is chosen as the next cell for the ant. 
-		In Alg. \ref{alg:find_next_cell} we detail the find next cell procedure, and in Alg. we detail the roulette wheel selection method. 
+		In Alg. \ref{alg:find_next_cell} we detail the find next cell procedure, and in Alg. \ref{alg:roulette_wheel} we detail the roulette wheel selection method. 
 		
 			\begin{algorithm}
 				\caption{Find Next Cell}
@@ -222,10 +222,10 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 
 			L-BFGS is an efficient local optimization method that combines the modest storage and computational requirements of conjugate gradient methods with the super linear convergence exhibited by full memory quasi-Newton strategies. This local optimization algorithm is usually adopted by hybrid approaches for cluster geometry optimization problems \cite{grosso07, xico09}.
 
-			After this procedure, we will have a different solution from the one that was given as parameter, in away that the new one corresponds to an improved solution.
+			After this procedure, we will have a different solution from the one that was given as parameter, in away that the new one is an improvement over the old one.
 			
 			\subsection{Convert Solutions to Discrete Space}
-			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because, as we referred, the solutions returned after their evaluation are different from the ones that were given as parameters.
+			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because, as we referred, the solutions returned after their evaluation are different from the ones that were given as parameters, and we need this the information of the new solutions.
 
 			In order to make the conversion, we start by moving all the atoms to origin of the axis. We do this, to deal of some problem that can arise with cluster geometry optimization: we can have two clusters that are exactly the same, although one of them can simply be a translation of the other.
 
@@ -266,7 +266,7 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 				\WHILE{$i < local\_search\_iterations$}
 					\STATE $worst\_atom\_cell = find\_atom\_worst\_contribution(current\_solution)$
 					\STATE $new\_position = random\_cell()$
-					\STATE $current_solution[worst\_atom\_cell] = new\_position$
+					\STATE $current\_solution[worst\_atom\_cell] = new\_position$
 					\STATE $evaluate(current\_solution)$
 					\IF{$is\_better(current\_solution, best\_solution)$}
 						\STATE $best\_solution = current\_solution$
@@ -289,7 +289,7 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 
 			We start by decrease the current values of the pheromones, by a certain percentage, simulating the pheromone evaporation in the nature.
 
-			After, to deposit pheromones we follow the rule presented in \cite{blum04} with some slightly differences. In the cited approach, they used 3 ants to update the trails:
+			After, to deposit pheromones we follow the rule presented in \cite{blum04} with some minor differences. In the cited approach, they used 3 ants to update the trails:
 			\begin{enumerate}
 				\item \emph{Iteration-best ant} - which corresponds to the best ant in the current iteration of the algorithm;
 				\item \emph{Restart-best ant} - which corresponds to the best ant found since the restart of the algorithm
@@ -298,7 +298,7 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 			
 			However, in our approach we do not have a restart mechanism, thus we do not need to use the restart-best ant. 
 
-			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and require a lot of experimentation. However in the HCF, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measure by the weights that we assign to each ant. The final rule to update pheromones is depicted by the following:
+			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and require a lot of experimentation. However in the HCF, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measure by the weights that we assign to each one. The final rule to update pheromones is depicted by the following:
 			\begin{equation}
 				\tau = \tau + \omega
 			\end{equation}
@@ -312,7 +312,7 @@ In this chapter we present the approach that we used to tackle the problem of Cl
 			
 			After the update is applied, pheromone values that exceed $\tau_{max}$ are set back to $\tau_{max}$. The similar process is applied to $\tau_{min}$.
 
-			The final important aspect of the pheromone update rule is that the pheromones are not deposit in only cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$.
+			The final important aspect of the pheromone update rule is that the pheromones are not deposit in only cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig. \ref{fig:propagation}). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$.
 			
 		\botapic[0.7]{propagation}{Pheromone Propagation}	
 			

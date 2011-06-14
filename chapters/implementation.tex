@@ -7,12 +7,14 @@ Since this dissertation is part of the Masters Degree in Informatics Engineering
 
 To implement the first versions of the system we decide to use the Python language. One of the reasons for this is related with the simplicity of the language, and easiness in making changes. The other reason is related with the L-BFGS method, which is written in Fortran. With python it is easy to connect modules made in Fortran with our code.
 
-After we have a stable version, we decided to write it in C. The reason for this was the performance of the python language. This language, despite being very fast, has some programming overhead, when compared, for instance, with python. During the conversion of the python code to C, some bugs that appeared, as one should expect. They were solved using the \emph{gdb} debugging system.
+After we have a stable version, we decided to write it in C. The reason for this was the performance of the python language. 
 
-We used the \emph{Git} has revision control system. As online repository our choice was the \emph{Github} platform, with private repositories.
+The C language, despite being very fast, has some programming overhead, when compared, for instance, with python. During the conversion of the python code to C, some bugs appeared, as one should expect. They were solved using the \emph{gdb} debugging system.
+
+We used \emph{Git} as revision control system. As online repository our choice was the \emph{Github} platform, with private repositories.
 
 \section{Architecture Overview}
-We used tried to keep our architecture simple and modular. In Fig.\ref{fig:class_diagram} we present a class diagram, which in our opinion gives a better insight in how the system is organized.
+We tried to keep our architecture simple and modular. In Fig.\ref{fig:class_diagram} we present a class diagram, which in our opinion gives a better insight in how the system is organized.
 
 \botapic[0.7]{class_diagram}{CGACO Class Diagram}
 \pagebreak
