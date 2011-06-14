@@ -4,8 +4,8 @@
 \usepackage{mystyle}
 \usepackage{pdflscape}
 
-\setcounter{tocdepth}{5}
-\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
 
 \begin{document}
 	\pagenumbering{roman}
@@ -21,19 +21,9 @@
 	\input{"chapters/introduction"}
 	\input{"chapters/atomic_clusters"}
 	\input{"chapters/optimization_of_clusters"}
-	\input{"chapters/research_objectives"}
-	\input{"chapters/current_work_prel_results"}
+	\input{"chapters/approach"}
+	\input{"chapters/implementation"}
 	\input{"chapters/conclusions"}
-	\appendix
-	\chapter{Appendix}
-	\begin{landscape}
-		\begin{figure}
-		  \centering
-		  \includegraphics[width=1.5\textwidth]{pictures/WorkPlan}% picture filename
-			\caption{WorkPlan}
-			\label{fig:WorkPlan}
-		\end{figure}
-	\end{landscape}
 	\bibliographystyle{plain}
 	\bibliography{refs}
 	
