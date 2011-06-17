@@ -164,7 +164,7 @@
 						\item only the \emph{best-so-far} or the \emph{iteration-best} ants are allowed to deposit pheromones \cite{stutzle00}:
 							\begin{equation}
 								\label{eq:max_min_rank_pheromone_update}
-								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best},
+								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best}
 							\end{equation}
 							\noindent where $\Delta\tau^{best}$ is the computed using $\frac{1} {L^{best}}$, where ${L^{best}}$ is the fitness of the best solution so far or the fitness of the best solution in the iteration, depending of which one is used. In most cases \emph{best-so-far} and \emph{iteration-best} are used interchangeably.
 						

@@ -5,47 +5,46 @@ The style file: plain.bst
 Database file #1: refs.bib
 Warning--empty booktitle in blum04
 Warning--can't use both volume and number fields in blum04
-Warning--empty year in lourenco10
 Warning--empty publisher in luke09
-You've used 39 entries,
+You've used 34 entries,
             2118 wiz_defined-function locations,
-            744 strings with 10433 characters,
-and the built_in function-call counts, 13751 in all, are:
-= -- 1328
-> -- 607
-< -- 15
-+ -- 238
-- -- 190
-* -- 988
-:= -- 2254
-add.period$ -- 125
-call.type$ -- 39
-change.case$ -- 196
+            718 strings with 9470 characters,
+and the built_in function-call counts, 12034 in all, are:
+= -- 1166
+> -- 519
+< -- 13
++ -- 204
+- -- 162
+* -- 874
+:= -- 1971
+add.period$ -- 108
+call.type$ -- 34
+change.case$ -- 168
 chr.to.int$ -- 0
-cite$ -- 43
-duplicate$ -- 535
-empty$ -- 1125
-format.name$ -- 190
-if$ -- 2948
+cite$ -- 37
+duplicate$ -- 465
+empty$ -- 986
+format.name$ -- 162
+if$ -- 2579
 int.to.chr$ -- 0
-int.to.str$ -- 39
-missing$ -- 41
-newline$ -- 199
-num.names$ -- 90
-pop$ -- 194
+int.to.str$ -- 34
+missing$ -- 37
+newline$ -- 174
+num.names$ -- 78
+pop$ -- 158
 preamble$ -- 1
-purify$ -- 162
+purify$ -- 139
 quote$ -- 0
-skip$ -- 373
+skip$ -- 327
 stack$ -- 0
-substring$ -- 937
-swap$ -- 123
-text.length$ -- 15
+substring$ -- 856
+swap$ -- 106
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 148
-warning$ -- 4
-while$ -- 126
-width$ -- 41
-write$ -- 437
-(There were 4 warnings)
+type$ -- 128
+warning$ -- 3
+while$ -- 112
+width$ -- 36
+write$ -- 384
+(There were 3 warnings)
