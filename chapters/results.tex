@@ -42,7 +42,7 @@ The cell size corresponds to size of each cell in our search space. The neighbor
 			Morse Potential range $(\beta)$ & 14.0 \\ 
 			Cell size $(W)$ & 0.6 \\
 			Number of Atoms $(N)$ & Between 30 and 50 \\
-			Influence of the pheromones $(\alpha)$) & 4 \\
+			Influence of the pheromones $(\alpha)$ & 4 \\
 			Continuous Local Search Iterations & 1000\\
 			Continuous Local Search Accuracy & 1.0E-8\\
 			Pheromone propagation value ($p$) & 0.5 \\
@@ -58,9 +58,9 @@ The cell size corresponds to size of each cell in our search space. The neighbor
 
 
 \section{Statistical Analysis}
-To compare our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data didn't not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair CGACO-EA and CGACO-PSO of algorithms.
+To compare our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair CGACO-EA and CGACO-PSO of algorithms.
 
-The hypothesis for comparing the two algorithms were:
+The hypothesis for comparing two algorithms were:
 \begin{itemize}
 	\item $H_{0} : u_1 = u_2$ - means of the algorithms were equal, as the null hypothesis.
 	\item $H_{1} : u_1 \neq u_2$ - means of the algorithms were not equal, as the alternative hypothesis.
@@ -72,16 +72,36 @@ Each time we applied a statistical test we looked for the results and concluded:
 
 \section{Experimental Results}
 	\subsection{CGACO}
-	In Table  we present the results obtained by the CGACO algorithm, for the instances where it was applied. 
+	In Table \ref{tab:optimization_results} we present the optimization results of short-ranged Morse Clusters between 30 and 50 obtained by the CGACO algorithm. The first column, \emph{Instance}, identifies the number of atom of each cluster. The second column, \emph{Optimum}, displays the potential energy of the best-known solution. The third column, \emph{Best Solution Found}, displays the potential energy of the best solution found by the CGACO. The next two columns present the success rate (column \emph{SR}) and the Mean Best Fitness (column \emph{MBF}). The last column measures of how the MBF deviates from the best-known solution.
 	\begin{table}[!htbp]
 		\begin{center}
-			\begin{tabular}{| c | p{2cm} | p{3cm} | p{2cm} | c | c |}
+			\begin{tabular}{| c | c | p{3cm} | r | c | c |}
 				\hline
-				\textbf{Instance} & \textbf{Known Optimum} & \textbf{Best Solution Found} & \textbf{Success Rate} & \textbf{MBF} & \textbf{Deviation}\\
-				\hline
+				\textbf{Instance} & \textbf{Optimum} & \textbf{Best Solution Found} & \textbf{SR} & \textbf{MBF} & \textbf{Deviation}\\ \hline
+				30 & -106.835790 & -106.835790 & 22 / 30 & -106.816158 & TODO \\ \hline
+				31 & -111.760670 & -111.760670 & 26 / 30 & -111.755823 & TODO \\ \hline
+				32 & -115.767561 & -115.767561 & 28 / 30 & -115.766290 & TODO \\ \hline
+				33 & -120.741345 & -120.741345 & 24 / 30 & -120.738735 & TODO \\ \hline
+				34 & -124.748271 & -124.748271 & 14 / 30 & -124.745248 & TODO \\ \hline
+				35 & -129.737360 & -129.737360 & 17 / 30 & -129.718032 & TODO \\ \hline
+				36 & -133.744666 & -133.744666 & 13 / 30 & -133.721919 & TODO \\ \hline
+				37 & -138.708582 & -138.708582 & 8 / 30 & -138.672695 & TODO \\ \hline
+				38 & -144.321054 & -144.321054 & 28 / 30 & -144.211960 & TODO \\ \hline
+				39 & -148.327400 & -148.327400 & 28 / 30 & -148.280771 & TODO \\ \hline
+				40 & -152.333745 & -152.333745 & 21 / 30 & -152.111035 & TODO \\ \hline
+				41 & -156.633479 & -156.633479 & 1 / 30 & -156.327948 & TODO \\ \hline
+				42 & -160.641020 & -160.641020 & 1 / 30 & -160.425386 & TODO \\ \hline
+				43 & -165.634973 & -165.634973 & 1 / 30 & -165.233135 & TODO \\ \hline
+				44 & -169.642441 & -169.614579 & 0 / 30 & -169.224056 & TODO \\ \hline
+				45 & -174.511632 & -174.397893 & 0 / 30 & -173.593068 & TODO \\ \hline
+				46 & -178.519320 & -178.417043 & 0 / 30 & -178.087957 & TODO \\ \hline
+				47 & -183.508227 & -183.399088 & 0 / 30 & -182.284522 & TODO \\ \hline
+				48 & -188.888965 & -188.888965 & 1 / 30 & -187.091177 & TODO \\ \hline
+				49 & -192.898412 & -192.898412 & 2 / 30 & -191.862510 & TODO \\ \hline
+				50 & -198.455632 & -196.949025 & 0 / 30 & -196.105401 & TODO \\ \hline
 			\end{tabular}
-		\caption{Parameter setting used in the experiments}
-		\label{tab:general_settings}
+		\caption{Optimization results of Morse Clusters between 30 and 50 obtained by CGACO}
+		\label{tab:optimization_results}
 		\end{center}
 	\end{table}
 	
