@@ -116,7 +116,7 @@ Each time we applied a statistical test we looked for the results and concluded:
 	\section{Algorithm Comparison}
 	In this section we compare our approach with others described in the literature. A direct comparison with other ACO approaches its not possible, due to absence of such approaches. Hence, we compare our approach with one of the swarm intelligence algorithms family, and with an another of the Evolutionary Algorithms family.
 	\subsection{CGACO versus PSO}
-	In Table \ref{tab:cgaco_vs_pso} we compare the CGACO and PSO algorithms. The third and fourth column represent the success rate (SR) and the MBF, respectively, of CGACO. The last two columns represent the SR and the the MBF of PSO. The number of evaluations granted to the PSO algorithm were the same of the CGACO. 
+	In Table \ref{tab:cgaco_vs_pso} we compare the CGACO and PSO algorithms. The third and fourth column represent the success rate (SR) and the MBF, of CGACO. The last two columns represent the SR and the the MBF of PSO. The number of evaluations granted to the PSO algorithm were the same of the CGACO. 
 	
 	\begin{table}[!htdp]
 			\label{tab:cgaco_vs_pso}
@@ -151,12 +151,52 @@ Each time we applied a statistical test we looked for the results and concluded:
 			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CCGACO algorithm and the PSO}
 		\end{table}
 		
-		Looking at the displayed results, we can conclude that the CGACO is as good as the PSO. We can see that, for instances between 30 ant 40 atoms, the SR of CGACO is, in general, higher than the SR of the PSO. However, when comparing the SR between 41 and 50 atom, the success rate of CGACO is lower than the PSO. Nevertheless, looking at the MBF, the CGACO presents the higher values for all instances. These MBF results, are interesting because they show that the CGACO algorithm can find solutions with better quality, than the ones of the PSO.
+		Looking at the results, we can conclude that the CGACO is as good as the PSO. We can see that, for instances between 30 ant 40 atoms, the SR of CGACO is, in general, higher than the SR of the PSO. However, when comparing the SR between 41 and 50 atom the success rate of CGACO is lower than the PSO. Nevertheless, analyzing the MBF values the CGACO presents the higher values for all instances. These MBF results are interesting because they show that the CGACO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in \ref{fig:cgaco_pso_mbf_50} we present the evolution of the MBF for CGACO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the CGACO is higher during the whole optimization process.
+		
+		\botapic[0.7]{cgaco_pso_mbf_50}{Evolution of the MBF of CGACO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
 	
 	
-	
-	
-	
+		<FALTA TRAZER A ANÁLISE ESTATISTICA DO SPSS>
+		
+		
+		\subsection{CGACO versus EA}
+		
+			In Table \ref{tab:cgaco_vs_pso} we compare the CGACO and EA algorithms. Like in the previous section, the third and fourth column represent SR and the MBF of CGACO. The last two columns represent the SR and the the MBF of EA. Again, the number of evaluation granted to the EA, was the same of the CGACO. 
+
+		\begin{table}[!htdp]
+				\label{tab:cgaco_vs_ea}
+				\begin{center}
+					\begin{tabular}{| c | c | c | c | c | c |}
+						\hline
+						\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{\textbf{CGACO}} & \multicolumn{2}{c|}{\textbf{EA}}\\ \hline
+						\textbf{Instance} & \textbf{Optimum} & \textbf{SR} & \textbf{MBF} & \textbf{SR} & \textbf{MBF} \\ \hline
+						30 & -106.835790 & 22 / 30 & -106.816158 & 22 / 30 & -106.794747 \\ \hline
+						31 & -111.760670 & 26 / 30 & -111.755823 & 30 / 30 & -111.760670 \\ \hline
+						32 & -115.767561 & 28 / 30 & -115.766290 & 29 / 30 & -115.766686 \\ \hline
+						33 & -120.741345 & 24 / 30 & -120.738735 & 28 / 30 & -120.697611 \\ \hline
+						34 & -124.748271 & 14 / 30 & -124.745248 & 28 / 30 & -124.715475 \\ \hline
+						35 & -129.737360 & 17 / 30 & -129.718032 & 27 / 30 & -129.623232 \\ \hline
+						36 & -133.744666 & 13 / 30 & -133.721919 & 28 / 30 & -133.715154 \\ \hline
+						37 & -138.708582 & 8 / 30 & -138.672695 & 25 / 30 & -138.610585 \\ \hline
+						38 & -144.321054 & 28 / 30 & -144.211960 & 8 / 30 & -143.130422 \\ \hline
+						39 & -148.327400 & 28 / 30 & -148.280771 & 14 / 30 & -147.958055 \\ \hline
+						40 & -152.333745 & 21 / 30 & -152.111035 & 9 / 30 & -151.886095 \\ \hline
+						41 & -156.633479 & 1 / 30 & -156.327948 & 15 / 30 & -156.547928 \\ \hline
+						42 & -160.641020 & 1 / 30 & -160.425386 & 12 / 30 & -160.518149 \\ \hline
+						43 & -165.634973 & 1 / 30 & -165.233135 & 14 / 30 & -165.254805 \\ \hline
+						44 & -169.642441 & 0 / 30 & -169.224056 & 7 / 30 & -169.303639 \\ \hline
+						45 & -174.511632 & 0 / 30 & -173.593068 & 5 / 30 & -174.102119 \\ \hline
+						46 & -178.519320 & 0 / 30 & -178.087957 & 9 / 30 & -178.389713 \\ \hline
+						47 & -183.508227 & 0 / 30 & -182.284522 & 2 / 30 & -183.153610 \\ \hline
+						48 & -188.888965 & 1 / 30 & -187.091177 & 14 / 30 & -188.160694 \\ \hline
+						49 & -192.898412 & 2 / 30 & -191.862510 & 18 / 30 & -192.627890 \\ \hline
+						50 & -198.455632 & 0 / 30 & -196.105401 & 5 / 30 & -197.688978 \\ \hline
+					\end{tabular}
+				\end{center}
+				\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CCGACO algorithm and the EA}
+			\end{table}
+			
+			An overview of the results presented in Table \ref{tab:cgaco_vs_ea} reveal that CGACO has as good results as the EA in the Morse clusters between 30 and 40, in both SR values and MBF values. However, for Morse instances between 40 and 50, the same behavior is not observed, as the SR of CGACO is inferior to the one of the EA. Nevertheless, looking at he MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by CGACO are almost as good as the EA.
 	
 	
 	
