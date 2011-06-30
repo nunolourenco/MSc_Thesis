@@ -227,13 +227,11 @@ In the next sections we present a high level overview of our entire algorithm. T
 			\subsection{Evaluate Solution in Continuous Space}
 			
 			The evaluation of the solutions, which were built by the ants, is made in this procedure. Since we have the atoms in the center of the cell, which are represented by $(x,y,z)$, where x, y, z $\in \mathbb{R}$, we do not have to make any additional computation to pass from the discretized space to the continuous space.
-
-			The evaluation of the solutions is made in two steps: the first step is to move the current solution to its closest optimum. To achieve such task it uses the Broyden-Fletcher-Goldfarb-Shannon (L-BFGS) quasi-newton method \cite{liu89}, to move the solution into the nearest local optimum. This method uses the gradient of the Morse potential equation, therefore we need the first derivatives of equation \ref{eq:morse_potential}. The second step is to evaluate the current solution using the Morse potential \ref{eq:morse_potential}.
-
-			L-BFGS is an efficient local optimization method that combines the modest storage and computational requirements of conjugate gradient methods with the super linear convergence exhibited by full memory quasi-Newton strategies. This local optimization algorithm is usually adopted by hybrid approaches for cluster geometry optimization problems \cite{grosso07, xico09}.
-
-			After this procedure, we will have a different solution from the one that was given as parameter, in away that the new one is an improvement over the old one.
 			
+			The evaluation of the solutions proceeds in two steps. First, the Broyden-Fletcher-Goldfarb-Shannon (L-BFGS) quasi-Newton method \cite{liu89} move the solution to the nearest local optimum. Then equation \ref{eq:morse_potential} is used to determine the potential energy of the resulting cluster.
+
+			L-BFGS is an efficient local optimization method that combines the modest storage and computational requirements of conjugate gradient methods with the super linear convergence exhibited by full memory quasi-Newton strategies. This local optimization algorithm is usually adopted by hybrid approaches for cluster geometry optimization problems \cite{grosso07, johnston03, xico09}.
+						
 			\subsection{Convert Solutions to Discrete Space}
 			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because, as we referred, the solutions returned after their evaluation are different from the ones that were given as parameters.
 			To convert the cluster to the discretized space, we apply the following algorithm: given a certain atom, we calculate the distance of this atom to all centers of the cells in the space, and the cell that is closer the atom, will be the one that will hold it. This process is detailed in Alg. \ref{alg:convertion_discrete}.

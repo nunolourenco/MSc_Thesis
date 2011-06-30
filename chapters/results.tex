@@ -1,7 +1,7 @@
 %!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2010_2011/Thesis/Thesis/thesis.tex
 \chapter{Results}
 
-In this chapter we present an experimental analysis of the application of our algorithm to several instances of short-ranged Morse Clusters. To perform such analysis, we start by describing the scenario used in our experiments. After we introduce the parameters used in the algorithm, then we present the hypothesis that we considered in the comparative analysis. After this we present and discuss the results obtained.
+In this chapter we present an experimental analysis of the application of our algorithm to several instances of short-ranged Morse Clusters. To perform such analysis, we start by describing the scenario used in our experiments. In Section \ref{sec:experimental_setting} we introduce the parameters used in the algorithm, and in Section \ref{sec:statistical_analysis} we present the hypothesis that we considered in the comparative analysis. In Section \ref{sec:experimental_results} we present and discuss the results obtained. Finally, in Section \ref{sec:detailed_analysis} we present a detailed analysis of some main components of the algorithm.
 
 
 
@@ -14,16 +14,16 @@ In this study we focus our attention in several instances of short-ranged Morse 
 		\item Gain insight into the influence of some components of the algorithm. 
 	\end{enumerate}
 	
-	For the first objective, we present the results of the CGACO optimization for all the aforementioned instances, and we analyze its performance based on two criteria:
+	For the first objective, we present the results of the DACCO optimization for all the aforementioned instances, and we analyze its performance based on two criteria:
 	\begin{enumerate}
 		\item Ability to discover the known optima;
 		\item Mean Best Fitness (MBF) deviation from the optimum;
 	\end{enumerate}
 	
 	The first criterion is a very widely adopted performance measure in cluster geometry optimization. Hence, for all instances, we show the best solution found by the algorithm, and what was its success rate(number of times that it found the best-known solution).
-	The second criterion aims to complement our study, as it will provide information about the convergence of CGACO to promising areas of the search space.
+	The second criterion aims to complement our study, as it will provide information about the convergence of DACCO to promising areas of the search space.
 	
-	Later, to assess the absolute performance of the CGACO, we compare its results with those achieved by two algorithms: a steady-state EA described in Pereira et al. \cite{xico09}, and Particle Swarm Optimization (PSO) algorithm. The PSO algorithm is a swarm intelligence algorithm, and it combines a set of rules to improve its effectiveness while optimizing Morse clusters. The most noteworthy are: a steady-state strategy to update solutions, with a structural distance measure, and new rule to update the particles, which applies the velocity only to a subset of the variables.
+	Later, to assess the absolute performance of the DACCO, we compare its results with those achieved by two algorithms: a steady-state EA described in Pereira et al. \cite{xico09}, and the Particle Swarm Optimization algorithm (PSO) described in Lourenço et al. \cite{lourenco11}.
 	
 \section{Experimental Settings}
 \label{sec:experimental_setting}
@@ -34,7 +34,7 @@ The size of the population depends on the size of the cluster being optimized. T
 
 The cell size ($W$) corresponds to size of each cell in our search space. 
 
-The neighborhood used is the Moore neighborhood with $r = 1$. The number of iterations in the discrete local search is 10.
+The neighborhood used is the Moore neighborhood with $r = 3$. The number of iterations in the discrete local search is 10.
 
 \begin{table}[!htbp]
 	\begin{center}
@@ -52,7 +52,7 @@ The neighborhood used is the Moore neighborhood with $r = 1$. The number of iter
 			Continuous Local Search Accuracy & 1.0E-8\\
 			Pheromone propagation value ($p$) & 0.5 \\
 			Neighborhood type & Moore Neighborhood \\
-			Neighborhood radius $(r)$ & 1 \\
+			Neighborhood radius $(r)$ & 3 \\
 			Discrete Local Search Iteration & 10 \\
 			\hline
 		\end{tabular}
@@ -63,7 +63,8 @@ The neighborhood used is the Moore neighborhood with $r = 1$. The number of iter
 \pagebreak
 
 \section{Statistical Analysis}
-While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair CGACO-EA and CGACO-PSO of algorithms.
+\label{sec:statistical_analysis}
+While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair DACCO-EA and DACCO-PSO of algorithms.
 
 The hypothesis for comparing two algorithms were:
 \begin{itemize}
@@ -77,210 +78,214 @@ In the tables where we make the statistical analysis we use the following notati
 
 
 
-\section{Experimental Results}
-	In this section we present the results obtained by the proposed approach. We present the results of the optimization of Morse cluster between 30 and 50 atoms. Furthermore, we discuss the obtained results.
-
-
-	\subsection{CGACO}
-	In Table \ref{tab:optimization_results} we present the optimization results of short-ranged Morse Clusters between 30 and 50 obtained by the CGACO algorithm. The first column, \emph{Instance}, identifies the number of atom of each cluster. The second column, \emph{Optimum}, displays the potential energy of the best-known solution. The third column, \emph{Best Solution Found}, displays the potential energy of the best solution found by the CGACO. The next two columns present the success rate (column \emph{SR}) and the Mean Best Fitness (column \emph{MBF}). The last column measures of how the MBF deviates from the best-known solution.
+\section{DACCO: Experimental Results}
+\label{sec:experimental_results}
+	
+	In Table \ref{tab:optimization_results} we present the optimization results of short-ranged Morse Clusters between 30 and 50 obtained by the DACCO algorithm. The first column, \emph{Instance}, identifies the number of atom of each cluster. The second column, \emph{Optimum}, displays the potential energy of the best-known solution. The third column, \emph{Best Solution Found}, displays the potential energy of the best solution found by the DACCO. The next two columns present the success rate (column \emph{SR}) and the Mean Best Fitness (column \emph{MBF}). The last column measures of how the MBF deviates from the best-known solution.
 	\begin{table}[!htbp]
 		\begin{center}
 			\begin{tabular}{| c | c | p{3cm} | c | c | p{2cm} |}
 				\hline
 				\textbf{Instance} & \textbf{Optimum} & \textbf{Best Solution Found} & \textbf{SR} & \textbf{MBF} & \textbf{Deviation}\\ \hline
-				30 & -106.835790 & -106.835790 & 22 / 30 & -106.816158 & 0.018 \\ \hline
-				31 & -111.760670 & -111.760670 & 26 / 30 & -111.755823 & 0.004 \\ \hline
-				32 & -115.767561 & -115.767561 & 28 / 30 & -115.766290 & 0.001 \\ \hline
-				33 & -120.741345 & -120.741345 & 24 / 30 & -120.738735 & 0.002 \\ \hline
-				34 & -124.748271 & -124.748271 & 14 / 30 & -124.745248 & 0.002 \\ \hline
-				35 & -129.737360 & -129.737360 & 17 / 30 & -129.718032 & 0.015 \\ \hline
-				36 & -133.744666 & -133.744666 & 13 / 30 & -133.721919 & 0.017 \\ \hline
-				37 & -138.708582 & -138.708582 & 8 / 30 & -138.672695 & 0.026 \\ \hline
-				38 & -144.321054 & -144.321054 & 28 / 30 & -144.211960 & 0.076 \\ \hline
-				39 & -148.327400 & -148.327400 & 28 / 30 & -148.280771 & 0.031 \\ \hline
-				40 & -152.333745 & -152.333745 & 21 / 30 & -152.111035 & 0.146 \\ \hline
-				41 & -156.633479 & -156.633479 & 1 / 30 & -156.327948 & 0.195 \\ \hline
-				42 & -160.641020 & -160.641020 & 1 / 30 & -160.425386 & 0.134 \\ \hline
-				43 & -165.634973 & -165.634973 & 1 / 30 & -165.233135 & 0.243 \\ \hline
-				44 & -169.642441 & -169.614579 & 0 / 30 & -169.224056 & 0.247 \\ \hline
-				45 & -174.511632 & -174.397893 & 0 / 30 & -173.593068 & 0.526 \\ \hline
-				46 & -178.519320 & -178.417043 & 0 / 30 & -178.087957 & 0.242 \\ \hline
-				47 & -183.508227 & -183.399088 & 0 / 30 & -182.284522 & 0.667 \\ \hline
-				48 & -188.888965 & -188.888965 & 1 / 30 & -187.091177 & 0.952 \\ \hline
-				49 & -192.898412 & -192.898412 & 2 / 30 & -191.862510 & 0.537 \\ \hline
-				50 & -198.455632 & -196.949025 & 0 / 30 & -196.105401 & 1.184 \\ \hline
+				30 & -106.835790 & -106.835790 & 28 / 30 & -106.831095 & 0.004 \\ \hline
+				31 & -111.760670 & -111.760670 & 30 / 30 & -111.760670 & 0.000 \\ \hline
+				32 & -115.767561 & -115.767561 & 30 / 30 & -115.767561 & 0.000 \\ \hline
+				33 & -120.741345 & -120.741345 & 30 / 30 & -120.741345 & 0.000 \\ \hline
+				34 & -124.748271 & -124.748271 & 30 / 30 & -124.748271 & 0.000 \\ \hline
+				35 & -129.737360 & -129.737360 & 30 / 30 & -129.737360 & 0.000 \\ \hline
+				36 & -133.744666 & -133.744666 & 30 / 30 & -133.744666 & 0.000 \\ \hline
+				37 & -138.708582 & -138.708582 & 28 / 30 & -138.682731 & 0.019 \\ \hline
+				38 & -144.321054 & -144.321054 & 25 / 30 & -144.053535 & 0.185 \\ \hline
+				39 & -148.327400 & -148.327400 & 26 / 30 & -148.243303 & 0.057 \\ \hline
+				40 & -152.333745 & -152.333745 & 25 / 30 & -152.228797 & 0.069 \\ \hline
+				41 & -156.633479 & -156.633479 & 11 / 30 & -156.483040 & 0.096 \\ \hline
+				42 & -160.641020 & -160.641020 & 5 / 30 & -160.449243 & 0.119 \\ \hline
+				43 & -165.634973 & -165.634973 & 6 / 30 & -165.361457 & 0.165 \\ \hline
+				44 & -169.642441 & -169.642441 & 3 / 30 & -169.383463 & 0.153 \\ \hline
+				45 & -174.511632 & -174.511632 & 3 / 30 & -174.295931 & 0.124 \\ \hline
+				46 & -178.519320 & -178.519320 & 2 / 30 & -178.371855 & 0.083 \\ \hline
+				47 & -183.508227 & -183.411312 & 0 / 30 & -183.095976 & 0.225 \\ \hline
+				48 & -188.888965 & -188.888965 & 19 / 30 & -188.402414 & 0.258 \\ \hline
+				49 & -192.898412 & -192.898412 & 15 / 30 & -192.675230 & 0.116 \\ \hline
+				50 & -198.455632 & -198.455632 & 12 / 30 & -197.853115 & 0.304 \\ \hline
 			\end{tabular}
-		\caption{Optimization results of Morse Clusters between 30 and 50 obtained by CGACO}
+		\caption{Optimization results of Morse Clusters between 30 and 50 obtained by DACCO}
 		\label{tab:optimization_results}
 		\end{center}
 	\end{table}
 	
-	The results from Table \ref{tab:optimization_results} are very encouraging, since the propose approach was able to find almost all the best-known solution for short-ranged Morse clusters between 30 and 50, missing only 5 instances.
+	The results from Table \ref{tab:optimization_results} are very encouraging, since the propose approach was able to find almost all the best-known solution for short-ranged Morse clusters between 30 and 50, missing only 1 instancs.
 	To the best of our knowledge, this work is the first to apply ACO algorithm to the problem of cluster geometry optimization, hence its results may play an important role in future proposals that intend to use the same approach of this work.
 	
-	Analyzing the success rate of the algorithm its variation is irregular: between 30 and 40 atoms the success rate is high, as for clusters between 41 and 50 atoms the algorithm has difficulties to find the optimum. Moreover there is a tendency for the success rate decrease as the number of atoms increases. This can in part be explained, by the fact the we keep the number of evaluation fixed for all the clusters. With more atoms, we will get a larger search space, and it is not surprising that the performance of the algorithm declines.
+	Analyzing the success rate of the algorithm its variation is irregular: between 30 and 40 atoms the success rate is high, as for clusters between 41 and 50 atoms the algorithm has more difficulties to find the optimum. This can in part be explained, by the fact the we keep the number of evaluation fixed for all the clusters. With more atoms, we will get a larger search space, and it is not surprising that the performance of the algorithm declines.
 	
-	Looking at the MBF values, they are always close to the optimum, as the deviation values ranges between 0.001 \% and 1.184 \%. This result is interesting, as it shows that even if the CGACO converges to local optima, it can accurately find low potential structures.
+	Looking at the MBF values, they are always close to the optimum, as the deviation values ranges between 0.000 \% and 0.304 \%. This result is interesting, as it shows that even if the DACCO converges to local optima, it can accurately find low potential structures.
 	
 	Another interesting aspect is that algorithm has a good performance while optimizing the so called ``magic instances" of 30 and 38 atoms \cite{doye97}. These instances define particularly rugged landscapes, and the majority of the unbiased algorithms tend to converge to local optima \cite{doye97, grosso07}.
 	
 	\section{Algorithm Comparison}
 	In this section we compare our approach with others described in the literature. A direct comparison with other ACO approaches its not possible, due to absence of such approaches. Hence, we compare our approach with one of the swarm intelligence algorithms family, and with an another of the Evolutionary Algorithms family.
-	\subsection{CGACO versus PSO}
-	In Table \ref{tab:cgaco_vs_pso} we compare the CGACO and PSO algorithms. The third and fourth column represent the success rate (SR) and the MBF of CGACO. The last two columns represent the SR and the the MBF of PSO. 
+	\subsection{DACCO versus PSO}
+	In Table \ref{tab:dacco_vs_pso} we compare the DACCO and PSO algorithms. The third and fourth column represent the success rate (SR) and the MBF of DACCO. The last two columns represent the SR and the the MBF of PSO. 
 	
-	The number of evaluations granted to the PSO algorithm were the same of the CGACO. 
+	The number of evaluations granted to the PSO algorithm were the same of the DACCO. 
 	
 	\begin{table}[!htdp]
-			\label{tab:cgaco_vs_pso}
+			\label{tab:dacco_vs_pso}
 			\begin{center}
 				\begin{tabular}{| c | c | c | c | c | c |}
 					\hline
-					\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{\textbf{CGACO}} & \multicolumn{2}{c|}{\textbf{PSO}}\\ \hline
+					\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{c|}{\textbf{PSO}}\\ \hline
 					\textbf{Instance} & \textbf{Optimum} & \textbf{SR} & \textbf{MBF} & \textbf{SR} & \textbf{MBF} \\ \hline
-					30 & -106.835790 & 22 / 30 & -106.816158 & 4 / 30 & -106.718221 \\ \hline
-					31 & -111.760670 & 26 / 30 & -111.755823 & 19 / 30 & -111.630904 \\ \hline
-					32 & -115.767561 & 28 / 30 & -115.766290 & 20 / 30 & -115.686360 \\ \hline
-					33 & -120.741345 & 24 / 30 & -120.738735 & 19 / 30 & -120.690258 \\ \hline
-					34 & -124.748271 & 14 / 30 & -124.745248 & 15 / 30 & -124.605299 \\ \hline
-					35 & -129.737360 & 17 / 30 & -129.718032 & 6 / 30 & -129.078905 \\ \hline
-					36 & -133.744666 & 13 / 30 & -133.721919 & 14 / 30 & -133.494812 \\ \hline
-					37 & -138.708582 & 8 / 30 & -138.672695 & 12 / 30 & -138.147442 \\ \hline
-					38 & -144.321054 & 28 / 30 & -144.211960 & 8 / 30 & -142.545537 \\ \hline
-					39 & -148.327400 & 28 / 30 & -148.280771 & 7 / 30 & -147.361971 \\ \hline
-					40 & -152.333745 & 21 / 30 & -152.111035 & 7 / 30 & -151.516586 \\ \hline
-					41 & -156.633479 & 1 / 30 & -156.327948 & 2 / 30 & -155.898689 \\ \hline
-					42 & -160.641020 & 1 / 30 & -160.425386 & 4 / 30 & -160.027062 \\ \hline
-					43 & -165.634973 & 1 / 30 & -165.233135 & 4 / 30 & -164.649840 \\ \hline
-					44 & -169.642441 & 0 / 30 & -169.224056 & 3/ 30 & -168.908517 \\ \hline
-					45 & -174.511632 & 0 / 30 & -173.593068 & 3 / 30 & -173.160552 \\ \hline
-					46 & -178.519320 & 0 / 30 & -178.087957 & 1 / 30 & -177.513539 \\ \hline
-					47 & -183.508227 & 0 / 30 & -182.284522 & 1 / 30 & -182.081130 \\ \hline
-					48 & -188.888965 & 1 / 30 & -187.091177 & 2 / 30 & -186.782038 \\ \hline
-					49 & -192.898412 & 2 / 30 & -191.862510 & 4 / 30 & -191.496032 \\ \hline
-					50 & -198.455632 & 0 / 30 & -196.105401 & 1 / 30 & -195.816027 \\ \hline
+					30 & -106.835790 & 28 / 30 & -106.831095 & 4 / 30 & -106.718221 \\ \hline
+					31 & -111.760670 & 30 / 30 & -111.760670 & 19 / 30 & -111.630904 \\ \hline
+					32 & -115.767561 & 30 / 30 & -115.767561 & 20 / 30 & -115.686360 \\ \hline
+					33 & -120.741345 & 30 / 30 & -120.741345 & 19 / 30 & -120.690258 \\ \hline
+					34 & -124.748271 & 30 / 30 & -124.748271 & 15 / 30 & -124.605299 \\ \hline
+					35 & -129.737360 & 30 / 30 & -129.737360 & 6 / 30 & -129.078905 \\ \hline
+					36 & -133.744666 & 30 / 30 & -133.744666 & 14 / 30 & -133.494812 \\ \hline
+					37 & -138.708582 & 28 / 30 & -138.682731 & 12 / 30 & -138.147442 \\ \hline
+					38 & -144.321054 & 25 / 30 & -144.053535 & 8 / 30 & -142.545537 \\ \hline
+					39 & -148.327400 & 26 / 30 & -148.243303 & 7 / 30 & -147.361971 \\ \hline
+					40 & -152.333745 & 25 / 30 & -152.228797 & 7 / 30 & -151.516586 \\ \hline
+					41 & -156.633479 & 11 / 30 & -156.483040 & 2 / 30 & -155.898689 \\ \hline
+					42 & -160.641020 & 5 / 30 & -160.449243 & 4 / 30 & -160.027062 \\ \hline
+					43 & -165.634973 & 6 / 30 & -165.361457 & 4 / 30 & -164.649840 \\ \hline
+					44 & -169.642441 & 3 / 30 & -169.383463 & 3/ 30 & -168.908517 \\ \hline
+					45 & -174.511632 & 3 / 30 & -174.295931 & 3 / 30 & -173.160552 \\ \hline
+					46 & -178.519320 & 2 / 30 & -178.371855 & 1 / 30 & -177.513539 \\ \hline
+					47 & -183.508227 & 0 / 30 & -183.095976 & 1 / 30 & -182.081130 \\ \hline
+					48 & -188.888965 & 19 / 30 & -188.402414 & 2 / 30 & -186.782038 \\ \hline
+					49 & -192.898412 & 15 / 30 & -192.675230 & 4 / 30 & -191.496032 \\ \hline
+					50 & -198.455632 & 12 / 30 & -197.853115 & 1 / 30 & -195.816027 \\ \hline
 				\end{tabular}
 			\end{center}
-			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CCGACO algorithm and the PSO}
+			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CDACCO algorithm and the PSO}
 		\end{table}
 		
-		Looking at the results, we can conclude that the CGACO is as good as the PSO. We can see that, for instances between 30 ant 40 atoms, the SR of CGACO is, in general, higher than the SR of the PSO. However, when comparing the SR between 41 and 50 atom the success rate of CGACO is lower than the PSO. Nevertheless, analyzing the MBF values the CGACO presents the higher values for all instances. These MBF results are interesting because they show that the CGACO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in Fig. \ref{fig:cgaco_pso_mbf_50} we present the evolution of the MBF for CGACO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the CGACO is higher during the whole optimization process.
+		Looking at the results, we can conclude that the DACCO is better than PSO. We can see that, for instances between 30 ant 40 atoms, the SR of DACCO is higher than the SR of the PSO. When comparing the SR between 41 and 50 atom the success rate of DACCO is equivalent to the PSO. Furthemore, analyzing the MBF values the DACCO presents the higher values for all instances. These MBF results are interesting because they show that the DACCO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in Fig. \ref{fig:dacco_pso_mbf_50} we present the evolution of the MBF for DACCO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the DACCO is higher during the whole optimization process.
 		
-		\botapic[0.7]{cgaco_pso_mbf_50}{Evolution of the MBF of CGACO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
+		\botapic[0.7]{dacco_pso_mbf_50}{Evolution of the MBF of DACCO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
 		\pagebreak
 		\begin{table}[!htdp]
 				\label{tab:statistical_comparison_pso}
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
-						\textbf{Instance} & \textbf{CGACO-PSO} \\ \hline
+						\textbf{Instance} & \textbf{DACCO-PSO} \\ \hline
 						30 & S+ \\ \hline
 						31 & S+ \\ \hline
 						32 & S+ \\ \hline
-						33 & $\sim$ \\ \hline
-						34 & $\sim$ \\ \hline
+						33 & S+ \\ \hline
+						34 & S+ \\ \hline
 						35 & S+ \\ \hline
-						36 & $\sim$ \\ \hline
-						37 & $\sim$ \\ \hline
+						36 & S+ \\ \hline
+						37 & S+ \\ \hline
 						38 & S+ \\ \hline
 						39 & S+\\ \hline
 						40 & S+\\ \hline
-						41 & $\sim$ \\ \hline
-						42 & $\sim$ \\ \hline
-						43 & $\sim$ \\ \hline
-						44 & $\sim$ \\ \hline
-						45 & $\sim$ \\ \hline
+						41 & S+ \\ \hline
+						42 & S+ \\ \hline
+						43 & S+ \\ \hline
+						44 & S+ \\ \hline
+						45 & S+ \\ \hline
 						46 & S+\\ \hline
-						47 & $\sim$ \\ \hline
-						48 & $\sim$ \\ \hline 
-						49 & $\sim$ \\ \hline
-						50 & $\sim$ \\ \hline
+						47 & S+ \\ \hline
+						48 & S+ \\ \hline 
+						49 & S+ \\ \hline
+						50 & S+ \\ \hline
 					\end{tabular}
-					\caption{Statistical results of comparing CGACO and PSO}
+					\caption{Statistical results of comparing DACCO and PSO}
 				\end{center}
 		\end{table}
 		
-		Looking at Table \ref{tab:statistical_comparison_pso}, we can see that CGACO performs significantly better in eight instances of the Morse Potential. In other instances we do not have statistical evidence to show that CGACO is better than the PSO. However, if we take into account the MBF results, we can say that CGACO is in general better than the PSO. 
+		Looking at Table \ref{tab:statistical_comparison_pso}, we can see that DACCO performs significantly better in eight instances of the Morse Potential. In other instances we do not have statistical evidence to show that DACCO is better than the PSO. However, if we take into account the MBF results, we can say that DACCO is in general better than the PSO. 
 		\pagebreak
 		
-		\subsection{CGACO versus EA}
+		\subsection{DACCO versus EA}
 		
-			In Table \ref{tab:cgaco_vs_ea} we compare the CGACO and EA algorithms. Like in the previous section, the third and fourth column represent SR and the MBF of CGACO. The last two columns represent the SR and the the MBF of EA. 
+			In Table \ref{tab:dacco_vs_ea} we compare the DACCO and EA algorithms. Like in the previous section, the third and fourth column represent SR and the MBF of DACCO. The last two columns represent the SR and the the MBF of EA. 
 			
-			Again, the number of evaluation granted to the EA, was the same of the CGACO. 
+			Again, the number of evaluation granted to the EA, was the same of the DACCO. 
 
 		\begin{table}[!htdp]
-				\label{tab:cgaco_vs_ea}
+				\label{tab:dacco_vs_ea}
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c | c |}
 						\hline
-						\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{\textbf{CGACO}} & \multicolumn{2}{c|}{\textbf{EA}}\\ \hline
+						\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{c|}{\textbf{EA}}\\ \hline
 						\textbf{Instance} & \textbf{Optimum} & \textbf{SR} & \textbf{MBF} & \textbf{SR} & \textbf{MBF} \\ \hline
-						30 & -106.835790 & 22 / 30 & -106.816158 & 22 / 30 & -106.794747 \\ \hline
-						31 & -111.760670 & 26 / 30 & -111.755823 & 30 / 30 & -111.760670 \\ \hline
-						32 & -115.767561 & 28 / 30 & -115.766290 & 29 / 30 & -115.766686 \\ \hline
-						33 & -120.741345 & 24 / 30 & -120.738735 & 28 / 30 & -120.697611 \\ \hline
-						34 & -124.748271 & 14 / 30 & -124.745248 & 28 / 30 & -124.715475 \\ \hline
-						35 & -129.737360 & 17 / 30 & -129.718032 & 27 / 30 & -129.623232 \\ \hline
-						36 & -133.744666 & 13 / 30 & -133.721919 & 28 / 30 & -133.715154 \\ \hline
-						37 & -138.708582 & 8 / 30 & -138.672695 & 25 / 30 & -138.610585 \\ \hline
-						38 & -144.321054 & 28 / 30 & -144.211960 & 8 / 30 & -143.130422 \\ \hline
-						39 & -148.327400 & 28 / 30 & -148.280771 & 14 / 30 & -147.958055 \\ \hline
-						40 & -152.333745 & 21 / 30 & -152.111035 & 9 / 30 & -151.886095 \\ \hline
-						41 & -156.633479 & 1 / 30 & -156.327948 & 15 / 30 & -156.547928 \\ \hline
-						42 & -160.641020 & 1 / 30 & -160.425386 & 12 / 30 & -160.518149 \\ \hline
-						43 & -165.634973 & 1 / 30 & -165.233135 & 14 / 30 & -165.254805 \\ \hline
-						44 & -169.642441 & 0 / 30 & -169.224056 & 7 / 30 & -169.303639 \\ \hline
-						45 & -174.511632 & 0 / 30 & -173.593068 & 5 / 30 & -174.102119 \\ \hline
-						46 & -178.519320 & 0 / 30 & -178.087957 & 9 / 30 & -178.389713 \\ \hline
-						47 & -183.508227 & 0 / 30 & -182.284522 & 2 / 30 & -183.153610 \\ \hline
-						48 & -188.888965 & 1 / 30 & -187.091177 & 14 / 30 & -188.160694 \\ \hline
-						49 & -192.898412 & 2 / 30 & -191.862510 & 18 / 30 & -192.627890 \\ \hline
-						50 & -198.455632 & 0 / 30 & -196.105401 & 5 / 30 & -197.688978 \\ \hline
+						30 & -106.835790 & 28 / 30 & -106.831095 & 22 / 30 & -106.794747 \\ \hline
+						31 & -111.760670 & 30 / 30 & -111.760670 & 30 / 30 & -111.760670 \\ \hline
+						32 & -115.767561 & 30 / 30 & -115.767561 & 29 / 30 & -115.766686 \\ \hline
+						33 & -120.741345 & 30 / 30 & -120.741345 & 28 / 30 & -120.697611 \\ \hline
+						34 & -124.748271 & 30 / 30 & -124.748271 & 28 / 30 & -124.715475 \\ \hline
+						35 & -129.737360 & 30 / 30 & -129.737360 & 27 / 30 & -129.623232 \\ \hline
+						36 & -133.744666 & 30 / 30 & -133.744666 & 28 / 30 & -133.715154 \\ \hline
+						37 & -138.708582 & 28 / 30 & -138.682731 & 25 / 30 & -138.610585 \\ \hline
+						38 & -144.321054 & 25 / 30 & -144.053535 & 8 / 30 & -143.130422 \\ \hline
+						39 & -148.327400 & 26 / 30 & -148.243303 & 14 / 30 & -147.958055 \\ \hline
+						40 & -152.333745 & 25 / 30 & -152.228797 & 9 / 30 & -151.886095 \\ \hline
+						41 & -156.633479 & 11 / 30 & -156.483040 & 15 / 30 & -156.547928 \\ \hline
+						42 & -160.641020 & 5 / 30 & -160.449243 & 12 / 30 & -160.518149 \\ \hline
+						43 & -165.634973 & 6 / 30 & -165.361457 & 14 / 30 & -165.254805 \\ \hline
+						44 & -169.642441 & 3 / 30 & -169.383463 & 7 / 30 & -169.303639 \\ \hline
+						45 & -174.511632 & 3 / 30 & -174.295931 & 5 / 30 & -174.102119 \\ \hline
+						46 & -178.519320 & 2 / 30 & -178.371855 & 9 / 30 & -178.389713 \\ \hline
+						47 & -183.508227 & 0 / 30 & -183.095976 & 2 / 30 & -183.153610 \\ \hline
+						48 & -188.888965 & 19 / 30 & -188.402414 & 14 / 30 & -188.160694 \\ \hline
+						49 & -192.898412 & 15 / 30 & -192.675230 & 18 / 30 & -192.627890 \\ \hline
+						50 & -198.455632 & 12 / 30 & -197.853115 & 5 / 30 & -197.688978 \\ \hline
 					\end{tabular}
 				\end{center}
-				\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CCGACO algorithm and the EA}
+				\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}
 			\end{table}
 			
-			An overview of the results presented in Table \ref{tab:cgaco_vs_ea} reveal that CGACO has as good results as the EA in the Morse clusters between 30 and 40, in both SR values and MBF values. However, for Morse instances between 40 and 50, the same behavior is not observed, as the SR of CGACO is inferior to the one of the EA. Nevertheless, looking at he MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by CGACO are almost as good as the EA. To confirm this, in Fig. \ref{fig:cgaco_ea_mbf_50} we present the evolution of the MBF for CGACO and the EA. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. 
+			An overview of the results presented in Table \ref{tab:dacco_vs_ea} reveal that DACCO has as good results as the EA in the for considered Morse clusters. Moreover, looking at he MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by DACCO are as good as the ones found by the EA. To confirm this, in Fig. \ref{fig:dacco_ea_mbf_50} we present the evolution of the MBF for DACCO and the EA. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. 
 			
-			\botapic[0.7]{cgaco_ea_mbf_50}{Evolution of the MBF of CGACO and EA. The results were obtained with the Morse cluster of 50 atoms.}
-			Observing the depicted chart we see that the MBF of CGACO is higher until about 3 millions of evaluations. However at this point the MBF of the EA surpasses the CGACO and continues to improve until the end of the optimization.
+			\botapic[0.7]{dacco_ea_mbf_50}{Evolution of the MBF of DACCO and EA. The results were obtained with the Morse cluster of 50 atoms.}
+			Observing the depicted chart we see that the MBF of DACCO always than the EA. However, as we get close to the end of the optimization process, the MBF of DACCO and of EA tend to get equal.
 			
+			\pagebreak
 			\begin{table}[!htdp]
 					\label{tab:statistical_comparison_ea}
 					\begin{center}
 						\begin{tabular}{| c | c |}
 							\hline
-							\textbf{Instance} & \textbf{CGACO-EA} \\ \hline
-							30 & $\sim$ \\ \hline
-							31 & S- \\ \hline
+							\textbf{Instance} & \textbf{DACCO-EA} \\ \hline
+							30 & S+ \\ \hline
+							31 & $\sim$ \\ \hline
 							32 & $\sim$ \\ \hline
 							33 & $\sim$ \\ \hline
-							34 & S- \\ \hline
-							35 & S- \\ \hline
-							36 & S- \\ \hline
-							37 & S- \\ \hline
+							34 & $\sim$ \\ \hline
+							35 & $\sim$ \\ \hline
+							36 & $\sim$ \\ \hline
+							37 & $\sim$ \\ \hline
 							38 & S+ \\ \hline
 							39 & S+ \\ \hline
-							40 & $\sim$ \\\hline
-							41 & S- \\ \hline
-							42 & S- \\ \hline
-							43 & S- \\ \hline
-							44 & S- \\ \hline
-							45 & S- \\ \hline
-							46 & S- \\ \hline
-							47 & S- \\ \hline
-							48 & S- \\ \hline 
-							49 & S- \\ \hline
-							50 & S- \\ \hline
+							40 & S+ \\\hline
+							41 & $\sim$ \\ \hline
+							42 & $\sim$ \\ \hline
+							43 & $\sim$ \\ \hline
+							44 & $\sim$ \\ \hline
+							45 & $\sim$ \\ \hline
+							46 & $\sim$ \\ \hline
+							47 & $\sim$ \\ \hline
+							48 & $\sim$ \\ \hline 
+							49 & $\sim$ \\ \hline
+							50 & $\sim$ \\ \hline
 						\end{tabular}
-						\caption{Statistical results of comparing CGACO and PSO}
+						\caption{Statistical results of comparing DACCO and EA}
 					\end{center}
 			\end{table}
-		Table \ref{tab:statistical_comparison_ea} shows that CGACO is not as effective as the EA. It performs significantly worst in almost all the Morse instances. Nevertheless it is important to note that in Morse instance with 38 atoms, our approach performs significantly better than the EA. This instance is particularly hard to optimize, and this result shows that our algorithm can be at least as good as the EA used for comparison.
+		Table \ref{tab:statistical_comparison_ea} shows that DACCO is as effective as the EA. It performs significantly better in four instances. 
+		
+		It is important to note that in four Morse instances our approach performs significantly better than the EA. It is important to say that the Morse instances with 30 and 38 atoms are particularly hard to optimize, because they define very roughed landscapes, with many local minima.
+		
+		Moreover, these results show that DACCO can compete the EA, while optimizing Morse clusters with a number of atoms between 30 and 50.
 		
 		\section{Detailed Analysis}
+		\label{sec:detailed_analysis}
 	
 	
 

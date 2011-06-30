@@ -12,45 +12,45 @@ Warning--empty booktitle in blum04
 Warning--can't use both volume and number fields in blum04
 Warning--empty year in lourenco11
 Warning--empty publisher in luke09
-You've used 38 entries,
+You've used 39 entries,
             2118 wiz_defined-function locations,
-            743 strings with 10014 characters,
-and the built_in function-call counts, 13267 in all, are:
-= -- 1284
-> -- 575
-< -- 13
-+ -- 226
-- -- 180
-* -- 969
-:= -- 2183
-add.period$ -- 120
-call.type$ -- 38
-change.case$ -- 189
+            748 strings with 10152 characters,
+and the built_in function-call counts, 13683 in all, are:
+= -- 1330
+> -- 582
+< -- 14
++ -- 229
+- -- 182
+* -- 989
+:= -- 2240
+add.period$ -- 123
+call.type$ -- 39
+change.case$ -- 193
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 508
-empty$ -- 1084
-format.name$ -- 180
-if$ -- 2831
+cite$ -- 43
+duplicate$ -- 530
+empty$ -- 1119
+format.name$ -- 182
+if$ -- 2931
 int.to.chr$ -- 0
-int.to.str$ -- 38
-missing$ -- 41
-newline$ -- 194
-num.names$ -- 86
-pop$ -- 175
+int.to.str$ -- 39
+missing$ -- 42
+newline$ -- 199
+num.names$ -- 88
+pop$ -- 179
 preamble$ -- 1
-purify$ -- 156
+purify$ -- 159
 quote$ -- 0
-skip$ -- 355
+skip$ -- 377
 stack$ -- 0
-substring$ -- 939
-swap$ -- 110
-text.length$ -- 13
+substring$ -- 980
+swap$ -- 122
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 144
+type$ -- 148
 warning$ -- 4
-while$ -- 123
-width$ -- 40
-write$ -- 426
+while$ -- 127
+width$ -- 41
+write$ -- 437
 (There was 1 error message)

@@ -227,10 +227,14 @@
 							f(x) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \right)^2 } \mathord{\left/ 				{\vphantom {{ - \left( {x - \mu } \right)^2 } {2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
 						\end{equation}
 
-					\noindent where $\mu$ is the mean and the $\sigma$ is the variance. The use of the normal distribution has one drawback, because it can not describe a situation where there are two promising disjoint locations in the search space, as it only has one maximum. To solve this problem, the algorithm uses a mixture of normal distributions, as we can se in Fig. \ref{fig:kernel_mixture}. This gaussian kernel is used to select the next component to add to the solution that an ant is building.
+					\noindent where $\mu$ is the mean and the $\sigma$ is the variance. The use of the normal distribution has one drawback, because it can not describe a situation where there are two promising disjoint locations in the search space, as it only has one maximum. To solve this problem, the algorithm uses a mixture of normal distributions, as we can se in Fig. \ref{fig:kernel_mixture1}. 
+					
 						\botapic[0.7]{kernel_mixture1}{Example of a mixture of gaussian kernels - The dashed line is mixture of all the other depicted gaussian functions}
-
-					 Later a new version of this algorithm was proposed, where they used a solution archive. This solution archive is a table with a number $k$ of solutions that will be used to create the PDFs for the kernel. The number of solutions $k$ to store in the table is parameter. For more details on this algorithm, please refer to Socha et al. \cite{socha08}.
+						
+						While building solutions, an ant, at a certain step $i$, generates a random number according to an PDF that composes the kernel mixture, and add it to the solution.
+						
+						After the evaluation process we have to update the pheromone values. Hence we have to reinforce the influence of functions that lead to good solutions, and reduce the the influence of the function that lead to not so good solutions. The reinforcement can be achieved by adding a new PDF function, and the decrease can be achieved by removing PDFs from the kernel mixture.				
+						For more details in the algorithm see \cite{socha04,socha08}.
 					
 	\pagebreak
 			
