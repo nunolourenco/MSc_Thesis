@@ -5,33 +5,33 @@ Understanding the properties of chemical clusters is relevant in many scientific
 
 The goal of cluster geometry optimization is to determine the optimal structural organization for a set of particles that compose an aggregate. In other words, the main objective is to discover the position of all the atoms, or molecules, in a 3D space so that it corresponds to the lowest potential energy.
 
-Since the PES are usually computational heavy functions, model PES are adopted when studying large clusters. Examples of this type of PES are the potentials that only consider the distance between every pair of particles composing the cluster to determine the energy of the cluster. These potentials are known  as pairwise additive and, as expected, different conformations on the 3-Dimensional space lead to different energy values. An example, for a cluster with 6 atoms, is shown in Fig.~\ref{fig:clusters}.
+Since the PES are computationally heavy functions, model PES are adopted when studying large clusters. Examples of simplified PES are the pairwise additive potentials that only consider the distance between every pair of particles composing the cluster to determine the energy of the cluster. For a given number of particles different conformations on the 3-Dimensional space usually lead to different energy values. An example, for a cluster with 6 atoms, is shown in Fig. \ref{fig:clusters}.
 
 
-\botapic[0.8]{clusters}{Pairwise Potential: The distances considered to calculate the potential energy for two conformations of a cluster with 6 atoms.} 
+\botapic[0.8]{clusters}{Calculation of the pairwise potential for two clusters with 6 atoms: Distances considered to calculate the potential energy for each conformations are specified.} 
 \pagebreak
 
-Usually PES functions define highly roughed landscapes, with multiple valleys \cite{stillinger99}. It has been proved that global minimization of the PES function is a NP-hard problem, since the number of local minima increases exponentially as the cluster grows in size \cite{doye98, wille85}.
+Usually PES functions define highly roughed landscapes, with multiple valleys \cite{stillinger99}. It has been proved that global minimization of atomic PES is a NP-hard problem, since the number of local minima increases exponentially as the cluster grows in size \cite{doye98, wille85}.
 
 
 
 
 	\section{Morse Clusters}
 	
-	As described above, model PES are regularly adopted to understand chemical properties of real materials and as benchmarks of new optimization algorithms. The most widely adopted pairwise models are the Lennard-Jones and Morse potentials. Since the Morse potential provides accurate approximations of real materials, and define a more challenging benchmark, we focus our attention in this one.
+	As described above, model PES are regularly adopted to understand chemical properties of real materials and as benchmarks of new optimization algorithms. The most widely adopted pairwise models are the Lennard-Jones \cite{lennardJones31} and Morse potentials \cite{morse29}. Since the Morse potential provides accurate approximations of real materials, and define a more challenging benchmark \cite{braier90, smirnov99}, we focus our attention in this one.
 
-	The energy function of a \emph{N}-cluster Morse cluster, where \emph{N} is the number of atoms composing the aggregate, is obtained by the sum of all pairwise contributions that occurs between the atoms. Following \cite{doye97, morse29} we can formulate this as:
+	The energy function of a \emph{N}-atom Morse cluster is obtained by the sum of all pairwise contributions that occur between the atoms. Following \cite{doye97, morse29} we can formulate this as:
 	
 	\begin{equation} 
 		\label{eq:morse_potential}
-		V_{Morse} = \epsilon \sum_{i=1}^{N}\sum_{j=i+1}^{N} \left ( \exp^{-2\beta(r_{ij}-r_{0})} - 2\exp^{-\beta(r_{ij}-r_{0})} \right)
+		V_{Morse} = \epsilon \sum_{i=1}^{N-1}\sum_{j=i+1}^{N} \left ( \exp^{-2\beta(r_{ij}-r_{0})} - 2\exp^{-\beta(r_{ij}-r_{0})} \right)
 	\end{equation}
 
 
-	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. Thus, the potential has a single parameter $\beta$, that establishes the shape of the energy contribution of every pair of atoms \cite{doye04}. Figure \ref{fig:beta_influence} illustrates how the pair-wise contribution is modeled as a function of distance between atoms (\emph{xx} axis). Two different values of $\beta$ are depicted: $\beta = 6.0$, which corresponds to the long-ranged potential, and $\beta = 14.0$, which corresponds to a short-ranged version. As we can see, in both cases, the optimal potential energy is achieved when the atoms are placed at a distance of 1. This value corresponds to the equilibrium bond value. Another aspect that Fig.\ref{fig:beta_influence} shows, is that if we move from a long-ranged potential ($\beta = 6.0$) to a short-ranged version ($\beta = 14.0$), we get a narrower potential curvature, promoting the appearance of very roughed search landscapes, with the number of local minima increasing exponentially as the number of atoms increases \cite{doye04}.
+	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. Thus, the potential has a single parameter $\beta$, that establishes the shape of the energy contribution of every pair of atoms \cite{doye04}. Figure \ref{fig:beta_influence} illustrates how the pair-wise contribution is modeled as a function of distance between atoms (\emph{xx} axis). Two different values of $\beta$ are depicted: $\beta = 6.0$, which corresponds to the long-ranged potential, and $\beta = 14.0$, which corresponds to a short-ranged version. As we can see, in both cases, the optimal potential energy is achieved when the atoms are placed at a distance of 1. This value corresponds to the equilibrium bond value. Fig.\ref{fig:beta_influence} also reveals that if we move from a long-ranged potential ($\beta = 6.0$) to a short-ranged version ($\beta = 14.0$), we get a narrower potential curvature, promoting the appearance of roughed search landscapes, with a higher number of local minima \cite{doye04}.
 	
 	
-\botapic[0.50]{beta_influence}{Morse Potential for different values of $\beta$ }
+\botapic[0.7]{beta_influence}{Morse Potential for different values of $\beta$ }
 	
 	
 	

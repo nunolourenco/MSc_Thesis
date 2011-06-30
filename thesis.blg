@@ -3,48 +3,54 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: plain.bst
 Database file #1: refs.bib
+I was expecting a `,' or a `}'---line 426 of file refs.bib
+ :         
+ :         volume = {2},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--empty booktitle in blum04
 Warning--can't use both volume and number fields in blum04
+Warning--empty year in lourenco11
 Warning--empty publisher in luke09
-You've used 34 entries,
+You've used 38 entries,
             2118 wiz_defined-function locations,
-            718 strings with 9470 characters,
-and the built_in function-call counts, 12034 in all, are:
-= -- 1166
-> -- 519
+            743 strings with 10014 characters,
+and the built_in function-call counts, 13267 in all, are:
+= -- 1284
+> -- 575
 < -- 13
-+ -- 204
-- -- 162
-* -- 874
-:= -- 1971
-add.period$ -- 108
-call.type$ -- 34
-change.case$ -- 168
++ -- 226
+- -- 180
+* -- 969
+:= -- 2183
+add.period$ -- 120
+call.type$ -- 38
+change.case$ -- 189
 chr.to.int$ -- 0
-cite$ -- 37
-duplicate$ -- 465
-empty$ -- 986
-format.name$ -- 162
-if$ -- 2579
+cite$ -- 42
+duplicate$ -- 508
+empty$ -- 1084
+format.name$ -- 180
+if$ -- 2831
 int.to.chr$ -- 0
-int.to.str$ -- 34
-missing$ -- 37
-newline$ -- 174
-num.names$ -- 78
-pop$ -- 158
+int.to.str$ -- 38
+missing$ -- 41
+newline$ -- 194
+num.names$ -- 86
+pop$ -- 175
 preamble$ -- 1
-purify$ -- 139
+purify$ -- 156
 quote$ -- 0
-skip$ -- 327
+skip$ -- 355
 stack$ -- 0
-substring$ -- 856
-swap$ -- 106
+substring$ -- 939
+swap$ -- 110
 text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
-warning$ -- 3
-while$ -- 112
-width$ -- 36
-write$ -- 384
-(There were 3 warnings)
+type$ -- 144
+warning$ -- 4
+while$ -- 123
+width$ -- 40
+write$ -- 426
+(There was 1 error message)

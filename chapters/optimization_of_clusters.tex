@@ -2,30 +2,30 @@
 \chapter{Optimization Algorithms}
 	\label{chap:opt_alg}
 		
-	    In this chapter we describe some approximation methods for problem optimization. We do not aim to provide a comprehensive presentation of optimization algorithms. We offer just a brief description of several methods, focusing our attention on global, unbiased, iterative, approximated algorithms (a class usually known as \emph{metaheuristics}). The reason for this choice is that current state-of-art methods for cluster geometry optimization belong to this class. In Section \ref{subsec:single_state_solution} we present single-solution methods, followed by Evolutionary Algorithms in Section \ref{subsec:evolutionary_algorithms}. In Section \ref{subsec:swarm_intelligence}, we present example of swarm intelligence algorithms. Finally in Section \ref{subsec:cgo} we give a brief description of how some of the presented methods were applied to the problem of cluster geometry optimization. 
+	    In this chapter we describe some approximation methods for global optimization. We do not aim to provide a comprehensive presentation of optimization algorithms. We offer just a brief description of several methods, focusing our attention on global, unbiased, iterative, approximation algorithms (a class usually known as \emph{metaheuristics}). The reason for this choice is that current state-of-art methods for cluster geometry optimization belong to this class. In Section \ref{subsec:single_state_solution} we briefly highlight single-solution methods, followed by Evolutionary Algorithms in Section \ref{subsec:evolutionary_algorithms}. In Section \ref{subsec:swarm_intelligence}, we describe example of swarm intelligence algorithms, focused on ant colony optimization methods. Finally, in Section \ref{subsec:cgo}, we give a brief description of how some of the presented methods were applied to the problem of cluster geometry optimization. 
 		\section{Single-solution Methods}
 			\label{subsec:single_state_solution}
 			%SA
-		 	Single-solution algorithms are the ones that generate one initial solution and then they try to improve it over the execution of the algorithm. A remarkable example is the Simulated Annealing in which we focus our attention, since it has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also example examples of single-solution methods. For details on these methods, please refer to \cite{luke09}  		
+		 	Single-solution algorithms are the ones that generate one initial solution and then try to improve it over the execution of the algorithm. A remarkable example is Simulated Annealing in which we focus our attention, since it has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also other examples of single-solution methods. For details on these methods, please refer to \cite{luke09}  		
 			
 			\subsubsection*{Simulated Annealing}
-			Simulated Annealing (SA) \cite{kirkpatrick83} is a generic probabilistic metaheuristic for optimization problems. The inspiration to this method comes from annealing in metallurgy, a technique involving heating and controlled cooling of a material. The heat causes the atoms constituting the material to become unstuck from their initial positions (a local minimum) and wander randomly through space. Then, the slow cooling gives them more chances of finding configurations that have a lower internal energy than the initial one.
+			Simulated Annealing (SA) \cite{kirkpatrick83} is a generic probabilistic metaheuristic. The inspiration to this method comes from annealing in metallurgy, a technique involving heating and controlled cooling of a material. The heat causes the atoms constituting the material to become unstuck from their initial positions (a local minimum) and wander randomly through space. Then, the slow cooling gives them more chances of gradually finding configurations with a lower internal energy than the initial one.
 
-			Analogously with this physical process, each step of the SA selects a new nearby solution. If the new solution is better than the current one, the new solution replaces the current. However, if the new solution is worse than the current it can still be selected. This selection depends of two criteria:
+			Analogously with this physical process, each step of the SA selects a nearby solution. If the new solution is better than the current one, the new solution replaces the current. However, if the new solution is worse than the current it can still be selected. Acceptance depends of two criteria:
 			\begin{enumerate}
 				\item How worst is the new solution.
 				\item How many steps have been performed, since the beginning of the search.
 			\end{enumerate}
-			The number of steps of the algorithm is controlled by $T$, which is the temperature. It starts with an initial high value, that decreases over time, until reaches the minimum value of $T_{min}$. The generic algorithm that describes this behavior is shown in Algorithm \ref{alg:sa}.
+			The number of steps of the algorithm is controlled by $T$, which is the temperature. It starts a initial high value, that decreases over time, until it reaches the minimum value of $T_{min}$. The generic behavior is shown in Algorithm \ref{alg:sa}.
 			
 			
 			\begin{algorithm}
 				\caption{Simulated Annealing}
 				\label{alg:sa}
 				\begin{algorithmic}
-				\STATE define initial solution $s$
+				\STATE define a random initial solution $s$
 				\STATE $best\_solution \gets s$ 
-				\WHILE{termination condition not met and $T > T_{min}$}
+				\WHILE{termination condition not met}
 					\STATE choose a neighbor solution $snew$
 					\IF{accept($s$,$snew$,$T$)} 
 						\STATE  $s \gets snew$
@@ -40,14 +40,14 @@
 			\end{algorithm}
 		
 		
-		\noindent The \emph{accept()} procedure checks if the new solution is to be accepted. \emph{is\_better()} check if the current solution is better than the best solution found until the moment.
+		\noindent The \emph{accept()} procedure checks if the new solution is to be accepted. \emph{is\_better()} check if the current solution is better than the best solution found until that moment.
 
 			
 		\section{Evolutionary Algorithms}
 			\label{subsec:evolutionary_algorithms}
 			
 			Evolutionary Algorithms (EA) are a family of algorithms whose main inspiration is the biological evolution \cite{eiben03}. EAs use the reproduction, mutation, recombination and selection mechanisms, which play an important role in biological evolution.	
-			EAs maintain a population of individual solutions, which can be selected to reproduction. Selection is probabilistic and biased by the fitness of the individuals. In reproduction, two selected individuals exchange information about their solutions. This processed is called crossover and it creates two new solutions. Since the parents are promising solutions, with crossover we aim to create two new solutions that, hopefully, are promising as well. 
+			EAs maintain a population of individual solutions, which can be selected for reproduction. Selection is probabilistic and biased by the fitness of the individuals. In reproduction, two selected individuals exchange information about their solutions. This processed is called crossover and it creates two new solutions. Since the parents are promising solutions, with crossover we aim to create two new solutions that, hopefully, are promising as well. 
 			Next, mutation slightly modifies the offspring. The application of the mutation operator is probabilistic and it aims to maintain diversity in the population.
 			In the last step, descendants replace the old population, and a new iteration starts.
 			The general algorithm is presented in Algorithm \ref{alg:genetic_algorithm}.
@@ -68,24 +68,25 @@
 				\end{algorithmic}
 			\end{algorithm} 
 			
-			For more details on evolutionary algorithms see \cite{eiben03}.
+			For more details on evolutionary algorithms see, e.g., \cite{eiben03}.
 			
 		\section{Swarm Intelligence}
 		\label{subsec:swarm_intelligence}
 		The idea of swarm intelligence is to develop algorithms that model the behavior of a group of animals that engage in social interactions. Some examples are synchronous bird flocking, ants gathering food or fish shoals escaping from a predator \cite{si01}. In this sections we describe the Ant Colony Optimization (ACO) framework, which is inspired by the behavior of foraging ants searching for food.
 		
 		\subsubsection*{Traveling Salesman Problem}
-		 The Traveling Salesman Problem (TSP) will be used to help explain the ACO algorithms described. We choose this problem, due to its simplicity, and because it is a benchmark for all ACO algorithms.
+		 The Traveling Salesman Problem (TSP) will be used to help explain the ACO algorithms described. We choose this problem, due to its relevance, and because it is a benchmark for all ACO algorithms.
 		
-		The TSP is the problem of a salesman, who starting from a initial city, wants to find the shortest tour that visits a set of cities. More formally, we have a graph $G=(C,E)$, where $C$ are the cities that the salesman has to visit, and $E$ are the arcs connecting the cities, the problem consists of finding the minimum length Hamiltonian circuit of the graph, where an Hamiltonian circuit is a closed path visiting each node $c \in C$ exactly once.
+		The TSP is the problem of a salesman, who starting from a initial city, wants to find the shortest tour that visits a set of cities. More formally, we have a fully connected, undirected graph $G=(C,E)$, where $C$ contains the cities that the salesman has to visit, and $E$ are the arcs connecting the cities. The problem consists of finding the minimum length Hamiltonian circuit of the graph, where an Hamiltonian circuit is a closed path visiting each node $c \in C$ exactly once.
 		%ACO
 		\subsubsection*{Ant Colony Optimization Algorithms}
 		\label{subsubsec:ant_algorithms}
 
-		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone, which they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{``trail pheromone"}, which is very important for the social life of some ant species. This specific type of pheromone allow ants to mark paths, for example, from the nest to food source. This is the inspiring source of the ACO framework. 
-		These insights made possible the proposal of the ACO framework in 1992 \cite{dorigo92}. 	
+		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone, which they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{``trail pheromone"}, that is very important for the social life of some ant species. This specific type of pheromone allows ants to mark paths, for example, from the nest to food source.
+	
+		The idea behind ant algorithms is then to use a form of \emph{``artificial stigmergy"}, to coordinates artificial ant colonies. With this in mind, Marco Dorigo proposed an ACO framework in 1992 \cite{dorigo92}. 	
 
-		Algorithm \ref{alg:general_aco} presents the general idea of the ACO algorithm.
+		Algorithm \ref{alg:general_aco} presents the general idea behind the ACO algorithm.
 				\begin{algorithm}
 					\caption{General ACO Algorithm}
 					\label{alg:general_aco}
@@ -98,13 +99,15 @@
 					\end{algorithmic}
 				\end{algorithm}
 				
-				One aspect that is important is the representation of the problem. In ACO, it is assumed that the problem can be represented as a graph $G$, composed by a set of components $C$ which are connected by a set $E$ of edges. Using the TSP as an example, the graph $G=(C,E)$ is composed by cities that correspond to $C$ and by distances that correspond to $E$.
-				
-				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, the ant evaluates the (partial) solution. This result will be then used by the \emph{UpdatePheromones()} procedure to decide how much pheromones an ant should deposit.
+				In ACO, a problem is represented as a graph $G$ that artificial ants will cross when building solutions. $G$ is composed composed by a set of solution components $C$, connected by a set $E$ of edges. The specific composition of $G$ depends on the problem being solved.
+				 Using the TSP as an example, the cities that the salesman has to visit correspond to $C$ and the routes that he has to travel correspond to $E$.			
+				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, the ant evaluates the (partial) solution.
 				
 				The \emph{UpdatePheromones()} is the process by which the pheromone trails are updated. The trails values can either increase, as ants deposits pheromone in the components or edges that they use, or decrease, due to pheromone evaporation. In practice, the deposit of pheromone trails increases the probability that those components/edges, which belonged to good solutions, will be selected again. Differently, pheromone evaporation implements a forgetting method: it avoids early convergence to a suboptimal region, therefore favoring exploration of new areas of the search space.
 				 
-				Finally \emph{DaemonActions()} procedure corresponds to actions that are not performed by ants. Examples of this daemon actions are the local search procedures, or the collection of global information to be used by ants.
+				Finally \emph{DaemonActions()} procedure corresponds to actions that are not performed by ants. Examples of this daemon actions are the local search procedures, or the collection of global information to be used whether it is useful or not to deposit additional pheromone to bias the search process from a non local perspective.
+				
+				During the years several ACO algorithms were proposed. Next we introduce and describe the some of these proposed algorithms. 
 
 					\subsubsection*{Ant System} 
 					\label{sec:ant_system}
@@ -148,41 +151,21 @@
 
 					\subsubsection*{Rank-Based Ant System}
 
-					In $AS_{rank}$ each ant deposits pheromones according to its rank, when compared to other ants of the colony. Besides, as in the EAS algorithm, the best-so-far-ant deposits the largest quantity of pheromone.
+					In $AS_{rank}$ each ant deposits pheromones according to its rank, when compared to other ants of the colony. Besides, as in the EAS algorithm, the best-so-far-ant deposits an additional amount of pheromone.
 
-					Before the updating of pheromones, ants are sorted, by ascending order, of the fitness of the current solution. In each iteration, only the $(w-1)$ best ranked ants, and the best ant so far, can deposit pheromone, where $w$ is a parameter. Thus, the $AS_{rank}$ pheromone update rule is as follow \cite{bullnheimer97}:
+					Before the updating of pheromones, ants are sorted, by ascending order, of the quality of the current solution. In each iteration, only the $(w-1)$ best ranked ants, and the best ant so far, can deposit pheromone, where $w$ is a parameter. Thus, the $AS_{rank}$ pheromone update rule is as follow \cite{bullnheimer97}:
 					\begin{equation}
 						\label{eq:asrank_pheromone_update}
 						\tau_{ij} = \tau_{ij} + \sum_{r=1}^{w-1}(w-r)\Delta\tau_{ij}^r + w\Delta\tau_{ij}^{bs},
 					\end{equation}.
 
-
-
-					\subsubsection*{$\mathcal{MAX}-\mathcal{MIN}$ Ant System}
-					$\mathcal{MAX}-\mathcal{MIN}$ Ant System ($\mathcal{MM}$AS) introduces four main modifications to the traditional AS:
-					\begin{enumerate}
-						\item only the \emph{best-so-far} or the \emph{iteration-best} ants are allowed to deposit pheromones \cite{stutzle00}:
-							\begin{equation}
-								\label{eq:max_min_rank_pheromone_update}
-								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best}
-							\end{equation}
-							\noindent where $\Delta\tau^{best}$ is the computed using $\frac{1} {L^{best}}$, where ${L^{best}}$ is the fitness of the best solution so far or the fitness of the best solution in the iteration, depending of which one is used. In most cases \emph{best-so-far} and \emph{iteration-best} are used interchangeably.
-						
-						\item Introduction of a limit to pheromone trails $[\tau_{min},\tau_{max}]$. This modification intends to counteract the effect of stagnation, that is the situation where all ants build the same solution.
-						
-						\item In the beginning, all the pheromone trails are initialized with $\tau_{max}$. Thus, and with small pheromone evaporation rate, the exploration is increased in the early stages of the search.
-						
-						\item Pheromone trails are reinitialized every time the system approaches stagnation, or when no improved tours have been generated for a certain number of consecutive generations.
-						 					
-					\end{enumerate}
-		
 					\subsubsection*{Ant Colony System}
 					\label{sec:acs}
 					This algorithm \cite{dorigo97}, despite of being inspired by the AS, differs from it in three main aspects:
 					\begin{enumerate}
-						\item it exploits the accumulated search experience, through the use of a more aggressive action choice rule: Eq. \ref{eq:acs_choice_rule}. 
+						\item It exploits the accumulated search experience, through the use of a more aggressive action choice rule: Eq. \ref{eq:acs_choice_rule}. 
 						\item Pheromone update and pheromone deposit takes place only on the edges belonging to the \emph{best-so-far} solution;
-						\item Each time an ant uses an edge $(i,j)$, it removes some pheromone from it, to increase the exploration of alternative solutions.
+						\item Online pheromone update. Each that each time an ant uses an edge $(i,j)$, it removes some pheromone from it. This increase the exploration of alternative solutions.
 					\end{enumerate}
 
 					In Ant Colony System(ACS), when an ant is building a solution, it chooses to move from component $i$ to component $j$ according to the following \emph{pseudorandom proportional} rule \cite{dorigo97}:
@@ -196,14 +179,35 @@
 						  \end{cases}
 					\end{equation}
 
-					\noindent where $q$ in a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\gamma$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search: around the \emph{best-so-far}, or explore other locations.
+					\noindent where $q$ is a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\gamma$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search: around the \emph{best-so-far}, or explore other locations.
+
+
+					\subsubsection*{$\mathcal{MAX}-\mathcal{MIN}$ Ant System}
+					$\mathcal{MAX}-\mathcal{MIN}$ Ant System ($\mathcal{MM}$AS) introduces four main modifications to the traditional AS \cite{stutzle00}:
+					\begin{enumerate}
+						\item only the \emph{best-so-far} or the \emph{iteration-best} ants are allowed to deposit pheromones:
+							\begin{equation}
+								\label{eq:max_min_rank_pheromone_update}
+								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best}
+							\end{equation}
+							\noindent where $\Delta\tau^{best}$ is the computed using $\frac{1} {L^{best}}$, where ${L^{best}}$ is the fitness of the best solution so far or the fitness of the best solution in the iteration, depending of which one is used. In most cases \emph{best-so-far} and \emph{iteration-best} according to a schedule, that can be based, for example, in the number of iterations.
+						
+						\item Introduction of a limit to pheromone trails $[\tau_{min},\tau_{max}]$. This modification intends to counteract the effect of stagnation, that is the situation where all ants build the same solution.
+						
+						\item In the beginning, all the pheromone trails are initialized with $\tau_{max}$. Thus, and with small pheromone evaporation rate, the exploration is increased in the early stages of the search.
+						
+						\item Pheromone trails are reinitialized every time the system approaches stagnation, or when no improved tours have been generated for a certain number of consecutive generations.
+						 					
+					\end{enumerate}
+		
+					
 
 					\subsubsection*{Multi-colony ant algorithm}
 					The main idea behind this algorithm is to have a set of identical colonies solving the same problem. In \cite{melo10} they used a variant of ACS with multiple colonies working in different locations of the search space, where the best colonies share information with the worst. This information sharing is made by passing along, to the worst colony, the \emph{best-so-far} solution. Every time a migration occurs, the worst colony uses the new solution as if it was found by it.
 
 
 					\subsubsection*{Approximate Nondeterministic Tree Search}
-					Approximate nondeterministic tree search (ANTS) is an ACO algorithm which exploit the ideas from mathematical programming \cite{Maniezzo99}. ANTS computes lower bounds every time it adds a new component to a partial solution, and then uses it to define the heuristic information necessary to build solutions. The use of this lower bounds has advantages, since we can discard a component if it leads to partial solutions that have a larger cost than the best-so-far solution. However calculating lower bounds at each step, can introduce a higher computational overhead.
+					Approximate nondeterministic tree search (ANTS) is an ACO algorithm which exploits the ideas from mathematical programming \cite{Maniezzo99}. ANTS computes lower bounds every time it adds a new component to a partial solution, and then uses it to define the heuristic information necessary to build solutions. The use of this lower bounds has advantages, since we can discard a component if it leads to partial solutions that have a larger cost than the best-so-far solution. However calculating lower bounds at each step, can introduce a higher computational overhead.
 
 
 					\subsubsection*{Hyper-Cube Framework for Ant Colony Optimization}
@@ -212,11 +216,11 @@
 					
 					\subsubsection*{Ant Colony Optimization for continuous domains}
 					ACO algorithms were originally proposed to solve discrete problems. Yet there are problems that are not discrete. Thus, and trying to keep the biological inspiration, there are some proposals to solve continuous problems using an ACO framework. 
-					Here we present the one of the main approaches, proposed by Socha et al.\cite{socha04}. For more details in ACO for continuous problems the reader might see \cite{bilchev95, kong06, tsutsui04}.
+					Here we present one of the main approaches, proposed by Socha et al.\cite{socha04}. For other alternatives in ACO for continuous problems the reader might see \cite{bilchev95, kong06, tsutsui04}.
 					
 					
 					\subsubsection*{Ant Colony Optimization for continuous and Mixed-Variable Optimization}
-					 ACO for continuous and Mixed-Variable Optimization($ACO_\mathbb{R}$) uses a simple approach: if a discrete probability distribution is used for discrete problems, then a continuous probability distribution function - the \emph{Probability Density Function} (PDF), should be adopted for continuous problems.
+					 ACO for continuous and Mixed-Variable Optimization($ACO_\mathbb{R}$) uses a simple approach: if a discrete probability distribution is used for discrete problems, then a continuous probability distribution function - the \emph{Probability Density Function} (PDF), should be adopted for continuous problems \cite{socha04}.
 
 					The most popular PDF is the normal (or gaussian) function, defined by,
 						\begin{equation}
@@ -224,27 +228,29 @@
 						\end{equation}
 
 					\noindent where $\mu$ is the mean and the $\sigma$ is the variance. The use of the normal distribution has one drawback, because it can not describe a situation where there are two promising disjoint locations in the search space, as it only has one maximum. To solve this problem, the algorithm uses a mixture of normal distributions, as we can se in Fig. \ref{fig:kernel_mixture}. This gaussian kernel is used to select the next component to add to the solution that an ant is building.
-						\botapic[0.7]{kernel_mixture}{Example of a mixture of gaussian kernels - The purple line is mixture of all the other depicted gaussian functions}
+						\botapic[0.7]{kernel_mixture1}{Example of a mixture of gaussian kernels - The dashed line is mixture of all the other depicted gaussian functions}
 
 					 Later a new version of this algorithm was proposed, where they used a solution archive. This solution archive is a table with a number $k$ of solutions that will be used to create the PDFs for the kernel. The number of solutions $k$ to store in the table is parameter. For more details on this algorithm, please refer to Socha et al. \cite{socha08}.
 					
 	\pagebreak
 			
 	\section{Cluster Geometry Optimization}
-		%Falta falar do CSA
 		\label{subsec:cgo}
-		Here we present some algorithms that were proposed in the literature to tackle the problem of Cluster Geometry Optimization, using Morse potential as a benchmark function.
+		Here we present some algorithms that were proposed in the literature to tackle the problem of Cluster Geometry Optimization, using the Morse potential as a benchmark function.
 
-		One of the first attempts of global optimization of the Morse potential was made by Wales et al. \cite{doye97, wales97}. In their work they used a Monte Carlo minimization method \cite{li87} combined with a local search algorithm. This method is known as Basin-Hopping (BH). In the work conducted by Wales et al., they deform the surface of the PES, in a way that some of the valleys are removed. This transformation does not affect the energies of the minima. They were able to found almost all the known global optima for short-ranged ($\beta = 14.0$) Morse clusters up to 80 atoms.
+		One of the first attempts of global optimization of the Morse potential was made by Wales et al. \cite{wales97, doye97}. In their work they used a Monte Carlo minimization method \cite{li87} combined with a local search algorithm. This method is known as Basin-Hopping (BH). In the work conducted by Wales et al., they deform the surface of the PES, in a way that some of the valleys are removed. This transformation does not affect the energies of the minima. They were able to found almost all the known global optima for short-ranged ($\beta = 14.0$) Morse clusters up to 80 atoms.
 		
-		In Roberts et al. \cite{roberts00} they proposed the first EA to the optimization of Morse clusters. They used a certain number of components that had been previously proposed: real-valued representation of the Cartesian coordinates of the atoms, a local search method to improve the solutions, and a Cut and Splice \cite{deaven95} crossover. This crossover is a specific operator handling atomic clusters. First, it defines a plane that passes through the center of mass of the clusters to be combined. Then the clusters are cut about this plane and the complementary halves are joined (spliced) together in order to form a new offspring.
-		The mutation operator in this work corresponds to assign a random coordinates to a certain number of atoms. 
+		Roberts et al. \cite{roberts00} proposed the first EA to the optimization of Morse clusters. They used a certain number of components that had been previously proposed: real-valued representation of the Cartesian coordinates of the atoms, a local search method to improve the solutions, and a Cut and Splice \cite{deaven95} crossover. This crossover is a specific operator handling atomic clusters. First, it defines a plane that passes through the center of mass of the clusters to be combined. Then the clusters are cut by this plane and the complementary halves are joined (spliced) together in order to form a new offspring.
+		The mutation operator in this work corresponds to assign random coordinates to a certain number of atoms. 
 		The algorithm was applied to instances between 19 and 50 of the Morse Potential with $\beta = 6.0$ and $\beta = 14.0$. The results showed that it was able to discover nearly all the known global optima \cite{roberts00}.   
 		
-		In Grosso et al. \cite{grosso07} they proposed a stochastic method, in which different conformations of the clusters are maintained in a population of solutions, hence ensuring a sufficient level of diversity. The diversity is enforced through the definition of diversity measures, related to the problem of cluster geometry optimization. Moreover, in their work, Grosso et el. applied an two-phase local search algorithm, in order to improve the efficiency of the method. Their final algorithm is also known as Population Basin Hopping (PBH) \cite{grosso07}.
+		Grosso et al. \cite{grosso07} proposed Population Basin Hopping (PBH), a stochastic method, in which different conformations of the clusters are maintained in a population of solutions, hence ensuring a sufficient level of diversity. The diversity is enforced through the definition of problem specific diversity measures. Moreover, in their work, Grosso et el. applied a two-phase local search algorithm, in order to improve the efficiency of the method.
 		
 		Dynamic lattice searching (DLS) is another effective approach for cluster geometry optimization \cite{cheng07}. It starts with a randomly generated local minimum and iteratively applies a greedy strategy to search for better solutions in the neighborhood. This search is aid by a Dynamic Lattice (DL). The DL is constructed adaptively, based on a starting local minimum, and then locating all the possible locations for new atom. Afterwards, they perform a greedy search for conformations with low potential energy values: it iteratively moves the atom located at the position with the highest energy (in the lattice) to the vacant position with the lowest energy (in the lattice) \cite{cheng07, shao04}. The method is restarted several times to ensure proper exploration of the search space \cite{cheng07}.
 			
-		More recently Pereira et al.\cite{xico09} proposed a steady-state EA, with diversity control to the problem of cluster geometry optimization. In a steady-state EA after generating a new offspring it is necessary to decide if it will enter the population, and if he do, which individual he will replace. In general, the replacement strategies are related with the fitness and the age of an individual. In the fitness based strategies we use the quality of the individuals to decide who will be replaced. In the age based strategies the oldest elements are replaced. These two strategies are not mutually exclusive, since they can be combined together. Moreover, these strategies can still be combined with other mechanisms, in order to keep an suitable level of diversity in the populations.
+		Pereira et al.\cite{xico09} proposed a steady-state EA, with diversity control to the problem of cluster geometry optimization. In a steady-state EA, after generating a new offspring it is necessary to decide if it will enter the population, and if it does, which individual it will replace. In general, replacement strategies are related with the fitness and/or the age of individuals. Fitness based strategies check the quality of the individuals to decide who will be replaced. In the age based strategies the oldest elements are replaced. These two strategies are not mutually exclusive, since they can be combined. Moreover, these strategies can still be combined with other mechanisms, in order to keep a suitable level of diversity in the populations.
 		In Pereira et al.\cite{xico09} they propose a couple of mechanisms to keep the diversity in the population. Furthermore, they show that the diversity is important to improve the effectiveness of the EA. The proposed EA was able to find all the known optima for short-ranged Morse clusters up to 80 atoms.
+		
+		More recently, Lourenço et al. \cite{lourenco11} proposed a Particle Swarm Optimization algorithm to the problem of cluster geometry optimization. The proposed algorithm has several features that were specifically design to tackle this problem. The most noteworthy are: the adoption of specific rules to update current position of particles, where the velocity is only applied to fraction of the solution; and the embracing of a steady-state strategy to update the population particles. This strategy allows for a simultaneous exploration of the neighborhoods of the current locations, and of the best ever seen solutions. Moreover, it has a diversity mechanism, to postpone convergence.
+ 		The results presented showed that the algorithm was able to find all the best-known solutions to short-ranged Morse instances between 30 and 50 atoms.
 		
