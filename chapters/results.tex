@@ -1,5 +1,6 @@
 %!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2010_2011/Thesis/Thesis/thesis.tex
 \chapter{Results}
+\label{chap:results}
 
 In this chapter we present an experimental analysis of the application of our algorithm to several instances of short-ranged Morse Clusters. To perform such analysis, we start by describing the scenario used in our experiments. In Section \ref{sec:experimental_setting} we introduce the parameters used in the algorithm, and in Section \ref{sec:statistical_analysis} we present the hypothesis that we considered in the comparative analysis. In Section \ref{sec:experimental_results} we present and discuss the results obtained. Finally, in Section \ref{sec:detailed_analysis} we present a detailed analysis of some main components of the algorithm.
 
@@ -114,24 +115,24 @@ In the tables where we make the statistical analysis we use the following notati
 		\end{center}
 	\end{table}
 	
-	The results from Table \ref{tab:optimization_results} are very encouraging, since the propose approach was able to find almost all the best-known solution for short-ranged Morse clusters between 30 and 50, missing only 1 instancs.
-	To the best of our knowledge, this work is the first to apply ACO algorithm to the problem of cluster geometry optimization, hence its results may play an important role in future proposals that intend to use the same approach of this work.
+	The results from Table \ref{tab:optimization_results} are very encouraging, since the propose approach was able to find almost all the best-known solution for short-ranged Morse clusters between 30 and 50, missing only 1 instance.
+	To the best of our knowledge, is the first work to apply ACO algorithm to the problem of cluster geometry optimization, hence its results may play an important role in future proposals that intend to use the same approach of this work.
 	
 	Analyzing the success rate of the algorithm its variation is irregular: between 30 and 40 atoms the success rate is high, as for clusters between 41 and 50 atoms the algorithm has more difficulties to find the optimum. This can in part be explained, by the fact the we keep the number of evaluation fixed for all the clusters. With more atoms, we will get a larger search space, and it is not surprising that the performance of the algorithm declines.
 	
 	Looking at the MBF values, they are always close to the optimum, as the deviation values ranges between 0.000 \% and 0.304 \%. This result is interesting, as it shows that even if the DACCO converges to local optima, it can accurately find low potential structures.
 	
-	Another interesting aspect is that algorithm has a good performance while optimizing the so called ``magic instances" of 30 and 38 atoms \cite{doye97}. These instances define particularly rugged landscapes, and the majority of the unbiased algorithms tend to converge to local optima \cite{doye97, grosso07}.
+	Another interesting aspect is that DACCO has a good performance while optimizing the so called ``magic instances" of 30 and 38 atoms \cite{doye97}. These instances define particularly rugged landscapes, and the majority of the unbiased algorithms tend to converge to local optima \cite{doye97, grosso07}.
 	
 	\section{Algorithm Comparison}
 	In this section we compare our approach with others described in the literature. A direct comparison with other ACO approaches its not possible, due to absence of such approaches. Hence, we compare our approach with one of the swarm intelligence algorithms family, and with an another of the Evolutionary Algorithms family.
+	
 	\subsection{DACCO versus PSO}
 	In Table \ref{tab:dacco_vs_pso} we compare the DACCO and PSO algorithms. The third and fourth column represent the success rate (SR) and the MBF of DACCO. The last two columns represent the SR and the the MBF of PSO. 
 	
 	The number of evaluations granted to the PSO algorithm were the same of the DACCO. 
 	
 	\begin{table}[!htdp]
-			\label{tab:dacco_vs_pso}
 			\begin{center}
 				\begin{tabular}{| c | c | c | c | c | c |}
 					\hline
@@ -161,14 +162,14 @@ In the tables where we make the statistical analysis we use the following notati
 				\end{tabular}
 			\end{center}
 			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CDACCO algorithm and the PSO}
+			\label{tab:dacco_vs_pso}
 		\end{table}
 		
-		Looking at the results, we can conclude that the DACCO is better than PSO. We can see that, for instances between 30 ant 40 atoms, the SR of DACCO is higher than the SR of the PSO. When comparing the SR between 41 and 50 atom the success rate of DACCO is equivalent to the PSO. Furthemore, analyzing the MBF values the DACCO presents the higher values for all instances. These MBF results are interesting because they show that the DACCO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in Fig. \ref{fig:dacco_pso_mbf_50} we present the evolution of the MBF for DACCO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the DACCO is higher during the whole optimization process.
+		Looking at the results, we can conclude that the DACCO is better than PSO. We can see that, for almost all instances the SR of DACCO is higher than the SR of the PSO. It misses only the 47 atoms instance. Furthermore, analyzing the MBF values the DACCO presents the higher values for all instances. These MBF results are interesting because they show that the DACCO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in Fig. \ref{fig:dacco_pso_mbf_50} we present the evolution of the MBF for DACCO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the DACCO is higher during the whole optimization process.
 		
-		\botapic[0.7]{dacco_pso_mbf_50}{Evolution of the MBF of DACCO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
+		\botapic[0.5]{dacco_pso_mbf_50}{Evolution of the MBF of DACCO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
 		\pagebreak
 		\begin{table}[!htdp]
-				\label{tab:statistical_comparison_pso}
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
@@ -196,10 +197,11 @@ In the tables where we make the statistical analysis we use the following notati
 						50 & S+ \\ \hline
 					\end{tabular}
 					\caption{Statistical results of comparing DACCO and PSO}
+					\label{tab:statistical_comparison_pso}
 				\end{center}
 		\end{table}
 		
-		Looking at Table \ref{tab:statistical_comparison_pso}, we can see that DACCO performs significantly better in eight instances of the Morse Potential. In other instances we do not have statistical evidence to show that DACCO is better than the PSO. However, if we take into account the MBF results, we can say that DACCO is in general better than the PSO. 
+		Looking at Table \ref{tab:statistical_comparison_pso}, we can see that DACCO performs significantly better in all instances of the Morse Potential.
 		\pagebreak
 		
 		\subsection{DACCO versus EA}
@@ -209,7 +211,6 @@ In the tables where we make the statistical analysis we use the following notati
 			Again, the number of evaluation granted to the EA, was the same of the DACCO. 
 
 		\begin{table}[!htdp]
-				\label{tab:dacco_vs_ea}
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c | c |}
 						\hline
@@ -239,16 +240,15 @@ In the tables where we make the statistical analysis we use the following notati
 					\end{tabular}
 				\end{center}
 				\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}
+				\label{tab:dacco_vs_ea}
 			\end{table}
 			
 			An overview of the results presented in Table \ref{tab:dacco_vs_ea} reveal that DACCO has as good results as the EA in the for considered Morse clusters. Moreover, looking at he MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by DACCO are as good as the ones found by the EA. To confirm this, in Fig. \ref{fig:dacco_ea_mbf_50} we present the evolution of the MBF for DACCO and the EA. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. 
-			
-			\botapic[0.7]{dacco_ea_mbf_50}{Evolution of the MBF of DACCO and EA. The results were obtained with the Morse cluster of 50 atoms.}
-			Observing the depicted chart we see that the MBF of DACCO always than the EA. However, as we get close to the end of the optimization process, the MBF of DACCO and of EA tend to get equal.
+			\botapic[0.5]{dacco_ea_mbf_50}{Evolution of the MBF of DACCO and EA. The results were obtained with the Morse cluster of 50 atoms.}
+			Observing the Fig. \ref{fig:dacco_ea_mbf_50} we see that the MBF of DACCO always higher than the EA. However, as we get close to the end of the optimization process, the MBF of DACCO and of EA tend to get equal.
 			
 			\pagebreak
 			\begin{table}[!htdp]
-					\label{tab:statistical_comparison_ea}
 					\begin{center}
 						\begin{tabular}{| c | c |}
 							\hline
@@ -276,17 +276,245 @@ In the tables where we make the statistical analysis we use the following notati
 							50 & $\sim$ \\ \hline
 						\end{tabular}
 						\caption{Statistical results of comparing DACCO and EA}
+						\label{tab:statistical_comparison_ea}
 					\end{center}
 			\end{table}
-		Table \ref{tab:statistical_comparison_ea} shows that DACCO is as effective as the EA. It performs significantly better in four instances. 
+		Table \ref{tab:statistical_comparison_ea} shows that DACCO is as effective as the EA.
 		
-		It is important to note that in four Morse instances our approach performs significantly better than the EA. It is important to say that the Morse instances with 30 and 38 atoms are particularly hard to optimize, because they define very roughed landscapes, with many local minima.
+		It is important to note that in four Morse instances our approach performs significantly better than the EA. Some of these Morse instances,  the ones with 30 and 38 atoms, are particularly hard to optimize, as they define very roughed landscapes, with many local minima \cite{doye97}.
 		
 		Moreover, these results show that DACCO can compete the EA, while optimizing Morse clusters with a number of atoms between 30 and 50.
-		
+		\pagebreak
 		\section{Detailed Analysis}
 		\label{sec:detailed_analysis}
-	
-	
-
+		
+		DACCO contains some components that enhance its effectiveness in cluster geometry optimization problems. In this section we present a set of additional tests to clarify the importance of some of these components. We selected clusters with size $N=\{30, 38, 45, 50\}$, and changes range from simple parameter setting variation to structural modifications in the DACCO framework. All comparisons in this work are made between the final DACCO version. These comparisons of results will help clarify the influence of the different components used.
+		
+		
+		\subsection{Cell Size}
+		In this section we present the results of the variation of the cell size $W$. When we have a big $W$ our search space will be smaller, but we will start to have more than on atom in one cell. Furthermore we have to be careful while defining the cell size, because we need to guarantee that our cube can host an entire cluster. Taking this into account it is important to assess how the algorithm behaves with different cell sizes.
+		Table \ref{tab:cell_size_results} present results obtained with additional setting $W=\{0.5, 0.6, 0.7\}$. A inspection of this table reveals that even if we build cells that can take more than two atoms, the outcomes of the optimization well be similar. This can be explained by the mapping strategy that we adopted: if a cell has two atom, the one that is far from its center will be moved to the closest adjacent cell.
+		There is a slight trend for the $W=0.6$ to obtain results of higher quality in both terms of success rate and MBF (Fig. \ref{fig:mbf_cell_size_50}).
+		Table \ref{tab:statistical_comparison_cell_size} verifies that there is no statistical evidence to which one of the $W$ values is better.
+		   		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c | c | c | c | c | c |}
+						\hline
+						~ & \multicolumn{2}{c|}{\textbf{$W=0.5$}} & \multicolumn{2}{c|}{\textbf{$W=0.6$}} & \multicolumn{2}{c|}{\textbf{$W=0.7$}} \\ \hline
+						~ & SR & MBF & SR & MBF & SR & MBF \\ \hline
+						30 & 28 / 30 & -106.831095 & 28 / 30 & -106.831095 & 30 / 30 & -106.835790 \\ \hline
+						38 & 20 / 30 & -143.786016 & 25 / 30 & -144.053535 & 19 / 30 & -143.732512 \\ \hline
+						45 & 1 / 30 & -174.304756 & 3 / 30 & -174.295931 & 2 / 30 & -174.331536 \\ \hline
+						50 & 4 / 30 & -197.694748 & 12 / 30 & -197.853115 & 9 / 30 & -197.831498 \\ \hline
+					\end{tabular}
+					\caption{Optimization results obtained by DACCO with different values of $W$ in the selected Morse cluster instances}
+					\label{tab:cell_size_results}
+				\end{center}
+		\end{table}
+		
+		
+		
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c | c | c |}
+						\hline
+						~& \textbf{$W=0.5$ - $W=0.6$} & \textbf{$W=0.5$ - $W=0.7$} & \textbf{$W=0.6$ - $W=0.7$} \\ \hline
+						30 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+						38 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+						45 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+						50 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+					\end{tabular}
+					\caption{Statistical results of comparing the different cell sizes}
+					\label{tab:statistical_comparison_cell_size}
+				\end{center}
+		\end{table}
+		
+		
+		\botapic[0.5]{mbf_cell_size_50}{Evolution of the MBF of DACCO with different values of $W$. Results were obtained with the Morse instance with 50 atoms.}
+		
+		\subsection{Neighborhoods}
+		
+		In this section we compare two neighborhoods: the Moore Neighborhood and the Full Moore Neighborhood. We used the same $r = 3$ for both neighborhoods.
+		
+		Table \ref{tab:neighborhood_results} present the results for both neighborhoods. Looking to the outcomes, we can see that for small instances the two neighborhoods have similar results. However, looking for the results obtained in larger instances, the Moore Neighborhood has better results. This may be explained by the fact that in the Full Moore neighborhood we are taking into account cells that can be far way from the current position. If that cells have an higher pheromone concentration there is a higher probability of choosing them, and thus destroying the cohesion of the cluster. 
+		
+		Table \ref{tab:statistical_comparison_neighborhoods} shows that for the bigger instances, the algorithm using the Moore neighborhood is statistically better than the one using the Full Moore neighborhood. Fig. \ref{fig:neighborhoods_mbf_50} presents the evolution of the MBF, and confirms that the Moore neighborhood achieves better results. 
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c | c | c | c |}
+						\hline
+						~ & \multicolumn{2}{c|}{\textbf{Moore}} & \multicolumn{2}{c|}{\textbf{Full Moore}} \\ \hline
+						~ & SR & MBF & SR & MBF \\ \hline
+						30 & 28 / 30 & -106.831095 & 25 / 30 & -106.823627 \\ \hline
+						38 & 25 / 30 & -144.053535 & 23 / 30 & -143.942889 \\ \hline
+						45 & 3 / 30 & -174.295931 &  1 / 30 &  -173.998727 \\ \hline
+						50 & 12 / 30 & -197.853115 & 3 / 30 &  -197.001784 \\ \hline
+					\end{tabular}
+					\caption{Optimization results obtained by DACCO with different Neighborhoods in the selected Morse cluster instances}
+					\label{tab:neighborhood_results}
+				\end{center}
+		\end{table}
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c |}
+						\hline
+						~ & \textbf{Moore - Full Moore} \\ \hline
+						30 & $\sim$ \\ \hline
+						38 & $\sim$ \\ \hline
+						45 & S+ \\ \hline
+						50 & S+ \\ \hline
+					\end{tabular}
+					\caption{Statistical results of comparing the different neighborhoods}
+					\label{tab:statistical_comparison_neighborhoods}
+				\end{center}
+		\end{table}
+		
+		\botapic[0.5]{neighborhoods_mbf_50}{Evolution of the MBF of DACCO with different Neighborhoods. Results were obtained with the Morse instance with 50 atoms.}
+		
+		\subsection{Neighborhood Radius}
+		
+		In this section we compare the radius of the two neighborhoods. Using the Moore Neighborhood, we tried experimented values of $r = \{1, 2, 3, 4\}$ while optimizing the subset of instances.
+		
+		Table \ref{tab:neighborhood_radius_results} present the results of the optimization. Looking at the results, we can observe that choosing a small radius ($r=1$), the optimization process becomes to greedy, in a way that he always tries to build compact clusters. This works well for small instances, but for the large ones, we need some more choices to place the atoms. However, with a big radius the optimization process starts to behave like the Full Moore Neighborhood. 
+		
+		Looking at this results, it is clear that we need to have a radius that is not to small that it only looks at the closest positions, neither to big, that it starts destroying the cohesion of the cluster.
+		
+		In Table \ref{tab:statistical_comparison_radius} we present a statistical analysis of the radius used for experimentation. It confirms that small radius do not help the search, and that as the radius increase, the success rate in the instances with more atoms tend to decrease.
+		
+		Fig. \ref{fig:neighborhoods_radius_50} presents the evolution of the MBF for the different values of $r$. These figures confirms that, with low values of $r$, the algorithm converges to local optima of inferior quality when compared, for example, with $r=2$ or $r=3$. Moreover, this chart shows that with $r=4$ the MBF is inferior to the MBF of the version that uses $r=3$
+		
+		
+		\botapic[0.50]{neighborhoods_radius_50}{Evolution of the MBF of DACCO with different values of $r$. Results were obtained with the Morse instance with 50 atoms.}
+		
+		
+		\begin{landscape}
+			 \begin{table}[!htdp]
+					\begin{center}
+						\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+							\hline
+							~ & \multicolumn{2}{c|}{\textbf{r = 1}} & \multicolumn{2}{c|}{\textbf{r = 2}} & \multicolumn{2}{c|}{\textbf{r = 3}} & \multicolumn{2}{c|}{\textbf{r = 4}} \\ \hline
+							~ & SR & MBF & SR & MBF & SR & MBF & SR & MBF \\ \hline
+							30 & 22 / 30 & -106.816158 & 27 / 30 & -106.828748 & 28 / 30 & -106.831095 & 27 / 30 & -106.828748 \\ \hline
+							38 & 28 / 30 & -144.211960 & 25 / 30 & -144.052332 & 25 / 30 & -144.053535 & 23 / 30 & -143.946527 \\ \hline
+							45 & 0 / 30 & -173.593068 & 4 / 30 & -174.338129 & 3 / 30 & -174.295931& 1 / 30 & -174.338283 \\ \hline
+							50 & 0 / 30 & -196.105401 & 7 / 30 & -197.387273 & 12 / 30 & -197.853115 & 4 / 30 & -197.605420 \\ \hline
+						\end{tabular}
+						\caption{Optimization results obtained by DACCO with different values of $r$ in the selected Morse cluster instances}
+						\label{tab:neighborhood_radius_results}
+					\end{center}
+			\end{table}
+		
+			\begin{table}[!htdp]
+					\begin{center}
+						\begin{tabular}{| c | c | c | c | c | c | c |}
+							\hline
+							~& \textbf{r = 1 - r = 2} & \textbf{r = 1 - r = 3} & \textbf{r = 1 - r = 4} & \textbf{r = 2 - r = 3} & \textbf{r = 2 - r = 4} & \textbf{r = 3 - r = 4} \\ \hline
+							30 & S- & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							38 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							45 & S- & S- & S- & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							50 & S- & S- & S- & S- & $\sim$ & $\sim$ \\ \hline
+						\end{tabular}
+						\caption{Statistical results of comparing the neighborhood radius}
+						\label{tab:statistical_comparison_radius}
+					\end{center}
+			\end{table}
+			
+			\end{landscape}
+			
+		\subsection{Discrete Local Search}
+		
+		In this section we analyze compare the DACCO algorithm with another version, but without the discrete local search procedure. 
+		
+		The proposed discrete local search was designed to cluster geometry optimization problems, and we with this set of experiments we intend to show its importance in the optimization process.
+		Table \ref{tab:discrete_local_search_results} shows that without a local search procedure in the discrete space the algorithm has a very poor performance. This results show that the discrete local search is a vital component to the success of the algorithm. 
+		
+		Table \ref{tab:statistical_comparison_discrete_local_search} presents a statistical analysis that confirms the importance of the discrete local search. 
+		
+		Fig. \ref{fig:no_discrete_local_search_vs_dacco_mbf_50} shows the evolution of the MBF in the optimization process. It clearly depicts that the values of MBF without discrete local search, are inferior to the ones with discrete local search.
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c | c | c | c |}
+						\hline
+						~ & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without Discrete Local Search}} \\ \hline
+						~ & SR & MBF & SR & MBF \\ \hline
+						30 & 28 / 30 & -106.831095 & 2 / 30 & -106.406177 \\ \hline
+						38 & 25 / 30 & -144.053535 & 1 / 30 & -142.077711 \\ \hline
+						45 & 3 / 30 & -174.295931 & 0 / 30 & -172.596377 \\ \hline
+						50 & 12 / 30 & -197.853115 & 2 / 30 & -194.567170 \\ \hline
+					\end{tabular}
+					\caption{Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}
+					\label{tab:discrete_local_search_results}
+				\end{center}
+		\end{table}
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c |}
+						\hline
+						~ & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
+						30 & S+ \\ \hline
+						38 & S+ \\ \hline
+						45 & S+ \\ \hline
+						50 & S+ \\ \hline
+					\end{tabular}
+					\caption{Statistical results of comparing DACCO and DACCO without local search}
+					\label{tab:statistical_comparison_discrete_local_search}
+				\end{center}
+		\end{table}
+		
+		\botapic[0.45]{no_discrete_local_search_vs_dacco_mbf_50}{Evolution of the MBF of DACCO with and without Discrete Local Search. Results were obtained with the Morse instance with 50 atoms.}
+		
+		\pagebreak
+		
+		\subsection{Pheromone Propagation}
+		
+		In this section we present the results of having a mechanism of pheromone propagation. This mechanism allows a better distribution of the pheromones in the search space (see Fig \ref{fig:no_propagation_graph} and Fig.\ref{fig:propagation_graph}).
+		
+		Looking at Table \ref{tab:pheromone_propagation_results}, we can see that the results with and without pheromone propagation are similar. Furthermore, looking at the statistical analysis of Table \ref{tab:statistical_comparison_pheromone_propagation} we can confirm that there is no statistical evidence to choose one of the methods. 
+		
+		Looking at the MBF evolution during the optimization process (Fig. \ref{fig:no_prop_vs_prop_mbf_50}) we can observe that the MBF of the algorithm with propagation is always higher than the one of the algorithm without propagation. These results shows that having a pheromone propagation system can increase the quality of the solutions.
+		
+		\botapic[0.45]{no_propagation_graph}{Pheromone distribution without pheromone propagation in the final iteration of the optimization of a Morse cluster with 50.}
+		\botapic[0.45]{propagation_graph}{Pheromone distribution with pheromone propagation in the final iteration of the optimization of a Morse cluster with 50.}
+		
+		\pagebreak
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c | c | c | c |}
+						\hline
+						~ & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without pheromone propagation}} \\ \hline
+						~ & SR & MBF & SR & MBF \\ \hline
+						30 & 28 / 30 & -106.831095 & 25 / 30 & -106.824054 \\ \hline
+						38 & 25 / 30 & -144.053535 & 22 / 30 & -143.893024 \\ \hline
+						45 & 3 / 30 & -174.295931 & 2 / 30 & -174.311589 \\ \hline
+						50 & 12 / 30 & -197.853115 & 10 / 30 & -197.652445 \\ \hline
+					\end{tabular}
+					\caption{Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}
+					\label{tab:pheromone_propagation_results}
+				\end{center}
+		\end{table}
+		
+		\begin{table}[!htdp]
+				\begin{center}
+					\begin{tabular}{| c | c |}
+						\hline
+						~ & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
+						30 & $\sim$ \\ \hline
+						38 & $\sim$ \\ \hline
+						45 & $\sim$ \\ \hline
+						50 & $\sim$ \\ \hline
+					\end{tabular}
+					\caption{Statistical results of comparing DACCO and DACCO without pheromone propagation}
+					\label{tab:statistical_comparison_pheromone_propagation}
+				\end{center}
+		\end{table}
+		\botapic[0.4]{no_prop_vs_prop_mbf_50}{Evolution of the MBF of DACCO with and without pheromone propagation. Results were obtained with the Morse instance with 50 atoms.}
+		
+		
 	
