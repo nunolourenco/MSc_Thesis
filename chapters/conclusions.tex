@@ -3,10 +3,10 @@
 \label{chap:conclusions}
 
 
-The main goal of this dissertation is to propose a new algorithm to tackle cluster geometry optimization problems. The proposed algorithm is based on swarm intelligence, more specifically in the an discrete variant of the Ant Colony Optimization (ACO). In this dissertation we proposed some new components to improve the effectiveness of the algorithm:
+The main goal of this dissertation is to propose a new algorithm to tackle cluster geometry optimization problems. The proposed algorithm is based on swarm intelligence, more specifically in a discrete variant of the Ant Colony Optimization (ACO). In this dissertation we proposed some new components to improve the effectiveness of the algorithm:
 \begin{itemize}
 	\item Discretization of the search space. Cluster geometry optimization problems are continuous, and was necessary to build a method to discretize the problem so that ACO could work;
-	\item Several methods to find feasible neighborhoods were tested. With these methods we intended to introduce more information about the problem when build the feasible neighborhoods;
+	\item Several methods to find feasible neighborhoods were tested. With these methods we intended to introduce more information about the problem while building the feasible neighborhoods;
 	\item Application of a continuous local optimization method combined with the ACO algorithm;
 	\item The mapping between solutions in the continuous and discrete spaces. With the mapping used we tried to keep as much information as possible between spaces;
 	\item The proposal of a discrete local search method, that ought to be crucial in the achievement of good results.
@@ -14,13 +14,13 @@ The main goal of this dissertation is to propose a new algorithm to tackle clust
 
 Furthermore we performed a brief perusal in the state-of-art in both ACO algorithms and some of algorithms used to tackle the problem of cluster geometry optimization.
 
-The proposed algorithm, DACCO, was tested in several instances of short-ranged Morse clusters. It performance was compared with two other approaches applied to the same problem instances: a Particle Swarm Optimization (PSO) algorithm and an Evolutionary Algorithm (EA). We concluded that DACCO performed better than the PSO in all the tested instances. When compared to the EA, DACCO obtained similar results, having a better performance in four of the tested Morse instances.
+The proposed algorithm, DACCO, was tested in several instances of short-ranged Morse clusters. Its performance was compared with two other approaches applied to the same problem instances: a Particle Swarm Optimization (PSO) algorithm and an Evolutionary Algorithm (EA). We concluded that DACCO performed better than the PSO in all the tested instances. When compared to the EA, DACCO obtained similar results, having a better performance in four of the tested Morse instances.
 
 We performed a detailed analysis in some of the proposed components, in order to assess their importance in the algorithm.
 
 \section{Future Work}
 
-In this type of research there is always work to do. The first important aspect that should be address is the application of the DACCO algorithm to bigger instances of the short-ranged Morse clusters. Another aspect that should be study is the application of heuristics to improve the optimization process. The study and implementation of new mechanisms to find feasible neighborhoods, should be of great interest, once this is one of the key aspects of the ACO algorithms. The improvement of the discrete local search method should be addressed as well, since it was proven that this component is vital to DACCO succeed in the optimization process. The comparison of our results with other approaches that are present in the literature it another aspect that should be made in the near future in order to assess its effectiveness. Finally, the study of the  possibility of using a continuous variant of the ACO algorithms to tackle the problems of cluster geometry optimization should be addressed as well.
+In this type of research there is always work to do. The first important aspect that should be address is the application of the DACCO algorithm to bigger instances of the short-ranged Morse clusters. Another aspect that should be study is the application of heuristics to improve the optimization process. The study and implementation of new mechanisms to find feasible neighborhoods, should be of great interest, once this is one of the key aspects of the ACO algorithms. The improvement of the discrete local search method should be addressed as well, since it was proven that this component is vital to DACCO succeed in the optimization process. The comparison of our results with other approaches that are present in the literature is another aspect that should be made in the near future in order to assess its effectiveness. Finally, the study of the  possibility of using a continuous variant of the ACO algorithms to tackle the problems of cluster geometry optimization should be addressed as well.
 
 
 

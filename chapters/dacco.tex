@@ -2,7 +2,7 @@
 \chapter{DACCO: Discrete Ant Colony Cluster Optimization}
 \label{chap:dacco}
 
-In this chapter we present DACCO, the ACO algorithm that we used to tackle the problem of Cluster Geometry Optimization. In this dissertation we are interested in developing an effective ACO approach to the problem of cluster geometry optimization. Yet, ACO algorithms were officially proposed for discrete environments and currently there are many variants that are state-of-art methods for different combinatorial optimization problems. Despite a few research efforts \cite{bilchev95, kong06, socha04, tsutsui04}, existing ACO algorithms to continuous domains are somehow incipient, particularly if compared with the most well-known discrete variants such as $\mathcal{MAX}-\mathcal{MIN}$ Ant System or ACS. Hence, in our research we decide to discretized our problem in order to use a discrete variant of ACO. Fig. \ref{fig:dacco_approach} presents and overview of the framework that we proposed.  
+In this chapter we present DACCO, the ACO algorithm that we used to tackle the problem of Cluster Geometry Optimization. In this dissertation we are interested in developing an effective ACO approach to the problem of cluster geometry optimization. Yet, ACO algorithms were officially proposed for discrete environments and currently there are many variants that are state-of-art methods for different combinatorial optimization problems. Despite a few research efforts \cite{bilchev95, kong06, socha04, tsutsui04}, existing ACO algorithms to continuous domains are somehow incipient, particularly if compared with the most well-known discrete variants such as $\mathcal{MAX}-\mathcal{MIN}$ Ant System or ACS. Hence, in our research we decide to discretized our problem in order to use a discrete variant of ACO. Fig. \ref{fig:dacco_approach} presents and overview of the framework that we propose.  
 
 \botapic[0.45]{dacco_approach}{Overview of DACCO framework}
 
@@ -56,7 +56,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 	\subsection{Construction of Search Space}
 	
 	In this procedure we discretized the search space, so that we can built a graph $G$ where the artificial ants can work.
-	The search space is defined by a cube of size $N^{(1/3)}$, where $N$ is the number of atoms, as depicted in Fig. \ref{fig:cube1}. To transform it we decided to divide the cube of Fig. \ref{fig:cube1} into smaller cubes to which we gave the name of \emph{cells}. This cells have to be large enough to contain one atom, but small enough to avoid having to atoms. The final result of this transformation is depicted in Fig. \ref{fig:cube2}.  
+	The search space is defined by a cube of size $N^{(1/3)}$, where $N$ is the number of atoms, as depicted in Fig. \ref{fig:cube1}. To transform it we decided to divide the cube of Fig. \ref{fig:cube1} into smaller cubes to which we gave the name of \emph{cells}. These cells have to be large enough to contain one atom, but small enough to avoid having more than one atom. The final result of this transformation is depicted in Fig. \ref{fig:cube2}.  
 	
 	\botapic[0.25]{cube1}{Search Space}
 	
@@ -89,7 +89,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 	
 	\subsection{Initialize Pheromones}
 	Before we start the optimization process, we need to initialize the pheromone matrix. This matrix contains the information about the quantity of pheromones of a certain path, and therefore it plays an important role in process of building solutions. For example, in the TSP the pheromone matrix contains information about how many times a certain path from city $i$ to city $j$ has been transversed.\\
-	Although in cluster geometry optimization problems what is important is the position of atoms in space, and not the order in which they are placed. Therefore in DACCO, we are not interested in building paths, but place atoms in cells of cube. Thus, instead of having information about how many times we have gone from cell $i$ to cell $j$, we have information about the desirability of having a certain component $i$ or $j$ in a solution.
+	Although in cluster geometry optimization problems what is important is the position of atoms in space, and not the order in which they are placed. Therefore in DACCO, we are not interested in building paths, but place atoms in cells. Thus, instead of having information about how many times we have gone from cell $i$ to cell $j$, we have information about the desirability of having a certain component $i$ or $j$ in a solution.
 	
 	In the beginning of the algorithm, all the cells have the same desirability of being in a solution, and for that reason we initialize the pheromone matrix with the value of $0.5$, as in \cite{blum04}.
 	
@@ -159,13 +159,13 @@ In the next sections we present a high level overview of our entire algorithm. T
 				\end{algorithmic}
 			\end{algorithm}
 			
-			The $remove\_repeated\_cell()$ procedure removes the repeated cells that are in the M set, since one cell can be in more the one atom neighborhood.
+			The $remove\_repeated\_cells()$ procedure removes the repeated cells that are in the M set, since one cell can be in more the one atom neighborhood.
 			The M set will then be used to determine which cell should be added to the solution.
 
 			This technique uses the information of all the atoms that had already been placed, but it demands a lot of computational resources. Every time we place a new atom we have to calculate the Convex Hull of the current partial solution. This, together with the additional time on the calculus of the distance of all cells to the segments, made us look for other alternatives.
 			
 			\paragraph*{Full Moore Neighborhood}
-			This technique was another attempt to use information about the partial constructed cluster.  In this technique, we iterate by all atoms that are in the partial solution, and we look for the neighbors of them. The neighborhood that we use is the Moore neighborhood with the same $r$ for all the atoms. The general idea is depicted in Fig. \ref{fig:all_neighbors}. We use a 2D representation for simplicity. The following algorithm gives more details about this technique:
+			This technique was another attempt to use information about the partial constructed cluster. Here we iterate by all atoms that are in the partial solution, and we look for the neighbors of them. The neighborhood that we use is the Moore neighborhood with the same $r$ for all the atoms. The general idea is depicted in Fig. \ref{fig:all_neighbors}. We use a 2D representation for simplicity. The following algorithm gives more details about this technique:
 		
 			\begin{algorithm}
 				\caption{Full Moore Neighborhood}
@@ -189,7 +189,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 		
 		\subsubsection*{Find Next Cell}	
 		This procedure receives the feasible neighborhood and determines the next cell to be part of the solution. This means that, an ant, located in a cell $i$ should choose a new cell $j$ to add to the solution. This choice is based on the pheromone value of cell $j$, $\tau_{j}^{\alpha}$ and the heuristic information $\eta_{j}^\gamma$. It is important to say that we do not use the heuristic component of the choice function. The heuristic information is applied when we are building the feasible neighborhood. In the case of our problem we want to place atoms that are close to each other, and being so we can discard the cells that are too far away from the current one. 
-		Hence, the choice function depends only of the pheromone value of cell $j$:
+		Taking this into account the choice function depends only of the pheromone value of cell $j$:
 		\begin{equation}
 			\label{eq:prob_rule}
 			p_j = \frac{[\tau_j]^\alpha} {\sum_{l \in M} [\tau_l]^\alpha}
@@ -237,7 +237,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			L-BFGS is an efficient local optimization method that combines the modest storage and computational requirements of conjugate gradient methods with the super linear convergence exhibited by full memory quasi-Newton strategies. This local optimization algorithm is usually adopted by hybrid approaches for cluster geometry optimization problems \cite{grosso07, johnston03, xico09}.
 						
 			\subsection{Convert Solutions to Discrete Space}
-			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because, as we referred, the solutions returned after their evaluation are different from the ones that were given as parameters.
+			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because the solutions returned after their evaluation are different from the ones that were given as parameters.
 			To convert the cluster to the discretized space, we apply the following algorithm: given a certain atom, we calculate the distance of this atom to all centers of the cells in the space, and the cell that is closer the atom, will be the one that will hold it. This process is detailed in Alg. \ref{alg:convertion_discrete}.
 			
 			\begin{algorithm}
@@ -297,7 +297,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			\subsection{Update Pheromone Values}
 			This procedure is responsible for the update of the pheromones. 
 
-			We start by decrease the current values of the pheromones, by a certain percentage, simulating the pheromone evaporation in the nature.
+			We start by decrease the current values of the pheromones, in a certain percentage, simulating the pheromone evaporation in the nature.
 
 			After, to deposit pheromones we follow the rule presented in \cite{blum04} with some minor differences. In the cited approach, they used 3 ants to update the trails:
 			\begin{enumerate}

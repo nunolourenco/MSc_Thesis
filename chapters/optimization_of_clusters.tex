@@ -6,7 +6,7 @@
 		\section{Single-solution Methods}
 			\label{subsec:single_state_solution}
 			%SA
-		 	Single-solution algorithms are the ones that generate one initial solution and then try to improve it over the execution of the algorithm. A remarkable example is Simulated Annealing in which we focus our attention, since it has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also other examples of single-solution methods. For details on these methods, please refer to \cite{luke09}  		
+		 	Single-solution algorithms are the ones that generate one initial solution and then try to improve it over the execution of the algorithm. A remarkable example is Simulated Annealing in which we focus our attention, since it has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also other examples of single-solution methods. For details on these methods, please refer to \cite{luke09}.  		
 			
 			\subsubsection*{Simulated Annealing}
 			Simulated Annealing (SA) \cite{kirkpatrick83} is a generic probabilistic metaheuristic. The inspiration to this method comes from annealing in metallurgy, a technique involving heating and controlled cooling of a material. The heat causes the atoms constituting the material to become unstuck from their initial positions (a local minimum) and wander randomly through space. Then, the slow cooling gives them more chances of gradually finding configurations with a lower internal energy than the initial one.
@@ -16,7 +16,7 @@
 				\item How worst is the new solution.
 				\item How many steps have been performed, since the beginning of the search.
 			\end{enumerate}
-			The number of steps of the algorithm is controlled by $T$, which is the temperature. It starts a initial high value, that decreases over time, until it reaches the minimum value of $T_{min}$. The generic behavior is shown in Algorithm \ref{alg:sa}.
+			The number of steps of the algorithm is controlled by $T$, which is the temperature. It starts with an initial high value, that decreases over time, until it reaches the minimum value of $T_{min}$. The generic behavior is shown in Algorithm \ref{alg:sa}.
 			
 			
 			\begin{algorithm}
@@ -82,9 +82,9 @@
 		\subsubsection*{Ant Colony Optimization Algorithms}
 		\label{subsubsec:ant_algorithms}
 
-		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone, which they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{``trail pheromone"}, that is very important for the social life of some ant species. This specific type of pheromone allows ants to mark paths, for example, from the nest to food source.
+		Ant colonies are distributed systems \cite{acobook} composed by a large amount of simple agents. They maintain a highly structured social organization, which allows the colonies to accomplish complex tasks. The individuals in the colony communicate with each other, via \emph{stigmergy}, which is a form of indirect communication mediated by modifications in the environment where the ants are working. In concrete, they have a chemical called pheromone that they deposit in the environment, which will be sensed by other ants, and help them in their work. One example of pheromones is the \emph{``trail pheromone"}, that is very important for the social life of some ant species. This specific type of pheromone allows ants to mark paths, for example, from the nest to food source.
 	
-		The idea behind ant algorithms is then to use a form of \emph{``artificial stigmergy"}, to coordinates artificial ant colonies. With this in mind, Marco Dorigo proposed an ACO framework in 1992 \cite{dorigo92}. 	
+		The idea behind ant algorithms is then to use a form of \emph{``artificial stigmergy"}, to coordinates artificial ant colonies. With this in mind, Marco Dorigo proposed an ACO algorithm in 1992 \cite{dorigo92}. 	
 
 		Algorithm \ref{alg:general_aco} presents the general idea behind the ACO algorithm.
 				\begin{algorithm}
@@ -99,9 +99,9 @@
 					\end{algorithmic}
 				\end{algorithm}
 				
-				In ACO, a problem is represented as a graph $G$ that artificial ants will cross when building solutions. $G$ is composed composed by a set of solution components $C$, connected by a set $E$ of edges. The specific composition of $G$ depends on the problem being solved.
+				In ACO a problem is represented as a graph $G$ that artificial ants will cross when building solutions. $G$ is composed composed by a set of solution components $C$, connected by a set $E$ of edges. The specific composition of $G$ depends on the problem being solved.
 				 Using the TSP as an example, the cities that the salesman has to visit correspond to $C$ and the routes that he has to travel correspond to $E$.			
-				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, the ant evaluates the (partial) solution.
+				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, it evaluates the (partial) solution.
 				
 				The \emph{UpdatePheromones()} is the process by which the pheromone trails are updated. The trails values can either increase, as ants deposits pheromone in the components or edges that they use, or decrease, due to pheromone evaporation. In practice, the deposit of pheromone trails increases the probability that those components/edges, which belonged to good solutions, will be selected again. Differently, pheromone evaporation implements a forgetting method: it avoids early convergence to a suboptimal region, therefore favoring exploration of new areas of the search space.
 				 
@@ -126,7 +126,7 @@
 					\begin{equation}
 						\tau_{ij} = (1 - \rho)\tau_{ij}, \quad \forall(i,j)\in E,
 					\end{equation}
-		\noindent where $0 \leq \rho \leq 1$ is a parameter.
+		\noindent where $0 \leq \rho \leq 1$ is a parameter that determines the quantity of pheromones to evaporate.
 
 					Then we perform the  pheromone trails update \cite{dorigo96}:
 					\begin{equation}
@@ -137,7 +137,7 @@
 
 		\noindent where $\Delta\tau^k$ is usually calculated using $\frac{1} {L^k}$, where $L^k$ is the fitness of the solution of the $k^{th}$-ant.
 
-					This algorithm had a poor performance when applied to larger instances of optimization problems \cite{acobook}, like the TSP. Therefore, there have been attempts to improve the algorithm. Elitist Ant System(EAS) \cite{dorigo92} \cite{dorigo96}, Rank-Based Ant System($AS_{rank}$) \cite{bullnheimer97}, Max-Min Ant System (MMAS) \cite{stutzle00}, and Ant Colony System \cite{dorigo97} are the most relevant contributions.
+					This algorithm had a poor performance when applied to larger instances of optimization problems \cite{acobook}, like the TSP. Therefore, there have been attempts to improve the algorithm. Elitist Ant System(EAS) \cite{dorigo92, dorigo96}, Rank-Based Ant System($AS_{rank}$) \cite{bullnheimer97}, Ant Colony System \cite{dorigo97}, and Max-Min Ant System (MMAS) \cite{stutzle00} are the most relevant contributions.
 
 					\subsubsection*{Elitist Ant System}
 
@@ -147,7 +147,7 @@
 						\tau_{ij} = \tau_{ij} + \sum_{k=1}^{m}\Delta\tau_{ij}^k + e\Delta\tau^{bs},
 					\end{equation}
 
-		\noindent where \emph{e} is the weight given to the best tour so far, and $\Delta\tau^{bs}$ is determined using $\frac{1} {L^bs}$, where ${L^bs}$ is the fitness of the best solution so far. 
+		\noindent where \emph{e} is the weight given to the best tour so far, and $\Delta\tau^{bs}$ is determined using $\frac{1} {L^{bs}}$, where ${L^bs}$ is the fitness of the best solution so far. 
 
 					\subsubsection*{Rank-Based Ant System}
 
@@ -165,7 +165,7 @@
 					\begin{enumerate}
 						\item It exploits the accumulated search experience, through the use of a more aggressive action choice rule: Eq. \ref{eq:acs_choice_rule}. 
 						\item Pheromone update and pheromone deposit takes place only on the edges belonging to the \emph{best-so-far} solution;
-						\item Online pheromone update. Each that each time an ant uses an edge $(i,j)$, it removes some pheromone from it. This increase the exploration of alternative solutions.
+						\item It uses an online pheromone update strategy. Each time an ant, while building solutions, uses an edge $(i,j)$, it removes some pheromone from it. This increase the exploration of alternative solutions.
 					\end{enumerate}
 
 					In Ant Colony System(ACS), when an ant is building a solution, it chooses to move from component $i$ to component $j$ according to the following \emph{pseudorandom proportional} rule \cite{dorigo97}:
@@ -190,7 +190,7 @@
 								\label{eq:max_min_rank_pheromone_update}
 								\tau_{ij} = \tau_{ij} + \Delta\tau_{ij}^{best}
 							\end{equation}
-							\noindent where $\Delta\tau^{best}$ is the computed using $\frac{1} {L^{best}}$, where ${L^{best}}$ is the fitness of the best solution so far or the fitness of the best solution in the iteration, depending of which one is used. In most cases \emph{best-so-far} and \emph{iteration-best} according to a schedule, that can be based, for example, in the number of iterations.
+							\noindent where $\Delta\tau^{best}$ is the computed using $\frac{1} {L^{best}}$, ${L^{best}}$ is the fitness of the best solution so far or the fitness of the best solution in the iteration, depending of which one is used. In most cases \emph{best-so-far} and \emph{iteration-best} according to a schedule, that can be based, for example, in the number of iterations.
 						
 						\item Introduction of a limit to pheromone trails $[\tau_{min},\tau_{max}]$. This modification intends to counteract the effect of stagnation, that is the situation where all ants build the same solution.
 						
@@ -231,7 +231,7 @@
 					
 						\botapic[0.7]{kernel_mixture1}{Example of a mixture of gaussian kernels - The dashed line is mixture of all the other depicted gaussian functions}
 						
-						While building solutions, an ant, at a certain step $i$, generates a random number according to an PDF that composes the kernel mixture, and add it to the solution.
+						While building solutions, an ant, at a certain step $i$, generates a random number according to an PDF that composes the kernel mixture, and add it to the solution. This process is repeated until a complete solution has been constructed. Then solutions are evaluated.
 						
 						After the evaluation process we have to update the pheromone values. Hence we have to reinforce the influence of functions that lead to good solutions, and reduce the the influence of the function that lead to not so good solutions. The reinforcement can be achieved by adding a new PDF function, and the decrease can be achieved by removing PDFs from the kernel mixture.				
 						For more details in the algorithm see \cite{socha04,socha08}.
@@ -244,7 +244,7 @@
 
 		One of the first attempts of global optimization of the Morse potential was made by Wales et al. \cite{wales97, doye97}. In their work they used a Monte Carlo minimization method \cite{li87} combined with a local search algorithm. This method is known as Basin-Hopping (BH). In the work conducted by Wales et al., they deform the surface of the PES, in a way that some of the valleys are removed. This transformation does not affect the energies of the minima. They were able to found almost all the known global optima for short-ranged ($\beta = 14.0$) Morse clusters up to 80 atoms.
 		
-		Roberts et al. \cite{roberts00} proposed the first EA to the optimization of Morse clusters. They used a certain number of components that had been previously proposed: real-valued representation of the Cartesian coordinates of the atoms, a local search method to improve the solutions, and a Cut and Splice \cite{deaven95} crossover. This crossover is a specific operator handling atomic clusters. First, it defines a plane that passes through the center of mass of the clusters to be combined. Then the clusters are cut by this plane and the complementary halves are joined (spliced) together in order to form a new offspring.
+		Roberts et al. \cite{roberts00} proposed the first EA to the optimization of Morse clusters. They used a certain number of components that had been previously proposed: real-valued representation of the Cartesian coordinates of the atoms, a local search method to improve the solutions, and the Cut and Splice \cite{deaven95} crossover. This crossover is a specific operator handling atomic clusters. First, it defines a plane that passes through the center of mass of the clusters to be combined. Then the clusters are cut by this plane and the complementary halves are joined (spliced) together in order to form a new offspring.
 		The mutation operator in this work corresponds to assign random coordinates to a certain number of atoms. 
 		The algorithm was applied to instances between 19 and 50 of the Morse Potential with $\beta = 6.0$ and $\beta = 14.0$. The results showed that it was able to discover nearly all the known global optima \cite{roberts00}.   
 		
@@ -253,8 +253,8 @@
 		Dynamic lattice searching (DLS) is another effective approach for cluster geometry optimization \cite{cheng07}. It starts with a randomly generated local minimum and iteratively applies a greedy strategy to search for better solutions in the neighborhood. This search is aid by a Dynamic Lattice (DL). The DL is constructed adaptively, based on a starting local minimum, and then locating all the possible locations for new atom. Afterwards, they perform a greedy search for conformations with low potential energy values: it iteratively moves the atom located at the position with the highest energy (in the lattice) to the vacant position with the lowest energy (in the lattice) \cite{cheng07, shao04}. The method is restarted several times to ensure proper exploration of the search space \cite{cheng07}.
 			
 		Pereira et al.\cite{xico09} proposed a steady-state EA, with diversity control to the problem of cluster geometry optimization. In a steady-state EA, after generating a new offspring it is necessary to decide if it will enter the population, and if it does, which individual it will replace. In general, replacement strategies are related with the fitness and/or the age of individuals. Fitness based strategies check the quality of the individuals to decide who will be replaced. In the age based strategies the oldest elements are replaced. These two strategies are not mutually exclusive, since they can be combined. Moreover, these strategies can still be combined with other mechanisms, in order to keep a suitable level of diversity in the populations.
-		In Pereira et al.\cite{xico09} they propose a couple of mechanisms to keep the diversity in the population. Furthermore, they show that the diversity is important to improve the effectiveness of the EA. The proposed EA was able to find all the known optima for short-ranged Morse clusters up to 80 atoms.
+		In Pereira et al.\cite{xico09} they propose a couple of mechanisms to keep the diversity in the population. They showed that the diversity is important to improve the effectiveness of the EA. The proposed EA was able to find all the known optima for short-ranged Morse clusters up to 80 atoms.
 		
-		More recently, Lourenço et al. \cite{lourenco11} proposed a Particle Swarm Optimization algorithm to the problem of cluster geometry optimization. The proposed algorithm has several features that were specifically design to tackle this problem. The most noteworthy are: the adoption of specific rules to update current position of particles, where the velocity is only applied to fraction of the solution; and the embracing of a steady-state strategy to update the population particles. This strategy allows for a simultaneous exploration of the neighborhoods of the current locations, and of the best ever seen solutions. Moreover, it has a diversity mechanism, to postpone convergence.
+		More recently, Lourenço et al. \cite{lourenco11} proposed a Particle Swarm Optimization algorithm to the problem of cluster geometry optimization. The proposed algorithm has several features that were specifically design to tackle this problem. The most noteworthy are: the adoption of specific rules to update current position of particles, where the velocity is only applied to fraction of the solution; and the embracing of a steady-state strategy to update the population particles. This strategy allows for a simultaneous exploration of the neighborhoods of the current locations, and of the best ever seen solutions. Additionally it has a diversity mechanism, to postpone convergence.
  		The results presented showed that the algorithm was able to find all the best-known solutions to short-ranged Morse instances between 30 and 50 atoms.
 		

@@ -18,13 +18,23 @@ We tried to keep our architecture simple and modular. In Fig.\ref{fig:class_diag
 
 \botapic[0.7]{class_diagram}{CGACO Class Diagram}
 \pagebreak
-\textbf{CGACO} – Main class that runs the ACO algorithm for a certain number of populations.
+\textbf{DACCO} – Main class that runs the ACO algorithm for a certain number of populations.
 
 \textbf{Population} – Class that simulates the ant colonies that appears in nature. It has a certain number of individuals, with common properties.
 
-\textbf{Ant} – Class that simulates the real ant. It is responsible for the individual behavior of each ant. This behavior includes, for instance, decide directions to go while building solutions.
+\textbf{Ant} – Class that simulates the real ant. It is responsible for the individual methods of each ant. The main methods are:
+\begin{itemize}
+	\item Construction of individual solutions:
+		\begin{itemize}
+			\item Choose feasible neighborhoods;
+			\item Apply a probabilistic rule to choose which components should be added to the solutions.
+		\end{itemize}
+	\item It calls the Fitness Function, in order to assess the quality of the solution that has been built;
+	\item Mapping of the continuous solutions to the discrete space;
+	\item Discrete local search. This local search works in the search space, and tries to improve the ant solutions applying random changes to the current solutions.
+\end{itemize}
 
-\textbf{Utils} – Class that has a set of procedures, that help all the other classes accomplish their individual tasks.
+\textbf{Utils} – Class that has a set of procedures to help all the other classes accomplish their individual tasks. Examples of these methods are: the euclidean distance method, that receives to points in the space and determines their euclidean distance; the method to read the parameters file; methods to write data to files, in order to allow us to see what is happening in the optimization process.
 
-\textbf{Fitness Function} – Class that is responsible for evaluate the quality of the individuals that belong to our system.
+\textbf{Fitness Function} – Class that is responsible for evaluate the quality of the individuals that belong to our system. This class receives an ant solution, that is already in the continuous space, and it performs the evaluation of the solutions.
 

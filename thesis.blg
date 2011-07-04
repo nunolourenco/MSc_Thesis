@@ -3,48 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: plain.bst
 Database file #1: refs.bib
-Warning--empty booktitle in blum04
-Warning--can't use both volume and number fields in blum04
 Warning--empty publisher in luke09
 You've used 39 entries,
             2118 wiz_defined-function locations,
             750 strings with 10161 characters,
-and the built_in function-call counts, 13738 in all, are:
-= -- 1337
+and the built_in function-call counts, 13592 in all, are:
+= -- 1322
 > -- 582
-< -- 14
+< -- 12
 + -- 229
 - -- 182
-* -- 997
-:= -- 2247
+* -- 994
+:= -- 2240
 add.period$ -- 123
 call.type$ -- 39
 change.case$ -- 193
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 531
-empty$ -- 1126
+cite$ -- 40
+duplicate$ -- 518
+empty$ -- 1113
 format.name$ -- 182
-if$ -- 2946
+if$ -- 2903
 int.to.chr$ -- 0
 int.to.str$ -- 39
 missing$ -- 42
 newline$ -- 199
 num.names$ -- 88
-pop$ -- 175
+pop$ -- 171
 preamble$ -- 1
 purify$ -- 159
 quote$ -- 0
-skip$ -- 378
+skip$ -- 361
 stack$ -- 0
-substring$ -- 992
-swap$ -- 122
-text.length$ -- 14
+substring$ -- 983
+swap$ -- 109
+text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 148
-warning$ -- 3
-while$ -- 128
+warning$ -- 1
+while$ -- 127
 width$ -- 41
 write$ -- 439
-(There were 3 warnings)
+(There was 1 warning)
