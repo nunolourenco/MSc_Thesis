@@ -7,7 +7,7 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {6.1}{\ignorespaces Parameter setting used in the experiments}}{39}{table.6.1}
 \contentsline {table}{\numberline {6.2}{\ignorespaces Optimization results of Morse Clusters between 30 and 50 obtained by DACCO}}{41}{table.6.2}
-\contentsline {table}{\numberline {6.3}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the CDACCO algorithm and the PSO}}{43}{table.6.3}
+\contentsline {table}{\numberline {6.3}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the PSO}}{43}{table.6.3}
 \contentsline {table}{\numberline {6.4}{\ignorespaces Statistical results of comparing DACCO and PSO}}{45}{table.6.4}
 \contentsline {table}{\numberline {6.5}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}}{46}{table.6.5}
 \contentsline {table}{\numberline {6.6}{\ignorespaces Statistical results of comparing DACCO and EA}}{48}{table.6.6}

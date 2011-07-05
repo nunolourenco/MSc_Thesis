@@ -69,7 +69,12 @@ The $\alpha$ value was set to 4, following the reviewed literature, and after th
 
 \section{Statistical Analysis}
 \label{sec:statistical_analysis}
-While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair DACCO-EA and DACCO-PSO of algorithms. Furthermore the same test is used to perform a detailed analysis in the components of the algorithm.
+While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair DACCO-EA and DACCO-PSO of algorithms. Furthermore the same test is used to perform a detailed analysis in the components of the algorithm. For multiple comparisons the $p$-value (0.05) used was adjusted using the Bonferroni correction method. To perform such correction we used used the following equation:
+\begin{equation}
+	p_B = \frac{p} {nc}
+\end{equation}
+
+where $nc$ is the number of comparisons performed, and the $p_B$ is the $p$-value to consider.
 
 The hypothesis for comparing two algorithms were:
 \begin{itemize}
@@ -165,7 +170,7 @@ In the tables where we make the statistical analysis we use the following notati
 					50 & -198.455632 & 12 / 30 & -197.853115 & 1 / 30 & -195.816027 \\ \hline
 				\end{tabular}
 			\end{center}
-			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the CDACCO algorithm and the PSO}
+			\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the PSO}
 			\label{tab:dacco_vs_pso}
 		\end{table}
 		
@@ -390,7 +395,7 @@ In the tables where we make the statistical analysis we use the following notati
 		
 		Looking at this results, it is clear that we need to have a radius that is not to small that it only looks at the closest positions, neither to big, that it starts destroying the cohesion of the cluster.
 		
-		In Table \ref{tab:statistical_comparison_radius} we present a statistical analysis of the radius used for experimentation. It confirms that small radius do not help the search, and that as the radius increase, the success rate in the instances with more atoms tend to decrease.
+		In Table \ref{tab:statistical_comparison_radius} we present a statistical analysis of the radius used for experimentation. It clearly confirms that small radius do not help the search.
 		
 		Fig. \ref{fig:neighborhoods_radius_50} presents the evolution of the MBF for the different values of $r$. These figures confirms that, with low values of $r$, the algorithm converges to local optima of inferior quality when compared, for example, with $r=2$ or $r=3$. Moreover, this chart shows that with $r=4$ the MBF is inferior to the MBF of the version that uses $r=3$
 		
@@ -420,10 +425,10 @@ In the tables where we make the statistical analysis we use the following notati
 						\begin{tabular}{| c | c | c | c | c | c | c |}
 							\hline
 							~& \textbf{r = 1 - r = 2} & \textbf{r = 1 - r = 3} & \textbf{r = 1 - r = 4} & \textbf{r = 2 - r = 3} & \textbf{r = 2 - r = 4} & \textbf{r = 3 - r = 4} \\ \hline
-							30 & S- & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							30 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
 							38 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
 							45 & S- & S- & S- & $\sim$ & $\sim$ & $\sim$ \\ \hline
-							50 & S- & S- & S- & S- & $\sim$ & $\sim$ \\ \hline
+							50 & S- & S- & S- & $\sim$ & $\sim$ & $\sim$ \\ \hline
 						\end{tabular}
 						\caption{Statistical results of comparing the neighborhood radius}
 						\label{tab:statistical_comparison_radius}
