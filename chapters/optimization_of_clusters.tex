@@ -2,21 +2,21 @@
 \chapter{Optimization Algorithms}
 	\label{chap:opt_alg}
 		
-	    In this chapter we describe some approximation methods for global optimization. We do not aim to provide a comprehensive presentation of optimization algorithms. We offer just a brief description of several methods, focusing our attention on global, unbiased, iterative, approximation algorithms (a class usually known as \emph{metaheuristics}). The reason for this choice is that current state-of-art methods for cluster geometry optimization belong to this class. In Section \ref{subsec:single_state_solution} we briefly highlight single-solution methods, followed by Evolutionary Algorithms in Section \ref{subsec:evolutionary_algorithms}. In Section \ref{subsec:swarm_intelligence}, we describe example of swarm intelligence algorithms, focused on ant colony optimization methods. Finally, in Section \ref{subsec:cgo}, we give a brief description of how some of the presented methods were applied to the problem of cluster geometry optimization. 
+	    In this chapter we describe some approximation methods for global optimization. We do not aim to provide a comprehensive presentation of optimization algorithms. We offer just a brief description of several methods that focus on global, unbiased, iterative, approximation algorithms (a class usually known as \emph{metaheuristics}). The reason for this choice is that current state-of-art methods for cluster geometry optimization belong to this class. In Section \ref{subsec:single_state_solution} we briefly highlight single-solution methods, followed by Evolutionary Algorithms in Section \ref{subsec:evolutionary_algorithms}. In Section \ref{subsec:swarm_intelligence}, we describe example of swarm intelligence algorithms, focused on ant colony optimization methods. Finally, in Section \ref{subsec:cgo}, we give a brief description of how some of the presented methods were applied to the problem of cluster geometry optimization. 
 		\section{Single-solution Methods}
 			\label{subsec:single_state_solution}
 			%SA
-		 	Single-solution algorithms are the ones that generate one initial solution and then try to improve it over the execution of the algorithm. A remarkable example is Simulated Annealing in which we focus our attention, since it has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also other examples of single-solution methods. For details on these methods, please refer to \cite{luke09}.  		
+		 	Single-solution algorithms generate one initial solution and try to improve it iteratively. A remarkable example is Simulated Annealing in which has been applied to the cluster geometry optimization problem. However, it is not the only single-solution method. Hill-Climbing (HC), Tabu Search (TS), Iterated Local Search (ILS) or Variable Neighborhood Search (VNS) are also other examples of single-solution methods. For details on these methods, the reader can see, e.g., \cite{luke09}.  		
 			
 			\subsubsection*{Simulated Annealing}
 			Simulated Annealing (SA) \cite{kirkpatrick83} is a generic probabilistic metaheuristic. The inspiration to this method comes from annealing in metallurgy, a technique involving heating and controlled cooling of a material. The heat causes the atoms constituting the material to become unstuck from their initial positions (a local minimum) and wander randomly through space. Then, the slow cooling gives them more chances of gradually finding configurations with a lower internal energy than the initial one.
 
 			Analogously with this physical process, each step of the SA selects a nearby solution. If the new solution is better than the current one, the new solution replaces the current. However, if the new solution is worse than the current it can still be selected. Acceptance depends of two criteria:
 			\begin{enumerate}
-				\item How worst is the new solution.
-				\item How many steps have been performed, since the beginning of the search.
+				\item How worse is the new solution.
+				\item How many steps have been performed.
 			\end{enumerate}
-			The number of steps of the algorithm is controlled by $T$, which is the temperature. It starts with an initial high value, that decreases over time, until it reaches the minimum value of $T_{min}$. The generic behavior is shown in Algorithm \ref{alg:sa}.
+			The number of steps of the algorithm is controlled by $T$, which is called temperature. It starts with an initial high value, that decreases over time, until it reaches the minimum value of $T_{min}$. The generic behavior is shown in Algorithm \ref{alg:sa}.
 			
 			
 			\begin{algorithm}
@@ -47,9 +47,9 @@
 			\label{subsec:evolutionary_algorithms}
 			
 			Evolutionary Algorithms (EA) are a family of algorithms whose main inspiration is the biological evolution \cite{eiben03}. EAs use the reproduction, mutation, recombination and selection mechanisms, which play an important role in biological evolution.	
-			EAs maintain a population of individual solutions, which can be selected for reproduction. Selection is probabilistic and biased by the fitness of the individuals. In reproduction, two selected individuals exchange information about their solutions. This processed is called crossover and it creates two new solutions. Since the parents are promising solutions, with crossover we aim to create two new solutions that, hopefully, are promising as well. 
+			EAs maintain a population of individual solutions, which can be selected for reproduction. Selection is probabilistic and biased by the fitness of the individuals. In reproduction, two selected individuals exchange information about their solutions. This process is called crossover and it creates two new solutions. Since the parents are promising solutions, with crossover we aim to create two new solutions that, hopefully, are promising as well. 
 			Next, mutation slightly modifies the offspring. The application of the mutation operator is probabilistic and it aims to maintain diversity in the population.
-			In the last step, descendants replace the old population, and a new iteration starts.
+			In the last step, offsprings replace the old population, and a new iteration starts.
 			The general algorithm is presented in Algorithm \ref{alg:genetic_algorithm}.
 			\begin{algorithm}
 				\caption{General Evolutionary Algorithm}
@@ -72,7 +72,7 @@
 			
 		\section{Swarm Intelligence}
 		\label{subsec:swarm_intelligence}
-		The idea of swarm intelligence is to develop algorithms that model the behavior of a group of animals that engage in social interactions. Some examples are synchronous bird flocking, ants gathering food or fish shoals escaping from a predator \cite{si01}. In this sections we describe the Ant Colony Optimization (ACO) framework, which is inspired by the behavior of foraging ants searching for food.
+		The idea of swarm intelligence is to develop algorithms that model the behavior of a group of animals that engage in social interactions. Some examples are synchronous bird flocking, ants gathering food or fish shoals escaping from a predator \cite{si01}. In the following sections we describe the Ant Colony Optimization (ACO) framework, which is inspired by the behavior of foraging ants searching for food.
 		
 		\subsubsection*{Traveling Salesman Problem}
 		 The Traveling Salesman Problem (TSP) will be used to help explain the ACO algorithms described. We choose this problem, due to its relevance, and because it is a benchmark for all ACO algorithms.
@@ -101,7 +101,7 @@
 				
 				In ACO a problem is represented as a graph $G$ that artificial ants will cross when building solutions. $G$ is composed composed by a set of solution components $C$, connected by a set $E$ of edges. The specific composition of $G$ depends on the problem being solved.
 				 Using the TSP as an example, the cities that the salesman has to visit correspond to $C$ and the routes that he has to travel correspond to $E$.			
-				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that makes use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, it evaluates the (partial) solution.
+				In the \emph{ConstructSolutions()} procedure, each ant navigates the graph $G$, and constructs a solution. This solution is built incrementally by stochastic local decisions that make use of pheromone trails and heuristic information about the problem. Once an ant has built a solution, or while the solution is being built, it evaluates the (partial) solution.
 				
 				The \emph{UpdatePheromones()} is the process by which the pheromone trails are updated. The trails values can either increase, as ants deposits pheromone in the components or edges that they use, or decrease, due to pheromone evaporation. In practice, the deposit of pheromone trails increases the probability that those components/edges, which belonged to good solutions, will be selected again. Differently, pheromone evaporation implements a forgetting method: it avoids early convergence to a suboptimal region, therefore favoring exploration of new areas of the search space.
 				 
@@ -114,7 +114,7 @@
 					Ant System (AS) was first proposed in 1992 by Marco Dorigo \cite{dorigo92, dorigo96}.
 					Initially, the pheromone trails are initialized according to a simple rule: the initial value must be higher than the total amount of pheromone that an ant will deposit in one iteration. Heuristics to calculate this value are commonly used.
 
-					Each ant in AS, constructs a complete solution to the problem in question. For instance, in the TSP, an ant must construct a tour. At each construction step, an ant uses a probabilistic rule to decide which new component it should add to the current solution. Following \cite{dorigo96}, the probability with which ant $k$, currently at city $i$, chooses to go to city $j$ is given as follows:
+					Each ant in AS constructs a complete solution to the problem in question. For instance, in the TSP, an ant must construct a tour. At each construction step, an ant uses a probabilistic rule to decide which new component it should add to the current solution. Following \cite{dorigo96}, the probability with which ant $k$, currently at city $i$, chooses to go to city $j$ is given as follows:
 					\begin{equation}
 						\label{eq:prob_rule_for_choice}
 						p_{ij}^k = \frac{[\tau_{ij}]^\alpha[\eta_{ij}]^\gamma} {\sum_{l \in N_{i}^k} [\tau_{il}]^\alpha[\eta_{il}]^\gamma}, \quad j \in N_{i}^k,
@@ -122,7 +122,7 @@
 
 		\noindent where $\tau_{ij}$ is the pheromone trail in edge $(i,j)$, $\eta$ is an heuristic value that is problem related (e.g. for the TSP: $\eta = \frac{1}{d_{ij}}$, where $d_{ij}$ is the distance between city $i$ and city $j$), $N_i^k$ is the feasible neighborhood when the ant $k$ is in the node $i$ (e.g. in TSP is the set of cities that ant $k$ has not visited yet), $\alpha, \gamma$ are parameters of the algorithm. The $\alpha$ parameter determines the relative influence of the pheromone trail, and $\gamma$ determines the relative influence of the heuristic information.
 
-					After all ants have constructed their solutions, the pheromone trails must be updated. First, and if we consider pheromone evaporation \cite{dorigo96}, we must update the trail, taking into account the percentage of pheromone to evaporate:
+					After all ants have constructed their solutions, the pheromone trails must be updated. First, and if we consider pheromone evaporation \cite{dorigo96}, we must update the trail by taking into account the percentage of pheromone to evaporate:
 					\begin{equation}
 						\tau_{ij} = (1 - \rho)\tau_{ij}, \quad \forall(i,j)\in E,
 					\end{equation}
@@ -135,13 +135,13 @@
 					\end{equation}
 
 
-		\noindent where $\Delta\tau^k$ is usually calculated using $\frac{1} {L^k}$, where $L^k$ is the fitness of the solution of the $k^{th}$-ant.
+		\noindent where $m$ is the total number of ants, $\Delta\tau^k$ is calculated using $\frac{1} {L^k}$, where $L^k$ is the fitness of the solution of the $k^{th}$-ant.
 
 					This algorithm had a poor performance when applied to larger instances of optimization problems \cite{acobook}, like the TSP. Therefore, there have been attempts to improve the algorithm. Elitist Ant System(EAS) \cite{dorigo92, dorigo96}, Rank-Based Ant System($AS_{rank}$) \cite{bullnheimer97}, Ant Colony System \cite{dorigo97}, and Max-Min Ant System (MMAS) \cite{stutzle00} are the most relevant contributions.
 
 					\subsubsection*{Elitist Ant System}
 
-					The main idea behind EAS \cite{dorigo92, dorigo96} is that the edges belonging to the best solution found since the beginning of the algorithm should receive more pheromones. If we look into Eq. \eqref{eq:as_pheromone_update}, and add an additional parameter that reinforces pheromones if an edge belongs to the best tour so far \cite{dorigo92, dorigo96}, the final equation will be:
+					The main idea behind Elitist Ant System (EAS) \cite{dorigo92, dorigo96} is that the edges belonging to the best solution found since the beginning of the algorithm should receive more pheromones. Adding an additional parameter that reinforces pheromones if an edge belongs to the best tour so far to Eq. \eqref{eq:as_pheromone_update} \cite{dorigo92, dorigo96}, the final equation will be:
 					\begin{equation}
 						\label{eq:eas_pheromone_update}
 						\tau_{ij} = \tau_{ij} + \sum_{k=1}^{m}\Delta\tau_{ij}^k + e\Delta\tau^{bs},
@@ -151,7 +151,7 @@
 
 					\subsubsection*{Rank-Based Ant System}
 
-					In $AS_{rank}$ each ant deposits pheromones according to its rank, when compared to other ants of the colony. Besides, as in the EAS algorithm, the best-so-far-ant deposits an additional amount of pheromone.
+					In $AS_{rank}$ each ant deposits pheromones according to its rank, when compared to other ants of the colony. Besides the best-so-far-ant deposits an additional amount of pheromone.
 
 					Before the updating of pheromones, ants are sorted, by ascending order, of the quality of the current solution. In each iteration, only the $(w-1)$ best ranked ants, and the best ant so far, can deposit pheromone, where $w$ is a parameter. Thus, the $AS_{rank}$ pheromone update rule is as follow \cite{bullnheimer97}:
 					\begin{equation}
@@ -179,7 +179,7 @@
 						  \end{cases}
 					\end{equation}
 
-					\noindent where $q$ is a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\gamma$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search: around the \emph{best-so-far}, or explore other locations.
+					\noindent where $q$ is a uniformly distributed variable in the range $[0,1]$, $q_{0}, 0 \leq q_{0} \leq 1$, is a parameter, $P$ is a random variable selected according to Eq. \eqref{eq:prob_rule_for_choice}, and $\gamma$ is a parameter. The $q_{0}$ parameter defines the degree of exploration and the choice of whether to concentrate the search around the \emph{best-so-far}, or explore other locations.
 
 
 					\subsubsection*{$\mathcal{MAX}-\mathcal{MIN}$ Ant System}
@@ -216,7 +216,7 @@
 					
 					\subsubsection*{Ant Colony Optimization for continuous domains}
 					ACO algorithms were originally proposed to solve discrete problems. Yet there are problems that are not discrete. Thus, and trying to keep the biological inspiration, there are some proposals to solve continuous problems using an ACO framework. 
-					Here we present one of the main approaches, proposed by Socha et al.\cite{socha04}. For other alternatives in ACO for continuous problems the reader might see \cite{bilchev95, kong06, tsutsui04}.
+					Here we present one of the main approaches, proposed by Socha et al.\cite{socha04}. For other alternatives in ACO for continuous problems see \cite{bilchev95, kong06, tsutsui04}.
 					
 					
 					\subsubsection*{Ant Colony Optimization for continuous and Mixed-Variable Optimization}

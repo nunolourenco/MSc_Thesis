@@ -3,24 +3,25 @@
 
 Challenging optimization problems occur in many science and engineering fields. In the Chemistry field, the problem of finding the lowest energy configuration of an atomic/molecular cluster is one example of these type of problems. For example, it seems that the native structure of a protein is related with the lowest energy configuration of atoms that composes it. If the structure could be effectively and reliably derived from the amino-acid sequence, this knowledge would provide new insights into the nature of protein folding. Such insights would be helpful, for example, for the development of drugs by pharmaceutical companies \cite{wales97}.
 
-The problem of finding the lowest energy configuration of an atomic/molecular cluster is usually designated by \emph{Cluster Geometry Optimization}. This problem studies how should a set of atoms/molecules be placed in a 3-dimensional space, to get the minimal configuration energy. During the last years, some efforts have been made to develop effective algorithms for this type of problem.
+The problem of finding the lowest energy configuration of an atomic/molecular cluster is usually designated by \emph{Cluster Geometry Optimization}. It addresses how should a set of atoms/molecules be placed in a 3-dimensional space, to get the minimal configuration energy. During the last years, some efforts have been made to develop effective algorithms for this type of problem.
 
-In this dissertation we report Discrete Ant Colony Cluster Optimization (DACCO), a discrete Ant Colony Optimization algorithm for the problem of cluster geometry optimization. Firstly DACCO starts by discretizing the problem, because it is continuous. Secondly, the ants belonging to the colony build possible solutions. Then, these solutions are moved to the continuous space using a local optimization procedure and are evaluated. After this, the solutions are moved again to the discrete space, so that we can update the pheromone matrix. This process is repeated for several iterations.
+In this dissertation we present Discrete Ant Colony Cluster Optimization (DACCO), a discrete Ant Colony Optimization algorithm, for the problem of cluster geometry optimization. Ant Colony algorithms powerful metaheuristics for discrete optimization and, in this work, we propose a novel approach to apply them to continuous domains. Firstly, DACCO discretizes the the domain. Then, the ants belonging to the colony build possible solutions in the discrete domain. Thirdly, these solutions are moved back to the continuous space using a local optimization procedure and are evaluated. This process is repeated for several iterations.
 
-To complement this work we present a state-of-art, where we focus our attention in: algorithms that have been applied to the cluster geometry optimization problem; and Ant Colony Optimization algorithms.
-
-The remainder of this document is the following: the next section presents the contributions of this work. In the next chapter we introduce the problem of cluster geometry optimization. In Chapter \ref{chap:opt_alg} we describe some optimization algorithms, and highlight the main achievements in what concerns their application to cluster geometry optimization. In Chapter \ref{chap:dacco} we detail the DACCO framework. Chapter \ref{chap:results} presents results of the application of DACCO to the problem of cluster geometry optimization. Finally, Chapter \ref{chap:conclusions} gathers the main conclusions and points towards possible future work.
+To complement this work we review the state-of-art of approaches to the problem, by focusing in algorithms that have been applied to the cluster geometry optimization problem.
 
 
 \section{Contributions}
 
-As every research work we expect to make contributions to the actual state-of-art. The contributions of this work can be summed into into three main points. 
+The contributions of this work can be summed up into into three main points. 
+\begin{itemize}
+	\item We propose an ant colony algorithm that discretizes a continuous problem and allows the application of well-known discrete variants to solve it. The approach comprises a set of mechanism that help to map solutions from one space in another.
 
-First the proposed approach itself. We present an algorithm that discretizes a continuous problem, so that it could work with a discrete variant of the Ant Colony Optimization algorithms . This led to an hybrid approach, that worked in both discrete and continuous spaces.
+	\item Second, the proposed approach was implemented and tested. The resulting framework can be parameterized, and it has diagnostic tools in order to assess what is happening during the evolution process. 
 
-Second, the proposed approach was implemented and tested. The resulting framework can be parameterized, and it has diagnostic tools in order to assess what is happening during the evolution process. 
+	\item Finally, we performed a set of experiments with the proposed approach. These experiments allowed us to make some conclusions about its effectiveness. The conclusions focus on the individual results, and on the comparison with other approaches proposed in the literature.
 
-Finally, we performed a set of experiments with the proposed approach. These experiments allowed us to make some conclusions about its effectiveness. The conclusions focus on the individual results, and on the comparison with other approaches proposed in the literature to the problem.
+\end{itemize}
 
-
+\section{Structure of the dissertation}
+The remainder of this document is as follows: In the next chapter we introduce the problem of cluster geometry optimization. In Chapter \ref{chap:opt_alg} we describe some optimization algorithms, and highlight the main achievements in what concerns their application to cluster geometry optimization. In Chapter \ref{chap:dacco} we detail the DACCO framework. Chapter \ref{chap:implementation} we present some technical aspects of this work. Chapter \ref{chap:results} presents results of the application of DACCO to the problem of cluster geometry optimization. Finally, Chapter \ref{chap:conclusions} gathers the main conclusions and points towards possible further work.
 

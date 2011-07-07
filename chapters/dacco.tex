@@ -2,28 +2,27 @@
 \chapter{DACCO: Discrete Ant Colony Cluster Optimization}
 \label{chap:dacco}
 
-In this chapter we present DACCO, the ACO algorithm that we used to tackle the problem of Cluster Geometry Optimization. In this dissertation we are interested in developing an effective ACO approach to the problem of cluster geometry optimization. Yet, ACO algorithms were officially proposed for discrete environments and currently there are many variants that are state-of-art methods for different combinatorial optimization problems. Despite a few research efforts \cite{bilchev95, kong06, socha04, tsutsui04}, existing ACO algorithms to continuous domains are somehow incipient, particularly if compared with the most well-known discrete variants such as $\mathcal{MAX}-\mathcal{MIN}$ Ant System or ACS. Hence, in our research we decide to discretized our problem in order to use a discrete variant of ACO. Fig. \ref{fig:dacco_approach} presents and overview of the framework that we propose.  
+In this chapter we present DACCO, the ACO algorithm that we used to tackle the problem of Cluster Geometry Optimization. In this dissertation we are interested in developing an effective ACO approach to the problem of cluster geometry optimization. Yet, ACO algorithms were officially proposed for discrete environments and currently there are many variants that are state-of-art methods for different combinatorial optimization problems. Despite a few research efforts \cite{bilchev95, kong06, socha04, tsutsui04}, existing ACO algorithms to continuous domains are somehow incipient, particularly if compared with the most well-known discrete variants such as $\mathcal{MAX}-\mathcal{MIN}$, Ant System or ACS. Hence, in our research we decided to discretize our problem in order to use a discrete variant of ACO. Fig. \ref{fig:dacco_approach} presents an overview of the framework that we propose.  
 
 \botapic[0.45]{dacco_approach}{Overview of DACCO framework}
+A mapping operator converts the original search space into a discrete version. Then, the ACO algorithm builds the solutions in the \emph{Discrete-Space}. After, the application of \emph{Local Optimization} converts the solutions back to the \emph{Continuous Space} where they are evaluated. Finally, the \emph{Mapping} operator will convert the evaluated solutions to the discrete space to allow the pheromone update.
 
-The ACO algorithm will build the solutions in the \emph{Discrete-Space}. After, and using \emph{Local Optimization} each solution will be converted to the \emph{Continuous Space} where it will evaluated. Then the \emph{Mapping} will convert the solutions to the discrete space.
-
-This framework poses some interesting research questions that will be addressed:
+This framework poses some interesting research questions that will be addressed in the next sections:
 \begin{enumerate}
-	\item Model a real-valued problem in a such a way that it can be solved by a discrete ACO algorithm (\emph{Mapping});
+	\item How to model a real-valued problem in a such a way that it can be solved by a discrete ACO algorithm (\emph{Mapping});
 	\item Study the performance of an ACO algorithm in a problem that was not originally discrete;
 \end{enumerate}
 
-The variant that we were inclined to use was the $\mathcal{MAX}-\mathcal{MIN}$ Ant System \cite{stutzle00}, since it was one of the most successful approaches of the ACO.  However, it has some drawbacks:
+DACCO follows the $\mathcal{MAX}-\mathcal{MIN}$ Ant System \cite{stutzle00}, since it was one of the most successful ACO approaches. However, $\mathcal{MAX}-\mathcal{MIN}$ has some drawbacks:
 \begin{enumerate}
-	\item Definition of the initial values to the pheromone limits;
+	\item It might be difficult to define the initial values to the pheromone limits;
 	\item Readjust the limits every time a new best solution is found; 
 	\item The decision in what ant to use to update the pheromones;
 \end{enumerate}
 
-To overcome these drawbacks, Blum et al. \cite{blum04}, proposed a variant of the $\mathcal{MAX}-\mathcal{MIN}$ Ant System called Hyper-Cube Framework (HCF). In the HCF the pheromones values are always kept in the interval [0,1]. Hence, we do not have to define an initial limit to the pheromones neither readjust them every time we find a new best solution. Furthermore, the rule to update pheromones in \cite{blum04} uses more than one ant in the updates. They use weights to adjust the relative influence of each ant to the pheromone values. These weights depend on the state of the algorithm.
+To overcome these drawbacks, DACCO incorporates the modifications proposed by the Hyper-Cube Framework (HCF) \cite{blum04}. In the HCF the pheromones values are always kept in the interval [0,1]. Hence, we do not have to define an initial limit to the pheromones neither readjust them every time we find a new best solution. Furthermore, the rule to update pheromones in \cite{blum04} uses more than one ant. They use weights to adjust the relative influence of each ant to the pheromone values. These weights depend on the state of the algorithm.
 
-Taking into account all elements aforementioned, our final choice fell to the HCF, with some modifications, in order to adapt it to our problem. The main modifications are:
+DACCO is not an exact $\mathcal{MAX}-\mathcal{MIN}$ / HCF variant as it incorporates some modifications, in order to adapt it to our problem. The main modifications are:
 \begin{enumerate}
 	\item The pheromone update rule does not deposit all the pheromone in one position;
 	\item We only use two ants to update the pheromones.
@@ -55,7 +54,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 	
 	\subsection{Construction of Search Space}
 	
-	In this procedure we discretized the search space, so that we can built a graph $G$ where the artificial ants can work.
+	In this procedure we discretize the search space, so that we can build a graph $G$ where the artificial ants can work.
 	The search space is defined by a cube of size $N^{(1/3)}$, where $N$ is the number of atoms, as depicted in Fig. \ref{fig:cube1}. To transform it we decided to divide the cube of Fig. \ref{fig:cube1} into smaller cubes to which we gave the name of \emph{cells}. These cells have to be large enough to contain one atom, but small enough to avoid having more than one atom. The final result of this transformation is depicted in Fig. \ref{fig:cube2}.  
 	
 	\botapic[0.25]{cube1}{Search Space}
@@ -82,20 +81,20 @@ In the next sections we present a high level overview of our entire algorithm. T
 		\end{algorithmic}
 	\end{algorithm}
 
-	In the first instruction we begin by defining an empty search space. Then we define the maximum coordinate of our problem. It is important to say that our cube is only defined in the positive side of the xx, yy, zz axis (Fig. \ref{fig:cube1}). After this we calculate the center of each cell in terms of (x,y,z) components and add it to the new search space. 
+	In the first instruction we begin by defining an empty search space. Then we define the maximum coordinate of our problem. It is important to say that our cube is only defined in the non-negative side of the xx, yy, zz axis (Fig. \ref{fig:cube1}). After this we calculate the center of each cell in terms of (x,y,z) components and add it to the new search space. 
 	The return value is the discretized search space.
 	
 	The cells that are part of the discretized search space are then used as components $C$ of $G$ that the ants use to build solutions. The edges $E$ are arcs connecting all the components of the graph. In the following sections we will use the name \emph{cells} indistinctively.
 	
 	\subsection{Initialize Pheromones}
-	Before we start the optimization process, we need to initialize the pheromone matrix. This matrix contains the information about the quantity of pheromones of a certain path, and therefore it plays an important role in process of building solutions. For example, in the TSP the pheromone matrix contains information about how many times a certain path from city $i$ to city $j$ has been transversed.\\
-	Although in cluster geometry optimization problems what is important is the position of atoms in space, and not the order in which they are placed. Therefore in DACCO, we are not interested in building paths, but place atoms in cells. Thus, instead of having information about how many times we have gone from cell $i$ to cell $j$, we have information about the desirability of having a certain component $i$ or $j$ in a solution.
+	Before we start the optimization process, we need to initialize the pheromone matrix. This matrix contains the information about the quantity of pheromones of a certain path, and therefore it plays an important role in process of building solutions. For example, in the TSP the pheromone matrix contains information about how many times a certain path from city $i$ to city $j$ has appear in a good solution.\\
+	In cluster geometry optimization problems what is important is the position of atoms in space, and not the order in which they are placed. Therefore in DACCO, we are not interested in building paths, but place atoms in cells. Thus, instead of having information about how many times we have gone from cell $i$ to cell $j$, we have information about the desirability of having a certain component $i$ in a solution (i.e. placing an atom in a cell $i$).
 	
 	In the beginning of the algorithm, all the cells have the same desirability of being in a solution, and for that reason we initialize the pheromone matrix with the value of $0.5$, as in \cite{blum04}.
 	
 	
 	\subsection{Construction of Solutions}
-	The construction of ant solutions is achieved by the method Construct Solutions. An ant solution corresponds to a complete atomic cluster. The algorithm starts by defining a start position for the ant, thus we have to place the ant in a cell of our search space. Then the ant calculates which are the neighbors of it, and chooses, in a probabilistic way, a new cell to move. After it knows which cell is the next, it places the atom in the center of the current cell, add it to solution, and moves to next one. This process is repeated until each ant has a cluster with all the atoms in place. The general algorithm that defines this construction process is detailed in Alg. \ref{alg:construct_solutions}.
+	The construction of solutions is achieved by the method Construct Solutions. An ant solution corresponds to a complete atomic cluster. The algorithm starts by defining a start position for the ant, thus we have to place the ant in a cell of our search space. Then the ant calculates which are the neighbors of it, and chooses, in a probabilistic way, a new cell to move. After it knows which cell is the next, it places the atom in the center of the current cell, adds it to solution, and moves to next one. This process is repeated until each ant has a cluster with all the atoms in place. The general algorithm that defines this construction process is detailed in Alg. \ref{alg:construct_solutions}.
 	
 	\begin{algorithm}
 		\caption{Construct Solutions}
@@ -103,7 +102,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 		\begin{algorithmic}
 		\STATE Given an ant \bf{do}:
 		\STATE $placed\_elements = 1$
-		\WHILE{$placed\_elements < (N - 1)$}
+		\WHILE{$placed\_elements < N$}
 			\STATE $neighbors = find\_feasible\_neighborhood(ant)$
 			\STATE $next\_cell = find\_next\_cell(ant, neighbors, pheromone\_matrix)$
 			\STATE $ant.solution[placed\_elements] = Atom(ant.current\_cell)$
@@ -115,10 +114,10 @@ In the next sections we present a high level overview of our entire algorithm. T
 	
 	In the end of Alg. \ref{alg:construct_solutions} an ant will have built a complete atomic cluster.
 	
-	We now focus our attention in some of the procedures used:\\ the $find\_feasible\_neighborhood()$ and $find\_next\_cell()$. 
+	In the following we explain:\\ the $find\_feasible\_neighborhood()$ and $find\_next\_cell()$. 
 	
 		\subsubsection*{Find Feasible Neighborhood}
-		This procedure determines the cells that are available in the neighbor of the current position of an ant. To find this neighbors, we used some different techniques:
+		This procedure determines the cells that are available in the neighbor of the current position of an ant. To find these neighbors, we used some different techniques:
 		\begin{enumerate}
 			\item Moore Neighborhood
 			\item Convex Hull
@@ -143,14 +142,11 @@ In the next sections we present a high level overview of our entire algorithm. T
 				\label{alg:convex_hull}
 				\begin{algorithmic}
 				\STATE Given a partial solution of an ant \bf{do}:
-				\STATE $M = \{\}$
-				\STATE $neighbors = \{\}$
 				\STATE $ch = find\_convex\_hull(partial\_solution)$
-				\STATE $ch\_size = length(ch)$
-				\FOR{$i = 1 \to ch\_size$}
+				\FOR{$i = 1 \to length(ch)$}
 					\FORALL{cells $CL$ of $discretized\_search\_space$}
 						\IF{$(distance(CL, segment(ch[i-i], ch[i])) = 1$}
-							\STATE $neighbors += CL$
+							\STATE $neighbors = neighbors \cup CL$
 						\ENDIF
 					\ENDFOR
 				\ENDFOR
@@ -162,7 +158,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			The $remove\_repeated\_cells()$ procedure removes the repeated cells that are in the M set, since one cell can be in more the one atom neighborhood.
 			The M set will then be used to determine which cell should be added to the solution.
 
-			This technique uses the information of all the atoms that had already been placed, but it demands a lot of computational resources. Every time we place a new atom we have to calculate the Convex Hull of the current partial solution. This, together with the additional time on the calculus of the distance of all cells to the segments, made us look for other alternatives.
+			This technique uses the information of all the atoms that had already been placed, but it demands a lot of computational resources. Every time we place a new atom we have to calculate the Convex Hull of the current partial solution. This, together with the additional time on the calculus of the distance of all cells to the segments, we decided to consider other alternatives.
 			
 			\paragraph*{Full Moore Neighborhood}
 			This technique was another attempt to use information about the partial constructed cluster. Here we iterate by all atoms that are in the partial solution, and we look for the neighbors of them. The neighborhood that we use is the Moore neighborhood with the same $r$ for all the atoms. The general idea is depicted in Fig. \ref{fig:all_neighbors}. We use a 2D representation for simplicity. The following algorithm gives more details about this technique:
@@ -172,11 +168,9 @@ In the next sections we present a high level overview of our entire algorithm. T
 				\label{alg:all_atom_neighbors}
 				\begin{algorithmic}
 				\STATE Given a partial solution of an ant \bf{do}:
-				\STATE $M = \{\}$
-				\STATE $neighbors = \{\}$
-				\FOR{$i = 1 \to ch\_size$}
+				\FOR{$i = 1 \to length(ch)$}
 					\FORALL{atoms $AT$ of $partial\ solution$}
-						\STATE $neighbors += Moore\_Neighborhood(AT)$
+						\STATE $neighbors = neighbors \cup Moore\_Neighborhood(AT)$
 					\ENDFOR
 				\ENDFOR
 				\STATE $M = remove\_repeated\_cells(neighbors)$
@@ -195,7 +189,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			p_j = \frac{[\tau_j]^\alpha} {\sum_{l \in M} [\tau_l]^\alpha}
 		\end{equation}
 		
-		Providing all values of the rule function are stored in $V$, the iterative cell selection is determined by a roulette wheel algorithm.: each value of the $V$ determines a slice on a circular roulette wheel. Next, the wheel is spun and the cell to which the marker points is chosen as the next cell for the ant. 
+		Providing all values of the rule function are stored in an certain set $V$, the iterative cell selection is determined by a roulette wheel algorithm.: each value of the $V$ determines a slice on a circular roulette wheel. Next, the wheel is spun and the cell to which the marker points is chosen as the next cell for the ant. 
 		In Alg. \ref{alg:find_next_cell} we detail the find next cell procedure, and in Alg. \ref{alg:roulette_wheel} we detail the roulette wheel selection method. 
 		
 			\begin{algorithm}
@@ -204,7 +198,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 				\begin{algorithmic}
 				\STATE Given a set $M$ of candidate cells \bf{do}:
 				\FORALL{cells in $M$}
-						\STATE $V =$ Apple Eq. \ref{eq:prob_rule} the probability of each cell
+						\STATE $V =$ Apply Eq. \ref{eq:prob_rule} the probability of each cell
 				\ENDFOR
 				\RETURN $roullete\_wheel(V)$
 				\end{algorithmic}
@@ -230,7 +224,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			
 			\subsection{Evaluate Solution in Continuous Space}
 			
-			The evaluation of the solutions, which were built by the ants, is made in this procedure. Since we have the atoms in the center of the cell, which are represented by $(x,y,z)$, where x, y, z $\in \mathbb{R}$, we do not have to make any additional computation to pass from the discretized space to the continuous space.
+			The evaluation of the solutions built by the ants is made in this procedure. Since we have the atoms in the center of the cell, which are represented by $(x,y,z)$, where x, y, z $\in \mathbb{R}$, we do not have to make any additional computation to pass from the discretized space to the continuous space.
 			
 			The evaluation of the solutions proceeds in two steps. First, the Broyden-Fletcher-Goldfarb-Shannon (L-BFGS) quasi-Newton method \cite{liu89} move the solution to the nearest local optimum. Then equation \ref{eq:morse_potential} is used to determine the potential energy of the resulting cluster.
 
@@ -238,20 +232,18 @@ In the next sections we present a high level overview of our entire algorithm. T
 						
 			\subsection{Convert Solutions to Discrete Space}
 			In this procedure we convert the solutions, which were returned by Evaluate Solutions in Continuous Space procedure, to the discrete space. This is very important, because the solutions returned after their evaluation are different from the ones that were given as parameters.
-			To convert the cluster to the discretized space, we apply the following algorithm: given a certain atom, we calculate the distance of this atom to all centers of the cells in the space, and the cell that is closer the atom, will be the one that will hold it. This process is detailed in Alg. \ref{alg:convertion_discrete}.
+			To convert the cluster to the discretized space, we apply the following algorithm: given a certain atom, we move it to center of the nearest cell. This process is detailed in Alg. \ref{alg:convertion_discrete}.
 			
 			\begin{algorithm}
 				\caption{Convert Solution to Discrete Space}
 				\label{alg:convertion_discrete}
 				\begin{algorithmic}
 				\STATE Given a solution $CS$ in the continuous space \bf{do}:
-				\STATE $discrete\_solution = \{\}$
 				\FORALL{atoms $AT$ of $CS$}
-						\STATE $distances = \{\}$
 						\FORALL{cels $CL$ of $discretized\ space$}
 								\STATE $distances[AT][CL] = distance(AT, CL)$
 						\ENDFOR
-						\STATE $discrete\_solution += min\_dist\_cell(AT, distances)$
+						\STATE $discrete\_solution = discrete\_solution \cup min\_dist\_cell(AT, distances)$
 				\ENDFOR
 				\RETURN $discrete\_solution$
 				\end{algorithmic}
@@ -289,17 +281,9 @@ In the next sections we present a high level overview of our entire algorithm. T
 				\end{algorithmic}
 			\end{algorithm}		
 			
-			The $local\_search\_iterations$ are the number of iterations that we make to try improve the solutions.
-
-			The $random\_cell()$ procedure returns a random cell that belongs to the search space, and that is not already occupied.
-
-			The $is\_better()$ procedure checks if the first solution is better than the second one.
+			The $local\_search\_iterations$ are the number of iterations that we make to try improve the solutions.	The $random\_cell()$ procedure returns a random cell that belongs to the search space, and that is not already occupied.mThe $is\_better()$ procedure checks if the first solution is better than the second one.
 			\subsection{Update Pheromone Values}
-			This procedure is responsible for the update of the pheromones. 
-
-			We start by decrease the current values of the pheromones, in a certain percentage, simulating the pheromone evaporation in the nature.
-
-			After, to deposit pheromones we follow the rule presented in \cite{blum04} with some minor differences. In the cited approach, they used 3 ants to update the trails:
+			This procedure is responsible for the update of the pheromones. We start by decreasing the current values of the pheromones, in a certain percentage, simulating the pheromone evaporation in the nature. After we follow the rule presented in \cite{blum04} to deposit pheromones, with some minor differences. In the cited approach, they used 3 ants to update the trails:
 			\begin{enumerate}
 				\item \emph{Iteration-best ant} - which corresponds to the best ant in the current iteration of the algorithm;
 				\item \emph{Restart-best ant} - which corresponds to the best ant found since the restart of the algorithm
@@ -308,7 +292,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			
 			However, in our approach we do not have a restart mechanism, thus we do not need to use the restart-best ant. 
 
-			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and require a lot of experimentation. However in the HCF, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measure by the weights that we assign to each one. The final rule to update pheromones is depicted by the following:
+			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and it requires a lot of experimentation. However in the HCF, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measured by the weights that we assign to each one. The final rule to update pheromones is depicted by the following:
 			\begin{equation}
 				\tau = \tau + \omega
 			\end{equation}
@@ -320,11 +304,13 @@ In the next sections we present a high level overview of our entire algorithm. T
 			\end{equation}
 			where, $w_{ib}$ is the weight of the iteration-best ant, $F_{ib}$ is the quality of the iteration-best ant, $w_{gb}$ is the weight of the global-best ant, $F_{gb}$ is the quality of the global best ant, and $w_{ib} + w_{gb} = 1$.
 			
-			After the update is applied, pheromone values that exceed $\tau_{max}$ are set back to $\tau_{max}$. The similar process is applied to $\tau_{min}$.
+			After the update is applied, pheromone values that exceed $\tau_{max}$ are set back to $\tau_{max}$. A similar process is applied to $\tau_{min}$.
 
-			The final important aspect of the pheromone update rule is that the pheromones are not deposit in only cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig. \ref{fig:propagation}). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$. Such aspect is important to maintain a homogeneous pheromone matrix.
+			The final important aspect of the pheromone update rule is that the pheromones are not deposited in only in one cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig. \ref{fig:propagation}). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$. Such aspect is important to smooth the transitions between components.
 			
 		\botapic[0.7]{propagation}{Pheromone Propagation}	
+		
+		In appendix \ref{chap:implementation} we provide information about some technical decisions related with the implementation of this approach.
 			
 			
 			
