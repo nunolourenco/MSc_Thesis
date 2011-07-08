@@ -1,33 +1,35 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[12pt,a4paper]{book}
 
 
 \usepackage{mystyle}
 \usepackage{pdflscape}
 \usepackage{rotating}
+\hypersetup{
+	breaklinks=true,%
+   	colorlinks,%
+   	citecolor=black,%
+   	filecolor=black,%
+   	linkcolor=black,%
+   	urlcolor=black
+}
+
+
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
 \begin{document}
+	\fancyhead[L]{}
 	\pagenumbering{roman}
 	\input{"chapters/title"}
-	
-	\begin{abstract}
-		The problem of cluster geometry optimization is relevant for many areas from protein structure prediction to the field of nanotechnology. A cluster is an aggregate of interacting atoms or molecules and it can hold a few or even millions of elements. Finding the organization for the \mbox{atoms/molecules} that has the lowest potential energy is an NP-hard problem. In this dissertation we propose an approach based on Swarm Intelligence algorithms. In particular we describe the application of an algorithm based on Ant Colony Optimization to the cluster geometry optimization problem.
-		Results are promising, since the the proposed approach is able to discover almost all the best-known solutions for short-ranged Morse clusters between 30 and 50 atoms. A comparative analysis with some state-of-art algorithms is presented and it shows that our approach can be as effective as the state-of-art algorithms. Moreover we perform an experimental analysis to understand the effect of algorithms components in the overall performance.
-		
-		
-		
-		
-		\textbf{Keywords:} Cluster geometry optimization, Morse Cluster, Swarm Intelligence, Ant Colony Optimization
-	\end{abstract}
+	\input{"chapters/abstract"}
 	\tableofcontents
 	\listoffigures
 	\listoftables
 	\pagebreak
 	\pagenumbering{arabic}
 	\input{"chapters/introduction"}
-	\input{"chapters/atomic_clusters"}
+	\input{"chapters/cgo"}
 	\input{"chapters/optimization_of_clusters"}
 	\input{"chapters/dacco"}
 	\input{"chapters/results"}

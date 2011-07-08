@@ -1,18 +1,17 @@
 %!TEX root = /Users/nunolourenco/Documents/FCTUC/Mestrado/2010_2011/Thesis/Thesis/thesis.tex
 \chapter{Introduction}
-
 Challenging optimization problems occur in many science and engineering fields. In the Chemistry field, the problem of finding the lowest energy configuration of an atomic/molecular cluster is one example of these type of problems. For example, it seems that the native structure of a protein is related with the lowest energy configuration of atoms that composes it. If the structure could be effectively and reliably derived from the amino-acid sequence, this knowledge would provide new insights into the nature of protein folding. Such insights would be helpful, for example, for the development of drugs by pharmaceutical companies \cite{wales97}.
 
 The problem of finding the lowest energy configuration of an atomic/molecular cluster is usually designated by \emph{Cluster Geometry Optimization}. It addresses how should a set of atoms/molecules be placed in a 3-dimensional space, to get the minimal configuration energy. During the last years, some efforts have been made to develop effective algorithms for this type of problem.
 
-In this dissertation we present Discrete Ant Colony Cluster Optimization (DACCO), a discrete Ant Colony Optimization algorithm, for the problem of cluster geometry optimization. Ant Colony algorithms powerful metaheuristics for discrete optimization and, in this work, we propose a novel approach to apply them to continuous domains. Firstly, DACCO discretizes the the domain. Then, the ants belonging to the colony build possible solutions in the discrete domain. Thirdly, these solutions are moved back to the continuous space using a local optimization procedure and are evaluated. This process is repeated for several iterations.
+In this dissertation we present Discrete Ant Colony Cluster Optimization (DACCO), a discrete Ant Colony Optimization algorithm, for the problem of cluster geometry optimization. Ant Colony algorithms are powerful metaheuristics for discrete optimization and, in this work, we propose a novel approach to apply them to continuous domains. Firstly, DACCO discretizes the domain. Then, the ants belonging to the colony build possible solutions in the discrete domain. Thirdly, these solutions are moved back to the continuous space using a local optimization procedure and are evaluated. This process is repeated for several iterations.
 
-To complement this work we review the state-of-art of approaches to the problem, by focusing in algorithms that have been applied to the cluster geometry optimization problem.
+To complement this work we review the state-of-art approaches to the problem, by focusing in algorithms that have been applied to the cluster geometry optimization problem.
 
 
 \section{Contributions}
 
-The contributions of this work can be summed up into into three main points. 
+The contributions of this work can be summed up into into three main points:
 \begin{itemize}
 	\item We propose an ant colony algorithm that discretizes a continuous problem and allows the application of well-known discrete variants to solve it. The approach comprises a set of mechanism that help to map solutions from one space in another.
 
@@ -23,5 +22,5 @@ The contributions of this work can be summed up into into three main points.
 \end{itemize}
 
 \section{Structure of the dissertation}
-The remainder of this document is as follows: In the next chapter we introduce the problem of cluster geometry optimization. In Chapter \ref{chap:opt_alg} we describe some optimization algorithms, and highlight the main achievements in what concerns their application to cluster geometry optimization. In Chapter \ref{chap:dacco} we detail the DACCO framework. Chapter \ref{chap:implementation} we present some technical aspects of this work. Chapter \ref{chap:results} presents results of the application of DACCO to the problem of cluster geometry optimization. Finally, Chapter \ref{chap:conclusions} gathers the main conclusions and points towards possible further work.
+The remainder of this document is as follows: In the next chapter we introduce the problem of cluster geometry optimization. In Chapter \ref{chap:opt_alg} we describe some optimization algorithms, and highlight the main achievements in what concerns their application to cluster geometry optimization. In Chapter \ref{chap:dacco} we detail the DACCO framework. Chapter \ref{chap:results} presents results of the application of DACCO to the problem of cluster geometry optimization. Finally, Chapter \ref{chap:conclusions} gathers the main conclusions and points towards possible further work.
 

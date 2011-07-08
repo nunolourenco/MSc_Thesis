@@ -235,9 +235,7 @@
 						
 						After the evaluation process we have to update the pheromone values. Hence we have to reinforce the influence of functions that lead to good solutions, and reduce the the influence of the function that lead to not so good solutions. The reinforcement can be achieved by adding a new PDF function, and the decrease can be achieved by removing PDFs from the kernel mixture.				
 						For more details in the algorithm see \cite{socha04,socha08}.
-					
-	\pagebreak
-			
+								
 	\section{Cluster Geometry Optimization}
 		\label{subsec:cgo}
 		Here we present some algorithms that were proposed in the literature to tackle the problem of Cluster Geometry Optimization, using the Morse potential as a benchmark function.
@@ -257,4 +255,5 @@
 		
 		More recently, Lourenço et al. \cite{lourenco11} proposed a Particle Swarm Optimization algorithm to the problem of cluster geometry optimization. The proposed algorithm has several features that were specifically design to tackle this problem. The most noteworthy are: the adoption of specific rules to update current position of particles, where the velocity is only applied to fraction of the solution; and the embracing of a steady-state strategy to update the population particles. This strategy allows for a simultaneous exploration of the neighborhoods of the current locations, and of the best ever seen solutions. Additionally it has a diversity mechanism, to postpone convergence.
  		The results presented showed that the algorithm was able to find all the best-known solutions to short-ranged Morse instances between 30 and 50 atoms.
+
 		

@@ -2,10 +2,7 @@
 \chapter{Results}
 \label{chap:results}
 
-In this chapter we present an experimental analysis of the application of our algorithm to several instances of short-ranged Morse Clusters. To perform such analysis, we start by describing the scenario used in our experiments. In Section \ref{sec:experimental_setting} we introduce the parameters used in the algorithm, and in Section \ref{sec:statistical_analysis} we present the hypothesis that we considered in the comparative analysis. In Section \ref{sec:experimental_results} we present and discuss the results obtained. Finally, in Section \ref{sec:detailed_analysis} we present a detailed analysis of some main components of the algorithm.
-
-
-
+In this chapter we present an experimental analysis of the application of our algorithm to several instances of short-ranged Morse Clusters. To perform such analysis, we start by describing the scenario used in our experiments. In Section \ref{sec:experimental_results} we present and discuss the results obtained by the DACCO algorithm. In Section \ref{sec:algorithm_comparison} we present a comparative analysis between DACCO and other approaches of the literature. Finally, in Section \ref{sec:detailed_analysis} we present a detailed analysis of some main components of the algorithm.
 
 \section{Experimental Scenario}
 \label{sec:experimental_scenario}
@@ -20,20 +17,14 @@ In this study we focus our attention in several instances of short-ranged Morse 
 		\item Ability to discover the known optima;
 		\item Mean Best Fitness (MBF) and deviation from the optimum;
 	\end{enumerate}
-	
-	The first criterion is a widely adopted performance measure in cluster geometry optimization. Hence, for all instances, we show its success rate(number of times that it found the best-known solution) of the algorithm. In case it does not find the best-known solution we present the best solution found by the algorithm.
-	The second criterion aims to complement our study, as it will provide information about the ability of DACCO to converge to promising areas of the search space.
-	
+	The first criterion is a widely adopted performance measure in cluster geometry optimization. Hence, for all instances, we show its success rate(number of times that it found the best-known solution) of the algorithm. In case it does not find the best-known solution we present the best solution found by the algorithm. The second criterion aims to complement our study, as it will provide information about the ability of DACCO to converge to promising areas of the search space.\\
 	Later, to assess the absolute performance of the DACCO, we compare its results with those achieved by two algorithms: a steady-state EA described in Pereira et al. \cite{xico09}, and the Particle Swarm Optimization algorithm (PSO) described in Lourenço et al. \cite{lourenco11}.
 	
-\section*{Experimental Settings}
-\label{sec:experimental_setting}
-
+\section*{Experimental Settings} \label{sec:experimental_setting}
 Table \ref{tab:general_settings} lists the general parameters used in all of the experiments. We performed a total of 30 runs to make possible a statistical analysis. In each run we allowed our algorithm to perform 5000000 evaluations. It is important to refer that each iteration made by L-BFGS procedure counts as one evaluation. 
 
 The size of the population depends on the size of the cluster being optimized. This parameter was set based on the reviewed literature, and some preliminary tests. The cell size ($W$) corresponds to size of each cell in our search space. The neighborhood used is the Moore neighborhood with $r = 3$. The number of iterations in the discrete local search is 10. The $\alpha$ value was set to 4, following the reviewed literature, and after the analysis of some preliminary results.
-
-\begin{table}[!htbp]
+\begin{table}[!htdp]
 	\begin{center}
 		\begin{tabular}{| l | p{8cm} |}
 			\hline
@@ -57,8 +48,6 @@ The size of the population depends on the size of the cluster being optimized. T
 	\label{tab:general_settings}
 	\end{center}
 \end{table}
-\pagebreak
-
 \section*{Statistical Analysis}
 \label{sec:statistical_analysis}
 While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair DACCO-EA and DACCO-PSO of algorithms. Furthermore the same test is used to perform a detailed analysis in the components of the algorithm. For multiple comparisons the $p$-value (0.05) used was adjusted using the Bonferroni correction method. To perform such correction we used used the following equation:
@@ -76,7 +65,7 @@ The hypothesis for comparing two algorithms were:
 
 Each time we applied a statistical test we looked for the results and concluded: if the $p$-value of the statistical test was smaller than the level of confidence, there was evidence to reject the null hypothesis $H_{0}$, and we could accept the alternative $H_{1}$. This means that there was evidence that the means were significantly different  at the significance level of 0.05. In contrast, there was not enough evidence to reject $H_{0}$, and being so, we concluded that the means were not significantly different.
 
-In the tables where we make the statistical analysis we use the following notation: ``S+" when the first algorithm is significantly better than the second, ``S-" when the first algorithm is significantly worse than the second, and ``$\sim$" when none of the algorithms is significantly better.
+In the tables where we make the statistical analysis we use the following notation: ``>" when the means are statistical different, and the first algorithm presents an higher mean value than the second, ``<"  when the means are statistical different, and the second algorithm presents an higher mean value than the first, and ``$\sim$" when there is no statistical differences in the means.
 
 
 
@@ -126,6 +115,7 @@ In the tables where we make the statistical analysis we use the following notati
 	Another interesting aspect is that DACCO has a good performance while optimizing the so called ``magic instances" of 30 and 38 atoms \cite{doye97}. These instances define particularly rugged landscapes, and the majority of the unbiased algorithms tend to converge to local optima \cite{doye97, grosso07}.
 	
 	\section{Algorithm Comparison}
+	\label{sec:algorithm_comparison}
 	In this section we compare our approach with others described in the literature. A direct comparison with other ACO approaches its not possible, due to absence of such approaches. Hence, we compare our approach with one of the Swarm Intelligence algorithms family, and with an another of the Evolutionary Algorithms family.
 	
 	\subsection{DACCO versus PSO}
@@ -167,50 +157,43 @@ In the tables where we make the statistical analysis we use the following notati
 		\end{table}
 		
 		Looking at the results, we can conclude that the DACCO is better than PSO. We can see that, for almost all instances the SR of DACCO is higher than the SR of the PSO. It misses only the 47 atoms instance. Furthermore, analyzing the MBF values the DACCO presents the better values for all instances. These MBF results are interesting because they show that the DACCO algorithm can find solutions with better quality than the ones of the PSO. To confirm this, in Fig. \ref{fig:dacco_pso_mbf_50} we present the evolution of the MBF for DACCO and PSO. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. The information in the chart shows that the MBF of the DACCO is lower during the whole optimization process.
-		
 		\botapic[0.5]{dacco_pso_mbf_50}{Evolution of the MBF of DACCO and PSO. The results were obtained with the Morse cluster of 50 atoms.}
-		\pagebreak
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
 						\textbf{Instance} & \textbf{DACCO-PSO} \\ \hline
-						30 & S+ \\ \hline
-						31 & S+ \\ \hline
-						32 & S+ \\ \hline
-						33 & S+ \\ \hline
-						34 & S+ \\ \hline
-						35 & S+ \\ \hline
-						36 & S+ \\ \hline
-						37 & S+ \\ \hline
-						38 & S+ \\ \hline
-						39 & S+\\ \hline
-						40 & S+\\ \hline
-						41 & S+ \\ \hline
-						42 & S+ \\ \hline
-						43 & S+ \\ \hline
-						44 & S+ \\ \hline
-						45 & S+ \\ \hline
-						46 & S+\\ \hline
-						47 & S+ \\ \hline
-						48 & S+ \\ \hline 
-						49 & S+ \\ \hline
-						50 & S+ \\ \hline
+						30 & > \\ \hline
+						31 & > \\ \hline
+						32 & > \\ \hline
+						33 & > \\ \hline
+						34 & > \\ \hline
+						35 & > \\ \hline
+						36 & > \\ \hline
+						37 & > \\ \hline
+						38 & > \\ \hline
+						39 & > \\ \hline
+						40 & > \\ \hline
+						41 & > \\ \hline
+						42 & > \\ \hline
+						43 & > \\ \hline
+						44 & > \\ \hline
+						45 & > \\ \hline
+						46 & > \\ \hline
+						47 & > \\ \hline
+						48 & > \\ \hline 
+						49 & > \\ \hline
+						50 & > \\ \hline
 					\end{tabular}
 					\caption{Statistical results of comparing DACCO and PSO}
 					\label{tab:statistical_comparison_pso}
 				\end{center}
 		\end{table}
-		
-		Looking at Table \ref{tab:statistical_comparison_pso}, we can see that DACCO performs significantly better in all instances of the Morse Potential.
+		\\ Looking at Table \ref{tab:statistical_comparison_pso}, we can see that the means of DACCO are statistical different and they have an higher value. Hence we can concluded that DACCO performs better than the PSO.
 		\pagebreak
-		
 		\subsection{DACCO versus EA}
 		
-			In Table \ref{tab:dacco_vs_ea} we compare the DACCO and EA algorithms. Like in the previous section, the third and fourth column represent SR and the MBF of DACCO. The last two columns represent the SR and the the MBF of EA. 
-			
-			Again, the number of evaluation granted to the EA, was the same of the DACCO. 
-
+			In Table \ref{tab:dacco_vs_ea} we compare the DACCO and EA algorithms. Like in the previous section, the third and fourth column represent SR and the MBF of DACCO. The last two columns represent the SR and the the MBF of EA. Again, the number of evaluation granted to the EA, was the same of the DACCO. 
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c | c |}
@@ -243,20 +226,14 @@ In the tables where we make the statistical analysis we use the following notati
 				\caption{Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}
 				\label{tab:dacco_vs_ea}
 			\end{table}
-			
-			An overview of the results presented in Table \ref{tab:dacco_vs_ea} reveal that DACCO has as good results as those of EA for the considered Morse clusters. Moreover, looking at the MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by DACCO are as good as the ones found by the EA. To confirm this, in Fig. \ref{fig:dacco_ea_mbf_50} we present the evolution of the MBF for DACCO and the EA. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. 
-			
-			
-			Observing the Fig. \ref{fig:dacco_ea_mbf_50} we see that the MBF of DACCO tends to converge more rapidly than the MBF of the EA. However, at the end of the optimization process the MBF of DACCO and of EA tend to get equal.
-			\botapic[0.5]{dacco_ea_mbf_50}{Evolution of the MBF of DACCO and EA. The results were obtained with the Morse cluster of 50 atoms.}
-			
-			\pagebreak
+			An overview of the results presented in Table \ref{tab:dacco_vs_ea} reveal that DACCO has as good results as those of EA for the considered Morse clusters. Moreover, looking at the MBF values of both algorithms, we can see that they are very close, revealing that the solutions found by DACCO are as good as the ones found by the EA. To confirm this, in Fig. \ref{fig:dacco_ea_mbf_50} we present the evolution of the MBF for DACCO and the EA. The results are from the Morse cluster with 50 atoms, but the same trend is visible for other instances. By observing it we see that the MBF of DACCO tends to converge more rapidly than the MBF of the EA. However, at the end of the optimization process the MBF of DACCO and of EA tend to get equal.\\
+			Table \ref{tab:statistical_comparison_ea} shows that DACCO is as effective as the EA.
 			\begin{table}[!htdp]
 					\begin{center}
 						\begin{tabular}{| c | c |}
 							\hline
 							\textbf{Instance} & \textbf{DACCO-EA} \\ \hline
-							30 & S+ \\ \hline
+							30 & > \\ \hline
 							31 & $\sim$ \\ \hline
 							32 & $\sim$ \\ \hline
 							33 & $\sim$ \\ \hline
@@ -264,9 +241,9 @@ In the tables where we make the statistical analysis we use the following notati
 							35 & $\sim$ \\ \hline
 							36 & $\sim$ \\ \hline
 							37 & $\sim$ \\ \hline
-							38 & S+ \\ \hline
-							39 & S+ \\ \hline
-							40 & S+ \\\hline
+							38 & > \\ \hline
+							39 & > \\ \hline
+							40 & > \\ \hline
 							41 & $\sim$ \\ \hline
 							42 & $\sim$ \\ \hline
 							43 & $\sim$ \\ \hline
@@ -282,13 +259,13 @@ In the tables where we make the statistical analysis we use the following notati
 						\label{tab:statistical_comparison_ea}
 					\end{center}
 			\end{table}
-		Table \ref{tab:statistical_comparison_ea} shows that DACCO is as effective as the EA.
+			\botapic[0.45]{dacco_ea_mbf_50}{Evolution of the MBF of DACCO and EA. The results were obtained with the Morse cluster of 50 atoms.}
 		
-		It is important to note that in four Morse instances our approach performs significantly better than the EA. Some of these Morse instances,  the ones with 30 and 38 atoms, are particularly hard to optimize, as they define very roughed landscapes, with many local minima \cite{doye97}.
+		It is important to note that in four Morse instances our approach has statistical differences in the means. Some of these Morse instances,  the ones with 30 and 38 atoms, are particularly hard to optimize, as they define very roughed landscapes, with many local minima \cite{doye97}.\\
 		
-		Moreover, these results show that DACCO can compete the EA, while optimizing Morse clusters with a number of atoms between 30 and 50. This is an important outcome since the EA  used in comparison is a state-of-art method, and the algorithm proposed in this dissertation performs as good as it.
-		
-		\pagebreak
+		Moreover, these results show that DACCO can compete with the EA, while optimizing Morse clusters with a number of atoms between 30 and 50. This is an important outcome since the EA used for comparison is a state-of-art method, and the algorithm proposed in this dissertation performs as good as it.
+
+
 		\section{Detailed Analysis}
 		\label{sec:detailed_analysis}
 		
@@ -336,15 +313,14 @@ In the tables where we make the statistical analysis we use the following notati
 		\end{table}
 		
 		
-		\botapic[0.5]{mbf_cell_size_50}{Evolution of the MBF of DACCO with different values of $W$. Results were obtained with the Morse instance with 50 atoms.}
-		
+		\botapic[0.45]{mbf_cell_size_50}{Evolution of the MBF of DACCO with different values of $W$. Results were obtained with the Morse instance with 50 atoms.}
 		\subsection{Neighborhoods}
 		
 		In this section we compare two neighborhoods: the Moore Neighborhood and the Full Moore Neighborhood. We used the same $r = 3$ for both neighborhoods.
 		
 		Table \ref{tab:neighborhood_results} present the results for both neighborhoods. Looking to the outcomes, we can see that for small instances the two neighborhoods have similar results. However, looking for the results obtained in larger instances, the Moore Neighborhood has better results. This may be explained by the fact that in the Full Moore neighborhood we are taking into account much more cells, and thus, the cell selection process can become to greedy. 
 		
-		Table \ref{tab:statistical_comparison_neighborhoods} shows that for the bigger instances, the algorithm using the Moore neighborhood is statistically better than the one using the Full Moore neighborhood. Fig. \ref{fig:neighborhoods_mbf_50} presents the evolution of the MBF, and confirms that the Moore neighborhood achieves better results. 
+		Table \ref{tab:statistical_comparison_neighborhoods} shows that for the bigger instances, the algorithm using the Moore neighborhood has statistical differences in the means when compared to the Full Moore neighborhood. Fig. \ref{fig:neighborhoods_mbf_50} presents the evolution of the MBF, and confirms that the Moore neighborhood achieves better results. 
 		
 		\begin{table}[!htdp]
 				\begin{center}
@@ -369,15 +345,15 @@ In the tables where we make the statistical analysis we use the following notati
 						~ & \textbf{Moore - Full Moore} \\ \hline
 						30 & $\sim$ \\ \hline
 						38 & $\sim$ \\ \hline
-						45 & S+ \\ \hline
-						50 & S+ \\ \hline
+						45 & > \\ \hline
+						50 & > \\ \hline
 					\end{tabular}
 					\caption{Statistical results of comparing the different neighborhoods}
 					\label{tab:statistical_comparison_neighborhoods}
 				\end{center}
 		\end{table}
 		
-		\botapic[0.5]{neighborhoods_mbf_50}{Evolution of the MBF of DACCO with different Neighborhoods. Results were obtained with the Morse instance with 50 atoms.}
+		\botapic[0.45]{neighborhoods_mbf_50}{Evolution of the MBF of DACCO with different Neighborhoods. Results were obtained with the Morse instance with 50 atoms.}
 		\pagebreak
 		\subsection{Neighborhood Radius}
 		
@@ -419,8 +395,8 @@ In the tables where we make the statistical analysis we use the following notati
 							~& \textbf{r = 1 - r = 2} & \textbf{r = 1 - r = 3} & \textbf{r = 1 - r = 4} & \textbf{r = 2 - r = 3} & \textbf{r = 2 - r = 4} & \textbf{r = 3 - r = 4} \\ \hline
 							30 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
 							38 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
-							45 & S- & S- & S- & $\sim$ & $\sim$ & $\sim$ \\ \hline
-							50 & S- & S- & S- & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							45 & < & < & < & $\sim$ & $\sim$ & $\sim$ \\ \hline
+							50 & < & < & < & $\sim$ & $\sim$ & $\sim$ \\ \hline
 						\end{tabular}
 						\caption{Statistical results of comparing the neighborhood radius}
 						\label{tab:statistical_comparison_radius}
@@ -460,10 +436,10 @@ In the tables where we make the statistical analysis we use the following notati
 					\begin{tabular}{| c | c |}
 						\hline
 						~ & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
-						30 & S+ \\ \hline
-						38 & S+ \\ \hline
-						45 & S+ \\ \hline
-						50 & S+ \\ \hline
+						30 & > \\ \hline
+						38 & > \\ \hline
+						45 & > \\ \hline
+						50 & < \\ \hline
 					\end{tabular}
 					\caption{Statistical results of comparing DACCO and DACCO without local search}
 					\label{tab:statistical_comparison_discrete_local_search}
@@ -475,16 +451,26 @@ In the tables where we make the statistical analysis we use the following notati
 		\pagebreak
 		
 		\subsection{Pheromone Propagation}
-		
-		In this section we present the results of having a mechanism of pheromone propagation. This mechanism allows a smoother distribution of the pheromones in the search space (see Fig \ref{fig:no_propagation_graph} and Fig.\ref{fig:propagation_graph}).
-		
+		In this section we present the results of having a mechanism of pheromone propagation. This mechanism allows a smoother distribution of the pheromones in the search space (see Fig \ref{fig:no_propagation_graph} and Fig.\ref{fig:propagation_graph}).\\
 		Looking at Table \ref{tab:pheromone_propagation_results}, we can see that the results with and without pheromone propagation are similar. Furthermore, looking at the statistical analysis of Table \ref{tab:statistical_comparison_pheromone_propagation} we can confirm that there is no statistical evidence to choose one of the methods. 
+		\begin{figure}[ht]
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[scale=0.35]{pictures/no_propagation_graph}
+		\caption{Pheromone distribution without pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}
+		\label{fig:no_propagation_graph}
+		\end{minipage}
+		\hspace{0.5cm}
+		\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[scale=0.35]{pictures/propagation_graph}
+		\caption{Pheromone distribution with pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}
+		\label{fig:propagation_graph}
+		\end{minipage}
+		\end{figure}
 		
-		\botapic[0.45]{no_propagation_graph}{Pheromone distribution without pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}
-		\botapic[0.45]{propagation_graph}{Pheromone distribution with pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}
-		
-		\pagebreak
-		
+		%\botapic[0.45]{no_propagation_graph}{Pheromone distribution without pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}
+		%\botapic[0.45]{propagation_graph}{Pheromone distribution with pheromone propagation in the final iteration of the optimization of a Morse cluster with 50 atoms.}	
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c |}
@@ -500,7 +486,6 @@ In the tables where we make the statistical analysis we use the following notati
 					\label{tab:pheromone_propagation_results}
 				\end{center}
 		\end{table}
-		
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c |}

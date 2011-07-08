@@ -29,12 +29,9 @@ DACCO is not an exact $\mathcal{MAX}-\mathcal{MIN}$ / HCF variant as it incorpor
 \end{enumerate}
 
 In the next sections we present a high level overview of our entire algorithm. Thereafter we will split it in its main components and we will explain them in more detail.
-
-	
-	\pagebreak
 	\section{DACCO}
 	Here we present a high level description of our ACO algorithm for cluster geometry optimization: \emph{DACCO}. In the following sections, we break it into smaller pieces, and explain them in detail.
-	
+
 	\begin{algorithm}
 		\caption{DACCO}
 		\label{alg:dacco}
@@ -55,12 +52,24 @@ In the next sections we present a high level overview of our entire algorithm. T
 	\subsection{Construction of Search Space}
 	
 	In this procedure we discretize the search space, so that we can build a graph $G$ where the artificial ants can work.
-	The search space is defined by a cube of size $N^{(1/3)}$, where $N$ is the number of atoms, as depicted in Fig. \ref{fig:cube1}. To transform it we decided to divide the cube of Fig. \ref{fig:cube1} into smaller cubes to which we gave the name of \emph{cells}. These cells have to be large enough to contain one atom, but small enough to avoid having more than one atom. The final result of this transformation is depicted in Fig. \ref{fig:cube2}.  
+	The search space is defined by a cube of size $N^{(1/3)}$, where $N$ is the number of atoms, as depicted in Fig. \ref{fig:cube1}. To transform it we decided to divide the cube of Fig. \ref{fig:cube1} into smaller cubes to which we gave the name of \emph{cells}. These cells have to be large enough to contain one atom, but small enough to avoid having more than one atom. The final result of this transformation is depicted in Fig. \ref{fig:cube2}.
 	
-	\botapic[0.25]{cube1}{Search Space}
+	\begin{figure}[t]
+	\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[scale=0.25]{pictures/cube1}
+	\caption{Search Space.}
+	\label{fig:cube1}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[scale=0.25]{pictures/cube2}
+	\caption{Division of the search space in cells.}
+	\label{fig:cube2}
+	\end{minipage}
+	\end{figure}  
 	
-	\botapic[0.25]{cube2}{Division of the search space in cells}
-	\pagebreak
 	The Alg. \ref{alg:construct_search_space} gives more details about the construction of the space. It receives the cube size $N^{(1/3)}$, and the cell size \emph{W}.
 	
 	\begin{algorithm}
@@ -69,6 +78,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 		\begin{algorithmic}
 		\STATE $discretized\_search\_space = \{\}$
 		\STATE $max\_coord = N^{(1/3)}$
+		\STATE $cell\_center = W / 2$
 		\STATE $total\_number\_of\_cells = ceil(max\_coord / W)$
 		\FOR{$x = 1 \to total\_number\_of\_cells$}
 			\FOR{$y = 1 \to total\_number\_of\_cells$} 
@@ -292,7 +302,7 @@ In the next sections we present a high level overview of our entire algorithm. T
 			
 			However, in our approach we do not have a restart mechanism, thus we do not need to use the restart-best ant. 
 
-			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and it requires a lot of experimentation. However in the HCF, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measured by the weights that we assign to each one. The final rule to update pheromones is depicted by the following:
+			As was pointed out by \cite{blum04}, finding a schedule for the usage of the ants can be a difficult task, and it requires a lot of experimentation. However in the HyperCube Framework, we do not have this problem, because both iteration-best and global-best ants are allowed to deposit pheromones. The influence of each ant is measured by the weights that we assign to each one. The final rule to update pheromones is depicted as follows:
 			\begin{equation}
 				\tau = \tau + \omega
 			\end{equation}
@@ -306,11 +316,11 @@ In the next sections we present a high level overview of our entire algorithm. T
 			
 			After the update is applied, pheromone values that exceed $\tau_{max}$ are set back to $\tau_{max}$. A similar process is applied to $\tau_{min}$.
 
-			The final important aspect of the pheromone update rule is that the pheromones are not deposited in only in one cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig. \ref{fig:propagation}). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$. Such aspect is important to smooth the transitions between components.
+			The final important aspect of the pheromone update rule is that the pheromones are not deposited in only in one cell. Instead, we only deposit a percentage $p$ in the main cell, and we propagate a percentage $(1-p)$ to the adjacent cells (Fig. \ref{fig:propagation}). This propagation is uniformly distributed among all the adjacent cells. This means that the value that is given to each one of the adjacent cells is $(1-p) / (number\ of\ adjacent\ cells)$. Such aspect is important to smooth the transitions between components in the search space.
 			
 		\botapic[0.7]{propagation}{Pheromone Propagation}	
 		
-		In appendix \ref{chap:implementation} we provide information about some technical decisions related with the implementation of this approach.
+		In appendix \ref{chap:implementation} we provide some technical decisions related with the implementation of this approach.
 			
 			
 			

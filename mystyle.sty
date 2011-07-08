@@ -3,6 +3,7 @@
 
 \usepackage{color}
 \usepackage{listings}
+\usepackage{fancyhdr}
 %\usepackage{algorithm}
 %\usepackage{algorithmicx}
 %\usepackage{algpseudocode}
@@ -20,8 +21,10 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{hyperref}
+
 \usepackage{parskip}
 %\usepackage[figure,table]{hypcap} % Correct a problem with hyperre
+
 
 
 \usepackage[english]{babel}
@@ -48,7 +51,7 @@
 \usepackage[fixlanguage]{babelbib}
 \selectbiblanguage{english}
 
-\pagestyle{headings}
+\pagestyle{fancy}
 
 \newtheorem{theorem}{Theorem}
 
@@ -63,7 +66,7 @@
 % \botapic command ussage:
 % \botapic[scale]{filename}{caption}
 \newcommand{\botapic}[3][1.0]{%
-	\begin{figure}[!htbp]
+	\begin{figure}[t]
 	\centering
 	\vspace{2mm}
 	\scalebox{#1}{\includegraphics{pictures/#2}}
