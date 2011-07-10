@@ -274,7 +274,7 @@ In the tables where we make the statistical analysis we use the following notati
 		In this section we present the results of the variation of the cell size $W$. When we have a big $W$ our search space will be smaller, but we will start to have more than on atom in one cell. Furthermore we have to be careful while defining the cell size, because we need to guarantee that our cube can host an entire cluster. Taking this into account it is important to assess how the algorithm behaves with different cell sizes.
 		Table \ref{tab:cell_size_results} present results obtained with additional setting $W=\{0.5, 0.6, 0.7\}$. A inspection of this table reveals that the outcomes of the optimization, with different $W$ are similar.
 		There is a slight trend for the $W=0.6$ to obtain results of higher quality in both terms of success rate and MBF (Fig. \ref{fig:mbf_cell_size_50}).
-		Table \ref{tab:statistical_comparison_cell_size} confirms that there is no statistical evidence to which one of the $W$ values is better.
+		We performed a statistical analysis to confirm that there is no statistical evidence to which one of the $W$ values is better.
 		   		
 		\begin{table}[!htdp]
 				\begin{center}
@@ -291,35 +291,32 @@ In the tables where we make the statistical analysis we use the following notati
 					\label{tab:cell_size_results}
 				\end{center}
 		\end{table}
-		
-		
-		
-		
-		\begin{table}[!htdp]
-				\begin{center}
-					\begin{tabular}{| c | c | c | c |}
-						\hline
-						\textbf{Instance} & \textbf{$W=0.5$ - $W=0.6$} & \textbf{$W=0.5$ - $W=0.7$} & \textbf{$W=0.6$ - $W=0.7$} \\ \hline
-						30 & $\sim$ & $\sim$ & $\sim$ \\ \hline
-						38 & $\sim$ & $\sim$ & $\sim$ \\ \hline
-						45 & $\sim$ & $\sim$ & $\sim$ \\ \hline
-						50 & $\sim$ & $\sim$ & $\sim$ \\ \hline
-					\end{tabular}
-					\caption{Statistical results of comparing the different cell sizes}
-					\label{tab:statistical_comparison_cell_size}
-				\end{center}
-		\end{table}
-		
-		
 		\botapic[0.45]{mbf_cell_size_50}{Evolution of the MBF of DACCO with different values of $W$. Results were obtained with the Morse instance with 50 atoms.}
-		\subsection{Neighborhoods}
 		
+		
+		
+		% \begin{table}[!htdp]
+		% 				\begin{center}
+		% 					\begin{tabular}{| c | c | c | c |}
+		% 						\hline
+		% 						\textbf{Instance} & \textbf{$W=0.5$ - $W=0.6$} & \textbf{$W=0.5$ - $W=0.7$} & \textbf{$W=0.6$ - $W=0.7$} \\ \hline
+		% 						30 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+		% 						38 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+		% 						45 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+		% 						50 & $\sim$ & $\sim$ & $\sim$ \\ \hline
+		% 					\end{tabular}
+		% 					\caption{Statistical results of comparing the different cell sizes}
+		% 					\label{tab:statistical_comparison_cell_size}
+		% 				\end{center}
+		% 		\end{table}
+		
+		
+		
+		\subsection{Neighborhoods}
 		In this section we compare two neighborhoods: the Moore Neighborhood and the Full Moore Neighborhood. We used the same $r = 3$ for both neighborhoods.
 		
-		Table \ref{tab:neighborhood_results} present the results for both neighborhoods. Looking to the outcomes, we can see that for small instances the two neighborhoods have similar results. However, looking for the results obtained in larger instances, the Moore Neighborhood has better results. This may be explained by the fact that in the Full Moore neighborhood we are taking into account much more cells, and thus, the cell selection process can become to greedy. 
-		
+		Table \ref{tab:neighborhood_results} present the results for both neighborhoods. Looking to the outcomes, we can see that for small instances the two neighborhoods have similar results. However, looking for the results obtained in larger instances, the Moore Neighborhood has better results. This may be explained by the fact that in the Full Moore neighborhood we are taking into account much more cells, and thus, the cell selection process can become to greedy. \\
 		Table \ref{tab:statistical_comparison_neighborhoods} shows that for the bigger instances, the algorithm using the Moore neighborhood has statistical differences in the means when compared to the Full Moore neighborhood. Fig. \ref{fig:neighborhoods_mbf_50} presents the evolution of the MBF, and confirms that the Moore neighborhood achieves better results. 
-		
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c |}
@@ -335,7 +332,6 @@ In the tables where we make the statistical analysis we use the following notati
 					\label{tab:neighborhood_results}
 				\end{center}
 		\end{table}
-		
 		\begin{table}[!htdp]
 				\begin{center}
 					\begin{tabular}{| c | c |}
@@ -350,7 +346,6 @@ In the tables where we make the statistical analysis we use the following notati
 					\label{tab:statistical_comparison_neighborhoods}
 				\end{center}
 		\end{table}
-		
 		\botapic[0.45]{neighborhoods_mbf_50}{Evolution of the MBF of DACCO with different Neighborhoods. Results were obtained with the Morse instance with 50 atoms.}
 		\pagebreak
 		\subsection{Neighborhood Radius}
@@ -437,7 +432,7 @@ In the tables where we make the statistical analysis we use the following notati
 						30 & > \\ \hline
 						38 & > \\ \hline
 						45 & > \\ \hline
-						50 & < \\ \hline
+						50 & > \\ \hline
 					\end{tabular}
 					\caption{Statistical results of comparing DACCO and DACCO without local search}
 					\label{tab:statistical_comparison_discrete_local_search}
@@ -450,7 +445,7 @@ In the tables where we make the statistical analysis we use the following notati
 		
 		\subsection{Pheromone Propagation}
 		In this section we present the results of having a mechanism of pheromone propagation. This mechanism allows a smoother distribution of the pheromones in the search space (see Fig \ref{fig:no_propagation_graph} and Fig.\ref{fig:propagation_graph}).\\
-		Looking at Table \ref{tab:pheromone_propagation_results}, we can see that the results with and without pheromone propagation are similar. Furthermore, looking at the statistical analysis of Table \ref{tab:statistical_comparison_pheromone_propagation} we can confirm that there is no statistical evidence to choose one of the methods. 
+		Looking at Table \ref{tab:pheromone_propagation_results}, we can see that the results with and without pheromone propagation are similar. Furthermore, we performed a statistical analysis and confirmed that there was no statistical evidence to choose one of the methods. 
 		\begin{figure}[ht]
 		\begin{minipage}[b]{0.5\linewidth}
 		\centering
@@ -484,20 +479,20 @@ In the tables where we make the statistical analysis we use the following notati
 					\label{tab:pheromone_propagation_results}
 				\end{center}
 		\end{table}
-		\begin{table}[!htdp]
-				\begin{center}
-					\begin{tabular}{| c | c |}
-						\hline
-						\textbf{Instance} & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
-						30 & $\sim$ \\ \hline
-						38 & $\sim$ \\ \hline
-						45 & $\sim$ \\ \hline
-						50 & $\sim$ \\ \hline
-					\end{tabular}
-					\caption{Statistical results of comparing DACCO and DACCO without pheromone propagation}
-					\label{tab:statistical_comparison_pheromone_propagation}
-				\end{center}
-		\end{table}
+		% \begin{table}[!htdp]
+		% 			\begin{center}
+		% 				\begin{tabular}{| c | c |}
+		% 					\hline
+		% 					\textbf{Instance} & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
+		% 					30 & $\sim$ \\ \hline
+		% 					38 & $\sim$ \\ \hline
+		% 					45 & $\sim$ \\ \hline
+		% 					50 & $\sim$ \\ \hline
+		% 				\end{tabular}
+		% 				\caption{Statistical results of comparing DACCO and DACCO without pheromone propagation}
+		% 				\label{tab:statistical_comparison_pheromone_propagation}
+		% 			\end{center}
+		% 	\end{table}
 		
 		
 	
