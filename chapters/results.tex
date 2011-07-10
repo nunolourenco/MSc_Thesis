@@ -11,7 +11,6 @@ In this study we focus our attention in several instances of short-ranged Morse 
 		\item Assess the performance of the algorithm;
 		\item Gain insight into the influence of some components of the algorithm. 
 	\end{enumerate}
-	
 	For the first objective, we present the results of the DACCO optimization for all the aforementioned instances, and we analyze its performance based on two criteria:
 	\begin{enumerate}
 		\item Ability to discover the known optima;
@@ -19,12 +18,8 @@ In this study we focus our attention in several instances of short-ranged Morse 
 	\end{enumerate}
 	The first criterion is a widely adopted performance measure in cluster geometry optimization. Hence, for all instances, we show its success rate(number of times that it found the best-known solution) of the algorithm. In case it does not find the best-known solution we present the best solution found by the algorithm. The second criterion aims to complement our study, as it will provide information about the ability of DACCO to converge to promising areas of the search space.\\
 	Later, to assess the absolute performance of the DACCO, we compare its results with those achieved by two algorithms: a steady-state EA described in Pereira et al. \cite{xico09}, and the Particle Swarm Optimization algorithm (PSO) described in Lourenço et al. \cite{lourenco11}.
-	
 \section*{Experimental Settings} \label{sec:experimental_setting}
-Table \ref{tab:general_settings} lists the general parameters used in all of the experiments. We performed a total of 30 runs to make possible a statistical analysis. In each run we allowed our algorithm to perform 5000000 evaluations. It is important to refer that each iteration made by L-BFGS procedure counts as one evaluation. 
-
-The size of the population depends on the size of the cluster being optimized. This parameter was set based on the reviewed literature, and some preliminary tests. The cell size ($W$) corresponds to size of each cell in our search space. The neighborhood used is the Moore neighborhood with $r = 3$. The number of iterations in the discrete local search is 10. The $\alpha$ value was set to 4, following the reviewed literature, and after the analysis of some preliminary results.
-\begin{table}[!htdp]
+\begin{table}[t]
 	\begin{center}
 		\begin{tabular}{| l | p{8cm} |}
 			\hline
@@ -48,6 +43,9 @@ The size of the population depends on the size of the cluster being optimized. T
 	\label{tab:general_settings}
 	\end{center}
 \end{table}
+Table \ref{tab:general_settings} lists the general parameters used in all of the experiments. We performed a total of 30 runs to make possible a statistical analysis. In each run we allowed our algorithm to perform 5000000 evaluations. It is important to refer that each iteration made by L-BFGS procedure counts as one evaluation. 
+The size of the population depends on the size of the cluster being optimized. This parameter was set based on the reviewed literature, and some preliminary tests. The cell size ($W$) corresponds to size of each cell in our search space. The neighborhood used is the Moore neighborhood with $r = 3$. The number of iterations in the discrete local search is 10. The $\alpha$ value was set to 4, following the reviewed literature, and after the analysis of some preliminary results.
+
 \section*{Statistical Analysis}
 \label{sec:statistical_analysis}
 While comparing our algorithm with the EA and the PSO we performed a statistical analysis to validate the results. We assumed that our data did not followed any distribution. Thus we applied the Mann-Whitney non-parametric test, at a 0.05 level of significance, to assess the statistical differences of the means, over the 30 runs of each of pair DACCO-EA and DACCO-PSO of algorithms. Furthermore the same test is used to perform a detailed analysis in the components of the algorithm. For multiple comparisons the $p$-value (0.05) used was adjusted using the Bonferroni correction method. To perform such correction we used used the following equation:
@@ -108,7 +106,7 @@ In the tables where we make the statistical analysis we use the following notati
 	The results from Table \ref{tab:optimization_results} are encouraging, since the proposed approach was able to find almost all the best-known solutions for short-ranged Morse clusters between 30 and 50, missing only 1 instance.
 	To the best of our knowledge, this is the first work to apply ACO algorithm to the problem of cluster geometry optimization, hence its results may play an important role in future proposals that intend to use the same approach.
 	
-	By analyzing the success rate of the algorithm we noticed that its variation is irregular: were between 30 and 40 atoms the success rate is high, as for clusters between 41 and 50 atoms the algorithm has more difficulties to find the optimum. This can in part be explained, by the fact the we keep the number of evaluation fixed for all the clusters. With more atoms, we will get a larger search space, and it is not surprising that the performance of the algorithm declines.
+	By analyzing the success rate of the algorithm we noticed that its variation is irregular: whereas between 30 and 40 atoms the success rate is high, for clusters between 41 and 50 atoms the algorithm has more difficulties to find the optimum. This can in part be explained, by the fact the we keep the number of evaluation fixed for all the clusters. With more atoms, we will get a larger search space, and it is not surprising that the performance of the algorithm declines.
 	
 	Looking at the MBF values, they are always close to the optimum, as the deviation values range between 0.000 \% and 0.304 \%. This result is interesting, as it shows that even if DACCO converges to local optima, it can accurately find low potential structures.
 	
@@ -282,7 +280,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c | c | c |}
 						\hline
-						~ & \multicolumn{2}{c|}{\textbf{$W=0.5$}} & \multicolumn{2}{c|}{\textbf{$W=0.6$}} & \multicolumn{2}{c|}{\textbf{$W=0.7$}} \\ \hline
+						\textbf{Instance} & \multicolumn{2}{c|}{\textbf{$W=0.5$}} & \multicolumn{2}{c|}{\textbf{$W=0.6$}} & \multicolumn{2}{c|}{\textbf{$W=0.7$}} \\ \hline
 						~ & SR & MBF & SR & MBF & SR & MBF \\ \hline
 						30 & 28 / 30 & -106.831095 & 28 / 30 & -106.831095 & 30 / 30 & -106.835790 \\ \hline
 						38 & 20 / 30 & -143.786016 & 25 / 30 & -144.053535 & 19 / 30 & -143.732512 \\ \hline
@@ -301,7 +299,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c | c | c |}
 						\hline
-						~& \textbf{$W=0.5$ - $W=0.6$} & \textbf{$W=0.5$ - $W=0.7$} & \textbf{$W=0.6$ - $W=0.7$} \\ \hline
+						\textbf{Instance} & \textbf{$W=0.5$ - $W=0.6$} & \textbf{$W=0.5$ - $W=0.7$} & \textbf{$W=0.6$ - $W=0.7$} \\ \hline
 						30 & $\sim$ & $\sim$ & $\sim$ \\ \hline
 						38 & $\sim$ & $\sim$ & $\sim$ \\ \hline
 						45 & $\sim$ & $\sim$ & $\sim$ \\ \hline
@@ -326,7 +324,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c |}
 						\hline
-						~ & \multicolumn{2}{c|}{\textbf{Moore}} & \multicolumn{2}{c|}{\textbf{Full Moore}} \\ \hline
+						\textbf{Instance} & \multicolumn{2}{c|}{\textbf{Moore}} & \multicolumn{2}{c|}{\textbf{Full Moore}} \\ \hline
 						~ & SR & MBF & SR & MBF \\ \hline
 						30 & 28 / 30 & -106.831095 & 25 / 30 & -106.823627 \\ \hline
 						38 & 25 / 30 & -144.053535 & 23 / 30 & -143.942889 \\ \hline
@@ -342,7 +340,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
-						~ & \textbf{Moore - Full Moore} \\ \hline
+						\textbf{Instance} & \textbf{Moore - Full Moore} \\ \hline
 						30 & $\sim$ \\ \hline
 						38 & $\sim$ \\ \hline
 						45 & > \\ \hline
@@ -365,7 +363,7 @@ In the tables where we make the statistical analysis we use the following notati
 		
 		In Table \ref{tab:statistical_comparison_radius} we present a statistical analysis of the radius used for experimentation. It clearly confirms that small radius do not help the search.
 		
-		Fig. \ref{fig:neighborhoods_radius_50} presents the evolution of the MBF for the different values of $r$. These figures confirms that, with low values of $r$, the algorithm converges to local optima of inferior quality when compared, for example, with $r=2$ or $r=3$. Moreover, this chart shows that with $r=4$ the MBF is inferior to the MBF of the version that uses $r=3$
+		Fig. \ref{fig:neighborhoods_radius_50} presents the evolution of the MBF for the different values of $r$. These figures confirms that, with low values of $r$, the algorithm converges to local optima of inferior quality when compared, for example, with $r=2$ or $r=3$. Moreover, this chart shows that with $r=4$ the MBF is smaller than the MBF of the version that uses $r=3$
 		
 		
 		\botapic[0.50]{neighborhoods_radius_50}{Evolution of the MBF of DACCO with different values of $r$. Results were obtained with the Morse instance with 50 atoms.}
@@ -376,7 +374,7 @@ In the tables where we make the statistical analysis we use the following notati
 					\begin{center}
 						\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
 							\hline
-							~ & \multicolumn{2}{c|}{\textbf{r = 1}} & \multicolumn{2}{c|}{\textbf{r = 2}} & \multicolumn{2}{c|}{\textbf{r = 3}} & \multicolumn{2}{c|}{\textbf{r = 4}} \\ \hline
+							\textbf{Instance} & \multicolumn{2}{c|}{\textbf{r = 1}} & \multicolumn{2}{c|}{\textbf{r = 2}} & \multicolumn{2}{c|}{\textbf{r = 3}} & \multicolumn{2}{c|}{\textbf{r = 4}} \\ \hline
 							~ & SR & MBF & SR & MBF & SR & MBF & SR & MBF \\ \hline
 							30 & 22 / 30 & -106.816158 & 27 / 30 & -106.828748 & 28 / 30 & -106.831095 & 27 / 30 & -106.828748 \\ \hline
 							38 & 28 / 30 & -144.211960 & 25 / 30 & -144.052332 & 25 / 30 & -144.053535 & 23 / 30 & -143.946527 \\ \hline
@@ -392,7 +390,7 @@ In the tables where we make the statistical analysis we use the following notati
 					\begin{center}
 						\begin{tabular}{| c | c | c | c | c | c | c |}
 							\hline
-							~& \textbf{r = 1 - r = 2} & \textbf{r = 1 - r = 3} & \textbf{r = 1 - r = 4} & \textbf{r = 2 - r = 3} & \textbf{r = 2 - r = 4} & \textbf{r = 3 - r = 4} \\ \hline
+							\textbf{Instance} & \textbf{r = 1 - r = 2} & \textbf{r = 1 - r = 3} & \textbf{r = 1 - r = 4} & \textbf{r = 2 - r = 3} & \textbf{r = 2 - r = 4} & \textbf{r = 3 - r = 4} \\ \hline
 							30 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
 							38 & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ & $\sim$ \\ \hline
 							45 & < & < & < & $\sim$ & $\sim$ & $\sim$ \\ \hline
@@ -419,7 +417,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c |}
 						\hline
-						~ & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without Discrete Local Search}} \\ \hline
+						\textbf{Instance} & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without Discrete Local Search}} \\ \hline
 						~ & SR & MBF & SR & MBF \\ \hline
 						30 & 28 / 30 & -106.831095 & 2 / 30 & -106.406177 \\ \hline
 						38 & 25 / 30 & -144.053535 & 1 / 30 & -142.077711 \\ \hline
@@ -435,7 +433,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
-						~ & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
+						\textbf{Instance} & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
 						30 & > \\ \hline
 						38 & > \\ \hline
 						45 & > \\ \hline
@@ -475,7 +473,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c | c | c | c |}
 						\hline
-						~ & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without pheromone propagation}} \\ \hline
+						\textbf{Instance} & \multicolumn{2}{c|}{\textbf{DACCO}} & \multicolumn{2}{p{4cm}|}{\textbf{DACCO without pheromone propagation}} \\ \hline
 						~ & SR & MBF & SR & MBF \\ \hline
 						30 & 28 / 30 & -106.831095 & 25 / 30 & -106.824054 \\ \hline
 						38 & 25 / 30 & -144.053535 & 22 / 30 & -143.893024 \\ \hline
@@ -490,7 +488,7 @@ In the tables where we make the statistical analysis we use the following notati
 				\begin{center}
 					\begin{tabular}{| c | c |}
 						\hline
-						~ & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
+						\textbf{Instance} & \multicolumn{1}{p{4cm}|}{\textbf{DACCO - DACCO without Discrete Local Search}} \\ \hline
 						30 & $\sim$ \\ \hline
 						38 & $\sim$ \\ \hline
 						45 & $\sim$ \\ \hline

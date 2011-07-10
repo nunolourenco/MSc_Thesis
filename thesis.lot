@@ -4,21 +4,21 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Parameter setting used in the experiments}}{35}{table.5.1}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Optimization results of Morse Clusters between 30 and 50 obtained by DACCO}}{37}{table.5.2}
-\contentsline {table}{\numberline {5.3}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the PSO}}{39}{table.5.3}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Parameter setting used in the experiments}}{34}{table.5.1}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Optimization results of Morse Clusters between 30 and 50 obtained by DACCO}}{36}{table.5.2}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the PSO}}{38}{table.5.3}
 \contentsline {table}{\numberline {5.4}{\ignorespaces Statistical results of comparing DACCO and PSO}}{40}{table.5.4}
-\contentsline {table}{\numberline {5.5}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}}{42}{table.5.5}
-\contentsline {table}{\numberline {5.6}{\ignorespaces Statistical results of comparing DACCO and EA}}{43}{table.5.6}
-\contentsline {table}{\numberline {5.7}{\ignorespaces Optimization results obtained by DACCO with different values of $W$ in the selected Morse cluster instances}}{45}{table.5.7}
-\contentsline {table}{\numberline {5.8}{\ignorespaces Statistical results of comparing the different cell sizes}}{45}{table.5.8}
-\contentsline {table}{\numberline {5.9}{\ignorespaces Optimization results obtained by DACCO with different Neighborhoods in the selected Morse cluster instances}}{46}{table.5.9}
-\contentsline {table}{\numberline {5.10}{\ignorespaces Statistical results of comparing the different neighborhoods}}{47}{table.5.10}
-\contentsline {table}{\numberline {5.11}{\ignorespaces Optimization results obtained by DACCO with different values of $r$ in the selected Morse cluster instances}}{49}{table.5.11}
-\contentsline {table}{\numberline {5.12}{\ignorespaces Statistical results of comparing the neighborhood radius}}{49}{table.5.12}
-\contentsline {table}{\numberline {5.13}{\ignorespaces Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}}{50}{table.5.13}
-\contentsline {table}{\numberline {5.14}{\ignorespaces Statistical results of comparing DACCO and DACCO without local search}}{50}{table.5.14}
-\contentsline {table}{\numberline {5.15}{\ignorespaces Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}}{51}{table.5.15}
-\contentsline {table}{\numberline {5.16}{\ignorespaces Statistical results of comparing DACCO and DACCO without pheromone propagation}}{52}{table.5.16}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Experimental results of Morse cluster between 30 and 50 atoms obtained by the DACCO algorithm and the EA}}{41}{table.5.5}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Statistical results of comparing DACCO and EA}}{42}{table.5.6}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Optimization results obtained by DACCO with different values of $W$ in the selected Morse cluster instances}}{44}{table.5.7}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Statistical results of comparing the different cell sizes}}{44}{table.5.8}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Optimization results obtained by DACCO with different Neighborhoods in the selected Morse cluster instances}}{45}{table.5.9}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Statistical results of comparing the different neighborhoods}}{45}{table.5.10}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Optimization results obtained by DACCO with different values of $r$ in the selected Morse cluster instances}}{48}{table.5.11}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Statistical results of comparing the neighborhood radius}}{48}{table.5.12}
+\contentsline {table}{\numberline {5.13}{\ignorespaces Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}}{49}{table.5.13}
+\contentsline {table}{\numberline {5.14}{\ignorespaces Statistical results of comparing DACCO and DACCO without local search}}{49}{table.5.14}
+\contentsline {table}{\numberline {5.15}{\ignorespaces Optimization results obtained by DACCO with and without Discrete Local Search in the selected Morse cluster instances}}{50}{table.5.15}
+\contentsline {table}{\numberline {5.16}{\ignorespaces Statistical results of comparing DACCO and DACCO without pheromone propagation}}{51}{table.5.16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

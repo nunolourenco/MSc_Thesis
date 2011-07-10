@@ -23,19 +23,13 @@ Usually PES functions define highly roughed landscapes, with multiple valleys \c
 	\label{sec:morse_clusters}
 	
 	As described above, model PES are regularly adopted to understand chemical properties of real materials and as benchmarks of new optimization algorithms. The most widely adopted pairwise models are the Lennard-Jones \cite{lennardJones31} and Morse potentials \cite{morse29}. Since the Morse potential provides accurate approximations of real materials, and define a more challenging benchmark \cite{braier90, smirnov99}, we focus our attention on the later.
-
 	The energy function of a \emph{N}-atom Morse cluster is obtained by the sum of all pairwise contributions that occur between the atoms. Following \cite{doye97, morse29} we can formulate this as:
-	
 	\begin{equation} 
 		\label{eq:morse_potential}
 		V_{Morse} = \epsilon \sum_{i=1}^{N-1}\sum_{j=i+1}^{N} \left ( \exp^{-2\beta(r_{ij}-r_{0})} - 2\exp^{-\beta(r_{ij}-r_{0})} \right)
 	\end{equation}
-
-
-	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. Thus, the potential has a single parameter $\beta$ that establishes the shape of the energy contribution of every pair of atoms \cite{doye04}. Fig. \ref{fig:beta_influence} illustrates how the pair-wise contribution is modeled as a function of distance between atoms (\emph{xx} axis). Two different values of $\beta$ are depicted: $\beta = 6.0$, which corresponds to the long-ranged potential, and $\beta = 14.0$, which corresponds to a short-ranged version. As we can see, in both cases, the optimal potential energy is achieved when the atoms are placed at a distance of 1. This value corresponds to the equilibrium bond value. Fig.\ref{fig:beta_influence} also reveals that if we move from a long-ranged potential ($\beta = 6.0$) to a short-ranged version ($\beta = 14.0$), we get a narrower potential curvature, promoting the appearance of roughed search landscapes, with a higher number of local minima \cite{doye04}.
-	
-	
-\botapic[0.7]{beta_influence}{Morse Potential for different values of $\beta$ }
+	\noindent where $r_{ij}$ is the distance between particles $i$ and $j$ in the aggregate, $\epsilon$ is the bond dissociation energy, $r_{0}$ is the equilibrium bond and $\beta$ is the range exponent of the potential. Following \cite{doye97}, $\epsilon$ and $r_{0}$ are both set to 1.0, leading to a scaled version of the Morse function without specific atom interactions. Thus, the potential has a single parameter $\beta$ that establishes the shape of the energy contribution of every pair of atoms \cite{doye04}. Fig. \ref{fig:beta_influence} illustrates how the pair-wise contribution is modeled as a function of distance between atoms. Two different values of $\beta$ are depicted: $\beta = 6.0$, which corresponds to the long-ranged potential, and $\beta = 14.0$, which corresponds to a short-ranged version. As we can see, in both cases, the optimal potential energy is achieved when the atoms are placed at a distance of 1. This value corresponds to the equilibrium bond value. Fig.\ref{fig:beta_influence} also reveals that if we move from a long-ranged potential ($\beta = 6.0$) to a short-ranged version ($\beta = 14.0$), we get a narrower potential curvature, promoting the appearance of roughed search landscapes, with a higher number of local minima \cite{doye04}.	
+\botapic[0.45]{beta_influence}{Morse Potential for different values of $\beta$ }
 	
 	
 	
