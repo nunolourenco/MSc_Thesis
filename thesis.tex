@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{book}
+\documentclass[pdftex,12pt,a4paper]{book}
 
 
 \usepackage{mystyle}
@@ -12,8 +12,16 @@
    	linkcolor=black,%
    	urlcolor=black
 }
+\usepackage{geometry}
 
+\geometry{bindingoffset=1cm}
+\let\origdoublepage\cleardoublepage
 
+\newcommand{\clearemptydoublepage}{%
+\clearpage
+{\pagestyle{empty}\origdoublepage}%
+}
+\let\cleardoublepage\clearemptydoublepage
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -21,11 +29,13 @@
 \begin{document}
 	\fancyhead[L]{}
 	\pagenumbering{roman}
-	\input{"chapters/title"}
-	\input{"chapters/abstract"}
-	\tableofcontents
-	\listoffigures
-	\listoftables
+	\renewcommand{\headrulewidth}{0pt}
+	%\input{"chapters/title"}
+	%\input{"chapters/ack"}
+	%\input{"chapters/abstract"}
+	%\tableofcontents
+	%\listoffigures
+	%\listoftables
 	\pagebreak
 	\pagenumbering{arabic}
 	\input{"chapters/introduction"}
